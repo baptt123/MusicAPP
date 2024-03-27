@@ -1,1 +1,1 @@
-# Lap-Trinh-Di-Dong
+Project mô tả về app nghe nhạc 

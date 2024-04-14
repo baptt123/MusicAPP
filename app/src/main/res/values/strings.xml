@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">ProjectDiDong</string>
+    <string name="app_name">App Nghe Nhac</string>
+    <string name="rating_board">BXH Âm nhạc</string>
+    <string name="arranged">Sắp xếp</string>
+    <string name="home_label">Trang chủ\n</string>
+    <string name="library_label">Thư viện\n</string>
+    <string name="play_label">Phát nhạc</string>
+    <string name="rating_label">Bảng xếp hạng</string>
+    <string name="setting_label">Cài đặt\n</string>
+    <string name="home_label_header">Trang chủ</string>
 </resources>

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "812340267359",
+    "project_id": "appnghenhac-6e858",
+    "storage_bucket": "appnghenhac-6e858.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:812340267359:android:fb475a8bc920c8ccf98eea",
+        "android_client_info": {
+          "package_name": "com.example.appnghenhac"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCa-7KoDLOwpBt4F70GjSGcNbmTUe96bq0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

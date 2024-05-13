@@ -13,4 +13,10 @@
               android:textSize="50dp">
 
     </TextView>
+    <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:id="@+id/chuyenhuong"
+            android:text="@string/Chuyentrang" tools:layout_editor_absoluteY="114dp"
+            tools:layout_editor_absoluteX="170dp">
+
+    </Button>
 </androidx.constraintlayout.widget.ConstraintLayout>

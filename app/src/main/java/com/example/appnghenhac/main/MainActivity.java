@@ -1,8 +1,10 @@
 package com.example.appnghenhac.main;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.provider.ContactsContract;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -12,6 +14,7 @@ import android.os.Bundle;
 import com.example.appnghenhac.R;
 import com.example.appnghenhac.asynctask.GetArtist;
 import com.example.appnghenhac.asynctask.GetUserTop;
+import com.example.appnghenhac.historyplaylist.HistoryActivity;
 import com.example.appnghenhac.model.Music;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseError;
@@ -29,11 +32,20 @@ public class MainActivity extends AppCompatActivity {
     //    GetArtist getArtist = new GetArtist(this);
     GetUserTop getUserTop = new GetUserTop(this);
     private TextView textView;
+    private Button btn;
+    public void initView(){
+        btn=findViewById(R.id.chuyenhuong);
+        btn.setOnClickListener(v -> {
+            Intent intent=new Intent(this, HistoryActivity.class);
+            startActivity(intent);
+        });
 
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initView();
 
 //        getArtist.execute();
 //        try {

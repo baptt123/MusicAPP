@@ -13,12 +13,12 @@ import com.example.appnghenhac.model.Music;
 
 import java.util.ArrayList;
 
-public class HistoryAdapter extends ArrayAdapter<Music> {
+public class UserTopAdapter extends ArrayAdapter<Music> {
     private Activity context;
     private int IDlayout;
     private ArrayList<Music> objects;
 
-    public HistoryAdapter(@NonNull Activity context, int IDlayout, @NonNull ArrayList<Music> objects) {
+    public UserTopAdapter(@NonNull Activity context, int IDlayout, @NonNull ArrayList<Music> objects) {
         super(context, IDlayout, objects);
         this.context = context;
         this.IDlayout = IDlayout;
@@ -31,11 +31,11 @@ public class HistoryAdapter extends ArrayAdapter<Music> {
         //tao khung de chua layout
         LayoutInflater layoutInflater = context.getLayoutInflater();
         //dua id cua layout vao de tao view
-        convertView = layoutInflater.inflate(IDlayout, null);
+        convertView = layoutInflater.inflate(IDlayout,null);
         //tao object va set up de xuat thanh listview
-        Music music = objects.get(position);
-        TextView textView = convertView.findViewById(R.id.history);
-        textView.setText(String.valueOf(music.getHistory()));
+        Music music=objects.get(position);
+        TextView textView=convertView.findViewById(R.id.popularity);
+        textView.setText(String.valueOf(music.getPopularity()));
         return convertView;
     }
 }

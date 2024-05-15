@@ -2,4 +2,7 @@
 <resources>
     <string name="arranged">Sắp xếp</string>
     <string name="helloworld">HelloWorld</string>
+    <string name="timkiem">Tìm kiếm</string>
+    <string name="play">Phát nhạc</string>
+    <string name="nhaplink">Nhập link phát nhạc</string>
 </resources>

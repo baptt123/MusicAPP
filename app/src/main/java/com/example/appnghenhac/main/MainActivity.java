@@ -16,6 +16,7 @@ import com.example.appnghenhac.asynctask.GetArtist;
 import com.example.appnghenhac.asynctask.GetUserTop;
 import com.example.appnghenhac.historyplaylist.HistoryActivity;
 import com.example.appnghenhac.model.Music;
+import com.example.appnghenhac.rating.RatingActivity;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,17 +31,25 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     //    GetArtist getArtist = new GetArtist(this);
-    GetUserTop getUserTop = new GetUserTop(this);
+//    GetUserTop getUserTop = new GetUserTop(this);
     private TextView textView;
     private Button btn;
-    public void initView(){
-        btn=findViewById(R.id.chuyenhuong);
+    private Button btnhistory;
+
+    public void initView() {
+        btn = findViewById(R.id.chuyenhuong);
         btn.setOnClickListener(v -> {
-            Intent intent=new Intent(this, HistoryActivity.class);
+            Intent intent = new Intent(this, RatingActivity.class);
+            startActivity(intent);
+        });
+        btnhistory = findViewById(R.id.chuyenhuonglichsu);
+        btnhistory.setOnClickListener(v -> {
+            Intent intent = new Intent(this, HistoryActivity.class);
             startActivity(intent);
         });
 
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,16 +68,16 @@ public class MainActivity extends AppCompatActivity {
 //        DeleteDatafromFirebase();
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        startMedia();
-    }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        startMedia();
+//    }
 
-    public void startMedia(){
-        MediaPlayer mediaPlayer=MediaPlayer.create(this,R.raw.emcuangayhomqua);
-        mediaPlayer.start();
-    }
+//    public void startMedia(){
+//        MediaPlayer mediaPlayer=MediaPlayer.create(this,R.raw.emcuangayhomqua);
+//        mediaPlayer.start();
+//    }
 }
 
 

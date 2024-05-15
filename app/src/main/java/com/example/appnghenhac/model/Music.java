@@ -2,6 +2,8 @@ package com.example.appnghenhac.model;
 
 public class Music {
     private int popularity;
+    //test de lay du lieu ve so lan phat nhac
+    private int history;
 
     public int getPopularity() {
         return popularity;
@@ -9,6 +11,14 @@ public class Music {
 
     public void setPopularity(int popularity) {
         this.popularity = popularity;
+    }
+
+    public int getHistory() {
+        return history;
+    }
+
+    public void setHistory(int history) {
+        this.history = history;
     }
 
     public void getInforPopular(String jsonstring) {

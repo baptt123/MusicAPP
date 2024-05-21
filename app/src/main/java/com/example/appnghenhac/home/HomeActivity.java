@@ -1,6 +1,8 @@
 package com.example.appnghenhac.home;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -43,7 +45,6 @@ public class HomeActivity extends AppCompatActivity {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
             }
-
             webView.setWebViewClient(new WebViewClient() {
                 @RequiresApi(api = Build.VERSION_CODES.M)
                 @Override
@@ -57,20 +58,59 @@ public class HomeActivity extends AppCompatActivity {
                     super.onPageFinished(view, url);
                     Log.i("HomeActivity", "Page loaded: " + url);
                 }
+
+                @Override
+                public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                    if (url == null || url.startsWith("http://") || url.startsWith("https://")) return false;
+                    try {
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                        view.getContext().startActivity(intent);
+                        return true;
+                    } catch (Exception e) {
+                        return true;
+                    }
+                }
             });
-            webView.loadUrl("https://open.spotify.com/embed/track/2vYaldhZyuRk6me6yowg8e?utm_source=generator&theme=0");
+
+            webView.setWebChromeClient(new WebChromeClient() {
+                @Override
+                public void onPermissionRequest(final PermissionRequest request) {
+                    runOnUiThread(new Runnable() {
+                        @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+                        @Override
+                        public void run() {
+                            request.grant(request.getResources());
+                        }
+                    });
+                }
+            });
+
+            String html = "<html>\n" +
+                    "<body>\n" +
+                    "<h2>Hello World!</h2>\n" +
+                    "<iframe style=\"border-radius:12px\" src=\"https://open.spotify.com/embed/track/4inMQ83GNpQ2OHDredH5hW?utm_source=generator&theme=0\" width=\"100%\" height=\"352\" frameBorder=\"0\" allowfullscreen=\"\" allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\" loading=\"lazy\"></iframe>\n" +
+                    "</body>\n" +
+                    "</html>";
+            webView.loadDataWithBaseURL("http://localhost:8080/TestSpotify_war/index.jsp", html, "text/html", "UTF-8", null);
         } else {
             Log.e("HomeActivity", "WebView is null");
         }
     }
-    public void changeIntent(){
-        btn_dowload=findViewById(R.id.chuyenhuongdowload);
+
+    public void changeIntent() {
+        btn_dowload = findViewById(R.id.chuyenhuongdowload);
         btn_dowload.setOnClickListener(v -> {
-            Intent intent=new Intent(Intent.ACTION_VIEW, Uri.parse("https://spotifydown.com/vi"));
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://spotifydown.com/vi"));
             startActivity(intent);
         });
     }
-    }
+}
+
+
+
+
+
+
 
 
 

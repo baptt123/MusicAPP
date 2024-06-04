@@ -1,35 +1,21 @@
 package com.example.appnghenhac.main;
+/*
+@Author :Thanh Tan
+ */
 
-import android.content.Intent;
-import android.media.MediaPlayer;
-import android.provider.ContactsContract;
-import android.util.Log;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.constants.ScaleTypes;
+import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.appnghenhac.R;
-import com.example.appnghenhac.asynctask.GetArtist;
-import com.example.appnghenhac.asynctask.GetUserTop;
-import com.example.appnghenhac.historyplaylist.HistoryActivity;
-import com.example.appnghenhac.model.Music;
-import com.example.appnghenhac.rating.RatingActivity;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import org.jetbrains.annotations.NotNull;
+
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    ImageSlider imageSlider;
     //    GetArtist getArtist = new GetArtist(this);
 //    GetUserTop getUserTop = new GetUserTop(this);
 //    private TextView textView;
@@ -55,6 +41,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 //        initView();
+        initView();
+    }
+    public void initView(){
+        /*
+        Dữ liệu để test
+
+         */
+        imageSlider=findViewById(R.id.slider);
+        ArrayList<SlideModel> slideModels=new ArrayList<>();
+        slideModels.add(new SlideModel("https://laodong.vn/van-hoa-giai-tri/lyly-duoc-gi-sau-khi-sang-trung-quoc-nhu-chi-pu-1248302.ldo#&gid=1&pid=1","Lyly", ScaleTypes.CENTER_CROP));
+        slideModels.add(new SlideModel("https://thanhnien.vn/suni-ha-linh-xuat-hien-trong-chuong-trinh-cua-ba-trum-showbiz-xu-trung-185240604004944538.htm#img-lightbox-1","Suni Hạ Linh",ScaleTypes.CENTER_CROP));
+        slideModels.add(new SlideModel("https://www.sggp.org.vn/trang-phap-tru-vung-top-3-nu-nghe-si-anh-huong-nhat-mxh-dau-nam-2024-post742789.html#lg=1&slide=0","Trang Pháp",ScaleTypes.CENTER_CROP));
+        imageSlider.setImageList(slideModels);
+
     }
 //        getArtist.execute();
 //        try {

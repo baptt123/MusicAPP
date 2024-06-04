@@ -32,30 +32,30 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     //    GetArtist getArtist = new GetArtist(this);
 //    GetUserTop getUserTop = new GetUserTop(this);
-    private TextView textView;
-    private Button btn;
-    private Button btnhistory;
-
-    public void initView() {
-        btn = findViewById(R.id.chuyenhuong);
-        btn.setOnClickListener(v -> {
-            Intent intent = new Intent(this, RatingActivity.class);
-            startActivity(intent);
-        });
-        btnhistory = findViewById(R.id.chuyenhuonglichsu);
-        btnhistory.setOnClickListener(v -> {
-            Intent intent = new Intent(this, HistoryActivity.class);
-            startActivity(intent);
-        });
-
-    }
+//    private TextView textView;
+//    private Button btn;
+//    private Button btnhistory;
+//
+//    public void initView() {
+//        btn = findViewById(R.id.chuyenhuong);
+//        btn.setOnClickListener(v -> {
+//            Intent intent = new Intent(this, RatingActivity.class);
+//            startActivity(intent);
+//        });
+//        btnhistory = findViewById(R.id.chuyenhuonglichsu);
+//        btnhistory.setOnClickListener(v -> {
+//            Intent intent = new Intent(this, HistoryActivity.class);
+//            startActivity(intent);
+//        });
+//
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initView();
-
+//        initView();
+    }
 //        getArtist.execute();
 //        try {
 //            FirebaseApp.initializeApp(this);
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 //        MediaPlayer mediaPlayer=MediaPlayer.create(this,R.raw.emcuangayhomqua);
 //        mediaPlayer.start();
 //    }
-}
+
 
 
 //    public void getDataFromAsyncTask(JsonObject jsonObject) {

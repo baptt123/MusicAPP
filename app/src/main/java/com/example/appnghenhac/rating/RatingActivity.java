@@ -41,15 +41,15 @@ public class RatingActivity extends AppCompatActivity {
             musicArrayList.add(music);
             startIndex = s.indexOf("\"popularity\":", endIndex);
         }
-        displayListViewRanking(musicArrayList);
+//        displayListViewRanking(musicArrayList);
     }
 
-    public void displayListViewRanking(ArrayList<Music> list) {
-        ListView listView = findViewById(R.id.list_view_rating);
-        UserTopAdapter musicArrayAdapter = new UserTopAdapter(this, R.layout.list_item, list);
-        listView.setAdapter(musicArrayAdapter);
-        Toast.makeText(this, "Hien thi du lieu thanh cong", Toast.LENGTH_LONG).show();
-    }
+//    public void displayListViewRanking(ArrayList<Music> list) {
+//        ListView listView = findViewById(R.id.list_view_rating);
+//        UserTopAdapter musicArrayAdapter = new UserTopAdapter(this, R.layout.list_item, list);
+//        listView.setAdapter(musicArrayAdapter);
+//        Toast.makeText(this, "Hien thi du lieu thanh cong", Toast.LENGTH_LONG).show();
+//    }
 
     public void initView() {
         btn_return = findViewById(R.id.back);

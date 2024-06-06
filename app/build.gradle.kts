@@ -48,7 +48,8 @@ dependencies {
     implementation("androidx.media:media:1.7.0")
     implementation("androidx.media3:media3-ui:1.3.1")
     implementation ("com.github.denzcoskun:ImageSlideshow:0.1.2")
-
+    implementation ("com.android.support:recyclerview-v7:27.1.1")
+    implementation ("com.squareup.picasso:picasso:2.71828")
 
 
 }

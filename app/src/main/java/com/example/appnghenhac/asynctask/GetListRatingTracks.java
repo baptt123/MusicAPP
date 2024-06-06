@@ -2,19 +2,19 @@ package com.example.appnghenhac.asynctask;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import com.example.appnghenhac.main.MainActivity;
+
 import com.example.appnghenhac.rating.RatingActivity;
-import com.google.gson.*;
+
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
 import java.io.IOException;
 
-public class GetUserTop extends AsyncTask<Void, Void, String> {
+public class GetListRatingTracks extends AsyncTask<Void, Void, String> {
     private RatingActivity ratingcontext;
 
-    public GetUserTop(RatingActivity ratingcontext) {
+    public GetListRatingTracks(RatingActivity ratingcontext) {
         this.ratingcontext = ratingcontext;
     }
 
@@ -61,7 +61,8 @@ public class GetUserTop extends AsyncTask<Void, Void, String> {
 //        }
         if(s!=null){
 //            mcontext.getDatafromAsyncTask(s);
-            ratingcontext.getDataFromAsyncTask(s);
+            ratingcontext.getMusicNameFromAsyncTask(s);
+
         }
     }
 

@@ -115,7 +115,7 @@
     <!--slider-->
 <com.denzcoskun.imageslider.ImageSlider
     android:layout_width="wrap_content"
-    android:layout_height="300dp"
+    android:layout_height="100dp"
     android:id="@+id/slider"
     app:iss_auto_cycle="true"
     app:iss_delay="1000"
@@ -123,4 +123,13 @@
     app:iss_text_align="center"/>
 
 </LinearLayout>
+    <!--fragment area-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="500dp"
+        android:layout_marginTop="50dp"
+        android:orientation="horizontal"
+        android:id="@+id/fragement_playicon">
+
+    </LinearLayout>
 </RelativeLayout>

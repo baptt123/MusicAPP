@@ -17,7 +17,6 @@ public class RatingActivity extends AppCompatActivity {
     private ImageView btn_return;
     GetListRatingTracks getListRatingTracks = new GetListRatingTracks(this);
     private ListRatingAdapter userTopAdapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,44 +25,10 @@ public class RatingActivity extends AppCompatActivity {
         initView();
     }
 
-    public void getMusicNameFromAsyncTask(String s) {
-        ArrayList<Music> musicArrayList = new ArrayList<>();
-        String inputnamestring = "\"name\":";
-        int startIndex = s.indexOf(inputnamestring);
-        while (startIndex != -1) {
-            int endIndex = s.indexOf(",", startIndex);
-            if (endIndex == -1) {
-                endIndex = s.indexOf("}", startIndex);
-            }
-            String nameString = s.substring(startIndex + inputnamestring.length(), endIndex);
-            Music music = new Music();
-            music.setName(nameString);
-            musicArrayList.add(music);
-            startIndex = s.indexOf(inputnamestring, endIndex);
-        }
-        ArrayList<Music> musicimgArrayList = new ArrayList<>();
-        String input_name_img="\"url\":";
-        int startIndexImg = s.indexOf(input_name_img);
-        while (startIndexImg != -1) {
-            int endIndexImg = s.indexOf(",", startIndexImg);
-            if (endIndexImg == -1) {
-                endIndexImg = s.indexOf("}", startIndexImg);
-            }
-            String nameString = s.substring(startIndexImg + input_name_img.length(), endIndexImg);
-            Music music_img= new Music();
-            music_img.setImg(input_name_img);
-            musicimgArrayList.add(music_img);
-            startIndex = s.indexOf(input_name_img, endIndexImg);
-        }
-        ArrayList<Music> musicresult=new ArrayList<>();
-        for (int i = 0; i < musicArrayList.size(); i++) {
-            Music music=new Music();
-            music.setName(musicArrayList.get(i).getName());
-            music.setImg(musicimgArrayList.get(i).getImg());
-            musicresult.add(music);
-        }
+    public void getMusicNameFromAsyncTask(ArrayList<Music> list) {
 
-        displayListViewRanking(musicArrayList);
+
+        displayListViewRanking(list);
     }
 
     public void displayListViewRanking(ArrayList<Music> list) {
@@ -80,6 +45,10 @@ public class RatingActivity extends AppCompatActivity {
             startActivity(intent);
 
         });
+    }
+
+    public void getRatingImageTrack(String s) {
+
     }
 
 //    public void getMusicFromFirebase() {

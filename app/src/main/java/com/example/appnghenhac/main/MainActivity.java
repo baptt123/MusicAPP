@@ -4,18 +4,23 @@ package com.example.appnghenhac.main;
  */
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.os.Bundle;
+import android.widget.ImageView;
 
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.appnghenhac.R;
+import com.example.appnghenhac.fragment.TestPlayFragment;
 
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     ImageSlider imageSlider;
+    ImageView playbuttonicon;
     //    GetArtist getArtist = new GetArtist(this);
 //    GetUserTop getUserTop = new GetUserTop(this);
 //    private TextView textView;
@@ -41,21 +46,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 //        initView();
+//        initView();
         initView();
     }
-    public void initView(){
-        /*
-        Dữ liệu để test
-
-         */
-        imageSlider=findViewById(R.id.slider);
-        ArrayList<SlideModel> slideModels=new ArrayList<>();
-        slideModels.add(new SlideModel("https://laodong.vn/van-hoa-giai-tri/lyly-duoc-gi-sau-khi-sang-trung-quoc-nhu-chi-pu-1248302.ldo#&gid=1&pid=1","Lyly", ScaleTypes.CENTER_CROP));
-        slideModels.add(new SlideModel("https://thanhnien.vn/suni-ha-linh-xuat-hien-trong-chuong-trinh-cua-ba-trum-showbiz-xu-trung-185240604004944538.htm#img-lightbox-1","Suni Hạ Linh",ScaleTypes.CENTER_CROP));
-        slideModels.add(new SlideModel("https://www.sggp.org.vn/trang-phap-tru-vung-top-3-nu-nghe-si-anh-huong-nhat-mxh-dau-nam-2024-post742789.html#lg=1&slide=0","Trang Pháp",ScaleTypes.CENTER_CROP));
-        imageSlider.setImageList(slideModels);
-
-    }
+//    public void initView(){
+//        /*
+//        Dữ liệu để test
+//
+//         */
+//        imageSlider=findViewById(R.id.slider);
+//        ArrayList<SlideModel> slideModels=new ArrayList<>();
+//        slideModels.add(new SlideModel("https://laodong.vn/van-hoa-giai-tri/lyly-duoc-gi-sau-khi-sang-trung-quoc-nhu-chi-pu-1248302.ldo#&gid=1&pid=1","Lyly", ScaleTypes.CENTER_CROP));
+//        slideModels.add(new SlideModel("https://thanhnien.vn/suni-ha-linh-xuat-hien-trong-chuong-trinh-cua-ba-trum-showbiz-xu-trung-185240604004944538.htm#img-lightbox-1","Suni Hạ Linh",ScaleTypes.CENTER_CROP));
+//        slideModels.add(new SlideModel("https://www.sggp.org.vn/trang-phap-tru-vung-top-3-nu-nghe-si-anh-huong-nhat-mxh-dau-nam-2024-post742789.html#lg=1&slide=0","Trang Pháp",ScaleTypes.CENTER_CROP));
+//        imageSlider.setImageList(slideModels);
+//
+//    }
 //        getArtist.execute();
 //        try {
 //            FirebaseApp.initializeApp(this);
@@ -66,6 +72,15 @@ public class MainActivity extends AppCompatActivity {
 //        addDatatoFirebase();
 //        getDatafromFirebase();
 //        DeleteDatafromFirebase();
+    public void initView(){
+    playbuttonicon=findViewById(R.id.playbuttonicon);
+    playbuttonicon.setOnClickListener(v -> {
+        TestPlayFragment testPlayFragment=new TestPlayFragment();
+        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragement_playicon,testPlayFragment);
+        fragmentTransaction.commit();
+    });
+    }
     }
 
 //    @Override

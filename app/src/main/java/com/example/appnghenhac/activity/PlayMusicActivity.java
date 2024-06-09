@@ -1,13 +1,15 @@
-package com.example.appnghenhac.playmusic;
+package com.example.appnghenhac.activity;
 
 import android.Manifest;
 import android.app.Notification;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.widget.Button;
+
 import androidx.annotation.Nullable;
 import androidx.annotation.OptIn;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,32 +17,38 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.media3.common.util.UnstableApi;
-import androidx.media3.session.MediaStyleNotificationHelper;
+
 import com.example.appnghenhac.R;
 import com.example.appnghenhac.notification.MusicNotification;
 
 public class PlayMusicActivity extends AppCompatActivity {
     private Button btn_playmusic;
+
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test_play_music);
         initView();
     }
+
     //hàm khởi tạo giao diện và sự kiện
-    public void initView(){
-        btn_playmusic=findViewById(R.id.btn_playmusic);
+    public void initView() {
+        btn_playmusic = findViewById(R.id.btn_playmusic);
         btn_playmusic.setOnClickListener(v -> {
             sendNotificationMedia();
+            Intent intent = new Intent();
+            intent.setClass(PlayMusicActivity.this, HistoryActivity.class);
+            startActivity(intent);
         });
     }
-//hàm gửi notification và hiển thị lên thiết bị
+
+    //hàm gửi notification và hiển thị lên thiết bị
     @OptIn(markerClass = UnstableApi.class)
     private void sendNotificationMedia() {
         //thư viện bitmap mã hóa ảnh sang nhị phân để xử lí
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.baseline_music_note_24);
-        MediaSessionCompat mediaSessionCompat=new MediaSessionCompat(this,"tag");
-                //các thông số để cấu hình notification
+        MediaSessionCompat mediaSessionCompat = new MediaSessionCompat(this, "tag");
+        //các thông số để cấu hình notification
         Notification notificationmedia = new NotificationCompat.Builder(this, MusicNotification.CHANNEl_ID).
                 setSmallIcon(R.drawable.baseline_music_note_24).
                 setSubText("Music").

@@ -1,4 +1,4 @@
-package com.example.appnghenhac.home;
+package com.example.appnghenhac.activity;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -16,7 +16,7 @@ import androidx.fragment.app.FragmentManager;
 import com.example.appnghenhac.R;
 import com.example.appnghenhac.fragment.SearchFragment;
 
-public class HomeActivity extends AppCompatActivity {
+public class  HomeActivity extends AppCompatActivity {
     private WebView webView;
     private Button btn_dowload;
     @Override

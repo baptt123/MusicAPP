@@ -14,11 +14,13 @@ import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.appnghenhac.R;
 import com.example.appnghenhac.fragment.TestPlayFragment;
+import com.google.firebase.storage.FirebaseStorage;
 
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    FirebaseStorage firebaseStorage;
     ImageSlider imageSlider;
     ImageView playbuttonicon;
     //    GetArtist getArtist = new GetArtist(this);

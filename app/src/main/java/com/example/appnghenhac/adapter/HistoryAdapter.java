@@ -13,7 +13,7 @@ import com.example.appnghenhac.model.Music;
 
 import java.util.ArrayList;
 
-public class HistoryAdapter extends ArrayAdapter<Music> {
+public class    HistoryAdapter extends ArrayAdapter<Music> {
     private Activity context;
     private int IDlayout;
     private ArrayList<Music> objects;
@@ -34,7 +34,7 @@ public class HistoryAdapter extends ArrayAdapter<Music> {
         convertView = layoutInflater.inflate(IDlayout, null);
         //tao object va set up de xuat thanh listview
         Music music = objects.get(position);
-        TextView textView = convertView.findViewById(R.id.history);
+        TextView textView = convertView.findViewById(R.id.textView2);
         textView.setText(String.valueOf(music.getHistory()));
         return convertView;
     }

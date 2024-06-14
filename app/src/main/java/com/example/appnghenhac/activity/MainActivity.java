@@ -1,8 +1,35 @@
-package com.example.appnghenhac.main;
+package com.example.appnghenhac.activity;
 /*
 @Author :Thanh Tan
  */
-
+import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.media.MediaPlayer;
+import android.net.Uri;
+import android.provider.ContactsContract;
+import android.provider.MediaStore;
+import android.util.Log;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import com.example.appnghenhac.R;
+import com.example.appnghenhac.asynctask.GetArtist;
+import com.example.appnghenhac.model.Music;
+import com.example.appnghenhac.model.MusicFiles;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import org.jetbrains.annotations.NotNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -10,21 +37,12 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.denzcoskun.imageslider.ImageSlider;
-import com.denzcoskun.imageslider.constants.ScaleTypes;
-import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.appnghenhac.R;
 import com.example.appnghenhac.fragment.TestPlayFragment;
-
-import com.google.firebase.storage.FirebaseStorage;
-
-
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-
-    FirebaseStorage firebaseStorage;
-
     ImageSlider imageSlider;
     ImageView playbuttonicon;
     //    GetArtist getArtist = new GetArtist(this);
@@ -87,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     });
     }
-    }
+
 
 //    @Override
 //    protected void onStart() {
@@ -95,11 +113,38 @@ public class MainActivity extends AppCompatActivity {
 //        startMedia();
 //    }
 
-//    public void startMedia(){
+    //    public void startMedia(){
 //        MediaPlayer mediaPlayer=MediaPlayer.create(this,R.raw.emcuangayhomqua);
 //        mediaPlayer.start();
 //    }
-
+    public static ArrayList<MusicFiles> getAllAudio(Context context) {
+        ArrayList<MusicFiles> tempAudioList = new ArrayList<>();
+        Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+        String[] projection = {
+                MediaStore.Audio.Media.ALBUM,
+                MediaStore.Audio.Media.TITLE,
+                MediaStore.Audio.Media.DURATION,
+                MediaStore.Audio.Media.DATA,
+                MediaStore.Audio.Media.ARTIST
+        };
+        Cursor cursor = context.getContentResolver().query(uri, projection, null, null, null);
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                String album = cursor.getString(0);
+                String title = cursor.getString(1);
+                String duration = cursor.getString(2);
+                String path = cursor.getString(3);
+                String artist = cursor.getString(4);
+                MusicFiles musicFiles = new MusicFiles(path, title, artist, album, duration);
+                tempAudioList.add(musicFiles);
+//                Lay log.e kiem tra
+                Log.e("Path" + path, "Album" + album);
+            }
+            cursor.close();
+        }
+        return tempAudioList;
+    }
+}
 
 
 //    public void getDataFromAsyncTask(JsonObject jsonObject) {

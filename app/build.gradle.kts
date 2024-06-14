@@ -1,3 +1,4 @@
+
 plugins {
     id("com.android.application")
     id("com.google.gms.google-services")
@@ -7,7 +8,7 @@ android {
     namespace = "com.example.appnghenhac"
     compileSdk = 34
 
-    defaultConfig {
+    defaultConfig { 
         applicationId = "com.example.appnghenhac"
         minSdk = 22
         targetSdk = 34
@@ -49,7 +50,7 @@ dependencies {
     implementation("androidx.media3:media3-ui:1.3.1")
    implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation ("com.github.denzcoskun:ImageSlideshow:0.1.2")
-    implementation ("com.android.support:recyclerview-v7:27.1.1")
+//    implementation ("com.android.support:recyclerview-v7:27.1.1")
     implementation ("com.squareup.picasso:picasso:2.71828")
     implementation ("androidx.core:core:1.9.0")
 

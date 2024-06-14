@@ -1,8 +1,12 @@
 package com.example.appnghenhac.main;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.provider.ContactsContract;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
@@ -16,6 +20,7 @@ import com.example.appnghenhac.asynctask.GetArtist;
 import com.example.appnghenhac.asynctask.GetUserTop;
 import com.example.appnghenhac.historyplaylist.HistoryActivity;
 import com.example.appnghenhac.model.Music;
+import com.example.appnghenhac.model.MusicFiles;
 import com.example.appnghenhac.rating.RatingActivity;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseError;
@@ -74,10 +79,37 @@ public class MainActivity extends AppCompatActivity {
 //        startMedia();
 //    }
 
-//    public void startMedia(){
+    //    public void startMedia(){
 //        MediaPlayer mediaPlayer=MediaPlayer.create(this,R.raw.emcuangayhomqua);
 //        mediaPlayer.start();
 //    }
+    public static ArrayList<MusicFiles> getAllAudio(Context context) {
+        ArrayList<MusicFiles> tempAudioList = new ArrayList<>();
+        Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+        String[] projection = {
+                MediaStore.Audio.Media.ALBUM,
+                MediaStore.Audio.Media.TITLE,
+                MediaStore.Audio.Media.DURATION,
+                MediaStore.Audio.Media.DATA,
+                MediaStore.Audio.Media.ARTIST
+        };
+        Cursor cursor = context.getContentResolver().query(uri, projection, null, null, null);
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                String album = cursor.getString(0);
+                String title = cursor.getString(1);
+                String duration = cursor.getString(2);
+                String path = cursor.getString(3);
+                String artist = cursor.getString(4);
+                MusicFiles musicFiles = new MusicFiles(path, title, artist, album, duration);
+                tempAudioList.add(musicFiles);
+//                Lay log.e kiem tra
+                Log.e("Path" + path, "Album" + album);
+            }
+            cursor.close();
+        }
+        return tempAudioList;
+    }
 }
 
 

@@ -13,7 +13,7 @@ import com.example.appnghenhac.model.Music;
 
 import java.util.ArrayList;
 
-public class HistoryAdapter extends ArrayAdapter<Music> {
+public class    HistoryAdapter extends ArrayAdapter<Music> {
     private Activity context;
     private int IDlayout;
     private ArrayList<Music> objects;

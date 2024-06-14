@@ -2,7 +2,6 @@ package com.example.appnghenhac.activity;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -12,9 +11,8 @@ import android.webkit.*;
 import android.widget.Button;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
+
 import com.example.appnghenhac.R;
-import com.example.appnghenhac.fragment.SearchFragment;
 
 public class HomeActivity extends AppCompatActivity {
     private WebView webView;

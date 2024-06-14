@@ -11,7 +11,6 @@ import android.widget.ImageView;
 
 import com.denzcoskun.imageslider.ImageSlider;
 import com.example.appnghenhac.R;
-import com.example.appnghenhac.fragment.TestPlayFragment;
 
 public class MainActivity extends AppCompatActivity {
     ImageSlider imageSlider;
@@ -41,8 +40,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 //        initView();
-//        initView();
-        initView();
     }
 //    public void initView(){
 //        /*
@@ -67,15 +64,15 @@ public class MainActivity extends AppCompatActivity {
 //        addDatatoFirebase();
 //        getDatafromFirebase();
 //        DeleteDatafromFirebase();
-    public void initView(){
-    playbuttonicon=findViewById(R.id.playbuttonicon);
-    playbuttonicon.setOnClickListener(v -> {
-        TestPlayFragment testPlayFragment=new TestPlayFragment();
-        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragement_playicon,testPlayFragment);
-        fragmentTransaction.commit();
-    });
-    }
+//    public void initView(){
+//    playbuttonicon=findViewById(R.id.playbuttonicon);
+//    playbuttonicon.setOnClickListener(v -> {
+////        TestPlayFragment testPlayFragment=new TestPlayFragment();
+////        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+////        fragmentTransaction.replace(R.id.fragement_playicon,testPlayFragment);
+////        fragmentTransaction.commit();
+//    });
+//    }
     }
 
 //    @Override

@@ -18,7 +18,9 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-
+/*
+lop de test cho chuc nang search
+ */
 public class SearchFragment extends Fragment {
     private MediaPlayer mediaPlayer;
     private EditText editText;

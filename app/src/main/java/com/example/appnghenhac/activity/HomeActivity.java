@@ -1,4 +1,4 @@
-package com.example.appnghenhac.home;
+package com.example.appnghenhac.activity;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;

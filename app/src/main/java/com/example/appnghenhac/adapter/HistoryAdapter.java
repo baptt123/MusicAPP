@@ -34,7 +34,7 @@ public class HistoryAdapter extends ArrayAdapter<Music> {
         convertView = layoutInflater.inflate(IDlayout, null);
         //tao object va set up de xuat thanh listview
         Music music = objects.get(position);
-        TextView textView = convertView.findViewById(R.id.textView2);
+        TextView textView = convertView.findViewById(R.id.history);
         textView.setText(String.valueOf(music.getHistory()));
         return convertView;
     }

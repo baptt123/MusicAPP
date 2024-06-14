@@ -1,6 +1,6 @@
 package com.example.appnghenhac.asynctask;
 import android.widget.Toast;
-import com.example.appnghenhac.activity.MainActivity;
+import com.example.appnghenhac.main.MainActivity;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;

@@ -2,9 +2,9 @@ package com.example.appnghenhac.asynctask;
 
 import android.os.AsyncTask;
 import android.util.Log;
-
-import com.example.appnghenhac.activity.RatingActivity;
-
+import com.example.appnghenhac.main.MainActivity;
+import com.example.appnghenhac.rating.RatingActivity;
+import com.google.gson.*;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;

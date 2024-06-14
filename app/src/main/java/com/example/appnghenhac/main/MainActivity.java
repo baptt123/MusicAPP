@@ -1,14 +1,33 @@
-package com.example.appnghenhac.activity;
+package com.example.appnghenhac.main;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.provider.ContactsContract;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
-
+import android.widget.Toast;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.example.appnghenhac.R;
+import com.example.appnghenhac.asynctask.GetArtist;
+import com.example.appnghenhac.asynctask.GetUserTop;
+import com.example.appnghenhac.historyplaylist.HistoryActivity;
+import com.example.appnghenhac.model.Music;
+import com.example.appnghenhac.rating.RatingActivity;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     //    GetArtist getArtist = new GetArtist(this);
@@ -36,12 +55,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-
-        // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
-
-        myRef.setValue("Hello, World!");
 
 //        getArtist.execute();
 //        try {

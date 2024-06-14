@@ -1,4 +1,4 @@
-package com.example.appnghenhac.activity;
+package com.example.appnghenhac.rating;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.appnghenhac.R;
 import com.example.appnghenhac.adapter.UserTopAdapter;
 import com.example.appnghenhac.asynctask.GetUserTop;
-import com.example.appnghenhac.activity.MainActivity;
+import com.example.appnghenhac.main.MainActivity;
 import com.example.appnghenhac.model.Music;
 
 import java.util.ArrayList;

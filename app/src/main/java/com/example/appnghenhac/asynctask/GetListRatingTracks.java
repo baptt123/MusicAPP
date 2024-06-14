@@ -4,7 +4,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.appnghenhac.model.Music;
-import com.example.appnghenhac.rating.RatingActivity;
+import com.example.appnghenhac.activity.RatingActivity;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;

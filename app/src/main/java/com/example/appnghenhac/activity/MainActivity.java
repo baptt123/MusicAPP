@@ -1,4 +1,4 @@
-package com.example.appnghenhac.main;
+package com.example.appnghenhac.activity;
 /*
 @Author :Thanh Tan
  */
@@ -10,13 +10,8 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.denzcoskun.imageslider.ImageSlider;
-import com.denzcoskun.imageslider.constants.ScaleTypes;
-import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.appnghenhac.R;
 import com.example.appnghenhac.fragment.TestPlayFragment;
-
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     ImageSlider imageSlider;

@@ -1,4 +1,4 @@
-package com.example.appnghenhac.historyplaylist;
+package com.example.appnghenhac.activity;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -17,14 +17,12 @@ import com.google.firebase.database.annotations.NotNull;
 
 import java.util.ArrayList;
 
-import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
-
 public class HistoryActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.history_playlist);
+        setContentView(R.layout.activity_history);
 //        addDatatoFirebase();
         FirebaseApp.initializeApp(this);
         setListView();

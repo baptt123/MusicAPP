@@ -1,4 +1,4 @@
-package com.example.appnghenhac.playmusic;
+package com.example.appnghenhac.activity;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;

@@ -5,9 +5,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.appnghenhac.model.MusicFiles;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+
 public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyVieHolder> {
+    private Context mContex;
+    private ArrayList<MusicFiles> mFile;
+//    MusicAdapter
+
     @NonNull
     @NotNull
     @Override
@@ -26,9 +33,6 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyVieHolder>
     }
 
     public class MyVieHolder extends RecyclerView.ViewHolder{
-
-        private Context mContex;
-
 
         public MyVieHolder(@NonNull @NotNull View itemView) {
             super(itemView);

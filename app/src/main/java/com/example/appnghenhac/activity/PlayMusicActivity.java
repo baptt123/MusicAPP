@@ -15,7 +15,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.media3.common.util.UnstableApi;
-import androidx.media3.session.MediaStyleNotificationHelper;
+
 import com.example.appnghenhac.R;
 import com.example.appnghenhac.notification.MusicNotification;
 
@@ -41,7 +41,7 @@ public class PlayMusicActivity extends AppCompatActivity {
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.baseline_music_note_24);
         MediaSessionCompat mediaSessionCompat=new MediaSessionCompat(this,"tag");
                 //các thông số để cấu hình notification
-        Notification notificationmedia = new NotificationCompat.Builder(this, MusicNotification.CHANNEl_ID).
+        Notification notificationmedia = new NotificationCompat.Builder(this, MusicNotification.CHANNEL_ID_MUSIC).
                 setSmallIcon(R.drawable.baseline_music_note_24).
                 setSubText("Music").
                 setContentText("Playing Music No 1").

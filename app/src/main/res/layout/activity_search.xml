@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SearchActivity">
+    <!--khu vực search-->
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:id="@+id/search_bar"
+        android:hint="Nhập bài hát">
+
+    </EditText>
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:id="@+id/search_button"
+        android:layout_marginTop="50dp"
+        android:text="Tìm kiếm">
+
+    </androidx.appcompat.widget.AppCompatButton>
+    <!--khu vực hiển thị cho fragment-->
+    <LinearLayout
+        android:layout_width="500dp"
+        android:layout_height="500dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:id="@+id/linear_fragment_search"
+        android:layout_marginTop="70dp">
+
+    </LinearLayout>
+
+
+</RelativeLayout>

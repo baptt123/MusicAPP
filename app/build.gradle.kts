@@ -54,6 +54,9 @@ dependencies {
     implementation ("com.squareup.picasso:picasso:2.71828")
     implementation ("androidx.core:core:1.9.0")
     implementation("com.google.firebase:firebase-storage")
-
+    implementation ("com.squareup.picasso:picasso:2.71828")
+    // https://mvnrepository.com/artifact/com.google.code.gson/gson
+    implementation ("com.google.code.gson:gson:2.11.0")
+    implementation ("com.google.firebase:firebase-analytics:20.0.0")
 }
 

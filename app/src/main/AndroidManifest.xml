@@ -57,6 +57,31 @@
                   android:exported="true">
 
         </activity>
+        <activity
+            android:name=".activity.SearchActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".activity.UploadFileActivity"
+            android:exported="true">
+
+        </activity>
+        <activity android:name=".activity.MusicPlayNotifyActivity"
+            android:exported="true">
+
+        </activity>
+        <activity android:name=".activity.ChooseFileActivity"
+            android:exported="true">
+
+        </activity>
+        <receiver android:name=".receiver.MusicReceiver" android:exported="true"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="Play"></action>
+                <action android:name="Pause"></action>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

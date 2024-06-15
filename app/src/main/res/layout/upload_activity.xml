@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".UploadFileActivity">
+<!--form thêm bài hát cho app-->
+    <!--tiêu đề-->
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:text="Thêm bài hát"
+        android:textAlignment="center"
+        android:textSize="30dp">
+
+    </TextView>
+<!--Nhập tên bài hát-->
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="50dp"
+        android:hint="Nhập tên bài hát"
+        android:id="@+id/name_song">
+
+    </EditText>
+<!--Nhập tên nghệ sĩ-->
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:hint="Nhập tên nghệ sĩ"
+        android:id="@+id/name_artist">
+
+    </EditText>
+    <!--ô hiển thị link sau khi bấm gửi file-->
+<!--    <EditText android:layout_width="250dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_marginLeft="50dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:hint="Hiển thị link"-->
+<!--        android:id="@+id/link_file_song">-->
+
+<!--    </EditText>-->
+    <!--ảnh được hiển thị sau khi chọn ảnh-->
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/headphone"
+        android:layout_marginLeft="140dp"
+        android:id="@+id/image_song">
+
+    </ImageView>
+<!--bấm thêm ảnh-->
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Thêm ảnh"
+        android:layout_marginLeft="120dp"
+        android:id="@+id/btn_add_image">
+<!--bấm gửi file-->
+    </androidx.appcompat.widget.AppCompatButton>
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Gửi file"
+        android:layout_marginLeft="120dp"
+        android:id="@+id/btn_add_file_song">
+
+    </androidx.appcompat.widget.AppCompatButton>
+    <!--gửi file lên firebase-->
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Gửi file lên server"
+        android:layout_marginLeft="120dp"
+        android:id="@+id/btn_send_file_song_to_firebase">
+
+    </androidx.appcompat.widget.AppCompatButton>
+</LinearLayout>

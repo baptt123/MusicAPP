@@ -1,8 +1,13 @@
 package com.example.appnghenhac.activity;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,7 +23,7 @@ import java.util.ArrayList;
 public class SearchActivity extends AppCompatActivity {
     EditText search_bar;
     Button search_button;
-
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +41,9 @@ public class SearchActivity extends AppCompatActivity {
             search_bar = findViewById(R.id.search_bar);
             AsyncTaskSearch asyncTaskSearch = new AsyncTaskSearch(this);
             String result_search = search_bar.getText().toString();
+            progressBar=findViewById(R.id.progress_bar);
+            progressBar.setVisibility(View.VISIBLE);
+           setProgressBarDuration(3000,progressBar);
             asyncTaskSearch.execute(result_search);
         });
     }
@@ -53,5 +61,19 @@ public class SearchActivity extends AppCompatActivity {
             arrayList.add(music);
         }
         return arrayList;
+    }
+    /*
+     * Hàm xử lý thời gian ProgressBar
+     */
+    private void setProgressBarDuration(int duration, ProgressBar progressBar) {
+        ObjectAnimator progressAnimator = ObjectAnimator.ofInt(progressBar, "progress", 0, 100);
+        progressAnimator.setDuration(duration);
+        progressAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                progressBar.setVisibility(View.GONE); // Ẩn ProgressBar sau khi hoàn thành
+            }
+        });
+        progressAnimator.start();
     }
 }

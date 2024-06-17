@@ -4,33 +4,46 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchActivity">
+    tools:context=".activity.SearchActivity">
     <!--khu vực search-->
     <EditText
+        android:id="@+id/search_bar"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:id="@+id/search_bar"
         android:hint="Nhập bài hát">
 
     </EditText>
+
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/search_button"
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:id="@+id/search_button"
         android:layout_marginTop="50dp"
         android:text="Tìm kiếm">
 
     </androidx.appcompat.widget.AppCompatButton>
+
+
     <!--khu vực hiển thị cho fragment-->
     <LinearLayout
-        android:layout_width="500dp"
-        android:layout_height="500dp"
-        android:orientation="vertical"
-        android:gravity="center"
         android:id="@+id/linear_fragment_search"
-        android:layout_marginTop="70dp">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="100dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:background="@color/light_blue">
 
     </LinearLayout>
-
+    <!--thanh progress bar-->
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Small.Inverse"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerInParent="true"
+        android:max="100"
+        android:progress="0"
+        android:visibility="invisible" />
 
 </RelativeLayout>

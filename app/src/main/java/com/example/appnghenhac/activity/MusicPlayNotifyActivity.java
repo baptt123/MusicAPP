@@ -51,6 +51,8 @@ public class MusicPlayNotifyActivity extends AppCompatActivity {
 
         Intent playintent = new Intent(this, MusicReceiver.class);
         playintent.setAction("Play");
+        //cái này để tạm thời truyền dữ liệu sang intent
+        playintent.putExtra("name_song","ten bai hat");
         PendingIntent playPendingIntent = PendingIntent.getBroadcast(this, 0, playintent, PendingIntent.FLAG_UPDATE_CURRENT);
         Intent pauseintent = new Intent(this, MusicReceiver.class);
         pauseintent.setAction("Pause");

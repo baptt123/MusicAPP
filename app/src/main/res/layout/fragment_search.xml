@@ -5,10 +5,11 @@
     android:id="@+id/fragment_search_layout">
     <!--fragment hiển thị khi trả kết quả từ search-->
     <ListView
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:id="@+id/fragment_search_list"
-        android:layout_marginTop="200dp"
-        android:layout_marginLeft="60dp">
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="0dp"
+        android:background="@color/white">
     </ListView>
 </RelativeLayout>

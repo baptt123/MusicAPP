@@ -23,12 +23,14 @@ public class MusicReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
         switch (action) {
+
             case "Play":
+                String name_song = intent.getStringExtra("name_song");
                 // Khởi tạo Firebase Storage
                 FirebaseStorage storage = FirebaseStorage.getInstance();
                 // Tham chiếu đến nơi bạn muốn lưu trữ file
                 StorageReference storageRef = storage.getReference();
-                StorageReference fileRef = storageRef.child("uploads/24h");
+                StorageReference fileRef = storageRef.child("uploads/"+name_song);
                 fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {

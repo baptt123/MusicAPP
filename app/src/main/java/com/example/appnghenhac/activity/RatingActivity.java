@@ -1,7 +1,11 @@
 package com.example.appnghenhac.activity;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.appnghenhac.R;
@@ -15,14 +19,16 @@ import java.util.ArrayList;
 
 public class RatingActivity extends AppCompatActivity {
     private ImageView btn_return;
+    ProgressBar progressBar;
     GetListRatingTracks getListRatingTracks = new GetListRatingTracks(this);
     private ListRatingAdapter userTopAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rating_board);
-        getListRatingTracks.execute();
         initView();
+        getListRatingTracks.execute();
+
     }
 
     public void getMusicNameFromAsyncTask(ArrayList<Music> list) {
@@ -39,22 +45,31 @@ public class RatingActivity extends AppCompatActivity {
     }
 
     public void initView() {
+        progressBar=findViewById(R.id.progress_bar);
         btn_return = findViewById(R.id.back);
         btn_return.setOnClickListener(v -> {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
 
         });
+        progressBar.setVisibility(View.VISIBLE);
+        setProgressBarDuration(5000,progressBar);
+
     }
 
     public void getRatingImageTrack(String s) {
 
     }
 
-//    public void getMusicFromFirebase() {
-//        // Write a message to the database
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        DatabaseReference myRef = database.getReference("message");
-//        myRef.setValue("Hello, World!");
-//    }
+    private void setProgressBarDuration(int duration, ProgressBar progressBar) {
+        ObjectAnimator progressAnimator = ObjectAnimator.ofInt(progressBar, "progress", 0, 100);
+        progressAnimator.setDuration(duration);
+        progressAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                progressBar.setVisibility(View.GONE); // Ẩn ProgressBar sau khi hoàn thành
+            }
+        });
+        progressAnimator.start();
+    }
 }

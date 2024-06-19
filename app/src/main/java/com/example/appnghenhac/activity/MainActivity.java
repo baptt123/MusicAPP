@@ -53,58 +53,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        BottomNavigationView bottom_navigation = findViewById(R.id.bottom_navigation);
-        bottom_navigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                // Dùng activity chuyển đổi menu
-                if(item.getItemId() == R.id.home){
-                    Intent homeIntent = new Intent(MainActivity.this, HomeActivity.class);
-                    startActivity(homeIntent);
-                    overridePendingTransition(0, 0);
-                    return true;
-                }
-                if(item.getItemId() == R.id.thuVien){
-                    Intent homeIntent = new Intent(MainActivity.this, HistoryActivity.class);
-                    startActivity(homeIntent);
-                    return true;
-                }
-                if(item.getItemId() == R.id.PlayMusic){
-//                    Intent homeIntent = new Intent(MainActivity.this, MainActivity.class);
-//                    startActivity(homeIntent);
-                    return true;
-                }
-                if(item.getItemId() == R.id.bxh){
-                    Intent homeIntent = new Intent(MainActivity.this, PlayerMusicActivity.class);
-                    startActivity(homeIntent);
-                    return true;
-                }
-                if(item.getItemId() == R.id.setting){
-                    Intent homeIntent = new Intent(MainActivity.this, RatingActivity.class);
-                    startActivity(homeIntent);
-                    return true;
-                }
-                return false;
-
-                // TODO yeu cay chuyen doi  sang dung frament
-//                Fragment selectedFragment = null;
-//                switch (item.getItemId()) {
-//                    case R.id.navigation_home:
-//                        selectedFragment = new HomeFragment();
-//                        break;
-//                    case R.id.navigation_dashboard:
-//                        selectedFragment = new DashboardFragment();
-//                        break;
-//                    case R.id.navigation_notific
-//                    ations:
-//                        selectedFragment = new NotificationsFragment();
-//                        break;
-//                }
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
-//                return true;
-            }
-        });
-
     }
 //    public void initView(){
 //        /*

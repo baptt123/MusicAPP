@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.appnghenhac.R;
 import com.example.appnghenhac.adapter.ListRatingAdapter;
 import com.example.appnghenhac.asynctask.GetListRatingTracks;
-import com.example.appnghenhac.activity.MainActivity;
 import com.example.appnghenhac.model.Music;
 
 import java.util.ArrayList;

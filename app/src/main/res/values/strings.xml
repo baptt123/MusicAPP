@@ -14,4 +14,15 @@
     <string name="timkiem">Tìm kiếm</string>
     <string name="play">Phát nhạc</string>
     <string name="nhaplink">Nhập link phát nhạc</string>
+    <string name="choiNhac">Chơi Nhạc</string>
+    <string name="thuVien">Thư Viện</string>
+    <string name="trangChu">Trang Chủ</string>
+    <string name="bxh">Bảng Xếp Hạng</string>
+    <string name="caiDat">Cài Đặt</string>
+    <string name="title_activity_navication">NavicationActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+
 </resources>

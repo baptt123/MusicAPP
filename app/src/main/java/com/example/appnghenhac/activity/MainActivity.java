@@ -5,40 +5,23 @@ package com.example.appnghenhac.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.media.MediaPlayer;
 import android.net.Uri;
-import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
-import com.example.appnghenhac.R;
-import com.example.appnghenhac.asynctask.GetArtist;
-import com.example.appnghenhac.model.Music;
-import com.example.appnghenhac.model.MusicFiles;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import org.jetbrains.annotations.NotNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.appnghenhac.R;
+import com.example.appnghenhac.model.MusicFiles;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import android.widget.ImageView;
 
 import com.denzcoskun.imageslider.ImageSlider;
-import com.example.appnghenhac.R;
-import com.example.appnghenhac.fragment.TestPlayFragment;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 
@@ -69,9 +52,59 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        initView();
-//        initView();
-        initView();
+
+        BottomNavigationView bottom_navigation = findViewById(R.id.bottom_navigation);
+        bottom_navigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                // Dùng activity chuyển đổi menu
+                if(item.getItemId() == R.id.home){
+                    Intent homeIntent = new Intent(MainActivity.this, HomeActivity.class);
+                    startActivity(homeIntent);
+                    overridePendingTransition(0, 0);
+                    return true;
+                }
+                if(item.getItemId() == R.id.thuVien){
+                    Intent homeIntent = new Intent(MainActivity.this, HistoryActivity.class);
+                    startActivity(homeIntent);
+                    return true;
+                }
+                if(item.getItemId() == R.id.PlayMusic){
+//                    Intent homeIntent = new Intent(MainActivity.this, MainActivity.class);
+//                    startActivity(homeIntent);
+                    return true;
+                }
+                if(item.getItemId() == R.id.bxh){
+                    Intent homeIntent = new Intent(MainActivity.this, PlayerMusicActivity.class);
+                    startActivity(homeIntent);
+                    return true;
+                }
+                if(item.getItemId() == R.id.setting){
+                    Intent homeIntent = new Intent(MainActivity.this, RatingActivity.class);
+                    startActivity(homeIntent);
+                    return true;
+                }
+                return false;
+
+                // TODO yeu cay chuyen doi  sang dung frament
+//                Fragment selectedFragment = null;
+//                switch (item.getItemId()) {
+//                    case R.id.navigation_home:
+//                        selectedFragment = new HomeFragment();
+//                        break;
+//                    case R.id.navigation_dashboard:
+//                        selectedFragment = new DashboardFragment();
+//                        break;
+//                    case R.id.navigation_notific
+//                    ations:
+//                        selectedFragment = new NotificationsFragment();
+//                        break;
+//                }
+//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+//                return true;
+            }
+        });
+
     }
 //    public void initView(){
 //        /*
@@ -97,13 +130,6 @@ public class MainActivity extends AppCompatActivity {
 //        getDatafromFirebase();
 //        DeleteDatafromFirebase();
     public void initView(){
-    playbuttonicon=findViewById(R.id.playbuttonicon);
-    playbuttonicon.setOnClickListener(v -> {
-        TestPlayFragment testPlayFragment=new TestPlayFragment();
-        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragement_playicon,testPlayFragment);
-        fragmentTransaction.commit();
-    });
     }
 
 

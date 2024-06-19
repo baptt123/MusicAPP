@@ -7,6 +7,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.example.appnghenhac.R;
 import com.example.appnghenhac.adapter.HistoryAdapter;
 import com.example.appnghenhac.asyncfirebase.DataLoadedCallback;
@@ -79,6 +81,8 @@ public class HistoryActivity extends AppCompatActivity {
             @Override
             public void onDataLoaded(ArrayList<Music> arrayList) {
                 ListView listView = findViewById(R.id.list_history);
+                Toolbar toolbar = findViewById(R.id.toolbar);
+                setSupportActionBar(toolbar);
                 HistoryAdapter historyAdapter = new HistoryAdapter(HistoryActivity.this, R.layout.list_item_history, arrayList);
                 listView.setAdapter(historyAdapter);
                 Log.d("setListView", "Adapter set with " + arrayList.size() + " items.");

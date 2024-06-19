@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/sky_blue"
-    tools:context=".activity.RatingActivity">
+    tools:context=".fragment.RatingFragment">
     <!--header-->
     <LinearLayout
         android:layout_width="match_parent"

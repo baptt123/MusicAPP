@@ -31,13 +31,9 @@
 
 
         </activity>
-        <activity android:name=".activity.RatingActivity"
+        <activity android:name=".fragment.RatingFragment"
                   android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity android:name=".activity.HomeActivity"
                   android:exported="true">
@@ -65,7 +61,11 @@
         <activity
             android:name=".activity.UploadFileActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
 
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity android:name=".activity.MusicPlayNotifyActivity"
             android:exported="true">

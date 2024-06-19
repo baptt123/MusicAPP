@@ -45,7 +45,7 @@ public class UploadFileActivity extends AppCompatActivity {
 
     public void initView() {
         btn_add_image = findViewById(R.id.btn_add_image);
-        btn_add_file_song = findViewById(R.id.btn_add_file_song);
+
         btn_add_image.setOnClickListener(v -> {
             openImagePicker();
         });

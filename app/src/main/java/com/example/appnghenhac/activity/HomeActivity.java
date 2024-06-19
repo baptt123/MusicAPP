@@ -13,6 +13,10 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.appnghenhac.R;
+import com.example.appnghenhac.model.Music;
+
+import java.util.ArrayList;
+
 /*
 Author:Thanh Tân
 Note for:Lê Tâm
@@ -25,10 +29,10 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home);
+//        setContentView(R.layout.home);
 //        addFragment();
-        addSpotify();
-        changeIntent();
+//        addSpotify();
+//        changeIntent();
     }
 
     //    public void addFragment(){
@@ -106,6 +110,9 @@ public class HomeActivity extends AppCompatActivity {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://spotifydown.com/vi"));
             startActivity(intent);
         });
+    }
+
+    public void getMusicNameFromAsyncTask(ArrayList<Music> musicArrayList) {
     }
 }
 

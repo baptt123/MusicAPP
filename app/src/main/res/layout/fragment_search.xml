@@ -10,6 +10,6 @@
         android:id="@+id/fragment_search_list"
         android:layout_marginTop="0dp"
         android:layout_marginLeft="0dp"
-        android:background="@color/white">
+        android:background="@color/sky_blue">
     </ListView>
 </RelativeLayout>

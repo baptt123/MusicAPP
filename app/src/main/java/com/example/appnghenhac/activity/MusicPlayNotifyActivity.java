@@ -62,8 +62,8 @@ public class MusicPlayNotifyActivity extends AppCompatActivity {
                 setSmallIcon(R.mipmap.ic_launcher).
                 setContentTitle("Playing Music").
                 setContentText("Hope you happy with current music!!!").
-                addAction(R.drawable.play, "Play", playPendingIntent).
-                addAction(R.drawable.pause, "Pause", pausePendingIntent).
+                addAction(R.drawable.baseline_play_arrow_24, "Play", playPendingIntent).
+                addAction(R.drawable.baseline_pause, "Pause", pausePendingIntent).
                 setStyle(new androidx.media.app.NotificationCompat.MediaStyle().setMediaSession(mediaSessionCompat.getSessionToken())).
                 setPriority(NotificationCompat.PRIORITY_LOW).
                 build();

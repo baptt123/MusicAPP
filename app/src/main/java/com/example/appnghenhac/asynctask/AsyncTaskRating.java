@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.appnghenhac.R;
 import com.example.appnghenhac.activity.HomeActivity;
+import com.example.appnghenhac.activity.TestAddFragmentRatingActivity;
 import com.example.appnghenhac.fragment.RatingFragment;
 import com.example.appnghenhac.model.Music;
 import com.google.gson.Gson;
@@ -25,10 +26,10 @@ public class AsyncTaskRating extends AsyncTask<Void, Void, String> {
   /*
   AsyncTask chịu trách nhiệm xử lí dữ liệu và nhúng vào fragment rating để hiển thị
    */
-    private HomeActivity homeActivity;
+    private TestAddFragmentRatingActivity fragmentRatingActivity;
 
-    public AsyncTaskRating(HomeActivity homeActivity) {
-        this.homeActivity = homeActivity;
+    public AsyncTaskRating(TestAddFragmentRatingActivity fragmentRatingActivity) {
+       this.fragmentRatingActivity=fragmentRatingActivity;
     }
 
     protected String doInBackground(Void... voids) {
@@ -81,7 +82,8 @@ public class AsyncTaskRating extends AsyncTask<Void, Void, String> {
             Bundle bundle=new Bundle();
             bundle.putSerializable("list",musicArrayList);
             RatingFragment ratingFragment=new RatingFragment();
-            FragmentTransaction ft=homeActivity.getSupportFragmentManager().beginTransaction().replace(R.id.listview_rating,ratingFragment);
+            ratingFragment.setArguments(bundle);
+            FragmentTransaction ft=fragmentRatingActivity.getSupportFragmentManager().beginTransaction().replace(R.id.listview_fragment_rating,ratingFragment);
             ft.commit();
         }
     }

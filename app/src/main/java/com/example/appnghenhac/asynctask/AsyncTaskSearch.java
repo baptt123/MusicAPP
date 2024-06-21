@@ -21,6 +21,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 public class AsyncTaskSearch extends AsyncTask<String, Void, String> {
     SearchActivity searchActivity;
@@ -29,22 +31,38 @@ public class AsyncTaskSearch extends AsyncTask<String, Void, String> {
         this.searchActivity = searchActivity;
     }
 
+
     @Override
     protected String doInBackground(String... strings) {
-        Gson gson=new Gson();
+        Gson gson = new Gson();
         String param = strings[0];
-        ArrayList<String> listlinkimage=new ArrayList<>();
+        ArrayList<MusicForSearch> listlinkimage = new ArrayList<>();
         FirebaseApp.initializeApp(searchActivity);
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("list");
-
+        // Đặt CountDownLatch với giá trị lớn, để chờ cho đến khi tất cả dữ liệu được tải về
+        CountDownLatch latch = new CountDownLatch(1);
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
                 // Đọc dữ liệu từ dataSnapshot
+
                 String childKey = dataSnapshot.getKey();
                 String childValue = dataSnapshot.getValue(String.class);
-                listlinkimage.add(childValue);
-                Log.d("TAG", "Child key: " + childKey + ", Child value: " + childValue);
+                if(childKey.equals(param)){
+                    MusicForSearch music = new MusicForSearch();
+                    music.setName(childKey);
+                    music.setImg(childValue);
+                    listlinkimage.add(music);
+                    Log.i("FirebaseData", "Name: " + childKey + ", Img: " + childValue);
+                    // Giảm latch
+                    latch.countDown();
+                }else{
+                    Log.e("FirebaseData", "Name: " + childKey + ", Img: " + childValue );
+                    // Giảm latch
+                    latch.countDown();
+                }
+
+
             }
 
             @Override
@@ -65,35 +83,18 @@ public class AsyncTaskSearch extends AsyncTask<String, Void, String> {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 // Xử lý khi có lỗi xảy ra
+                latch.countDown();
             }
         });
+        try {
+            latch.await(30, TimeUnit.SECONDS); // Chờ đến khi latch giảm về 0 hoặc hết thời gian chờ
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-
-//        OkHttpClient client = new OkHttpClient();
-//
-//        Request request = new Request.Builder()
-//                .url("https://v1.nocodeapi.com/thanhtan/spotify/dLRHJVlVhqyRGneg/search?q="+param)
-//                .addHeader("Content-Type", "application/json")
-//                .build();
-//
-//        try {
-//            Response response = client.newCall(request).execute();
-//            if (response.isSuccessful()) {
-//                //dữ liệu lấy về là dạng json
-//                String json = response.body().string();
-//                return json;
-//            } else {
-//                Log.e("HTTP", "Request was not successful: " + response.code());
-//                return null;
-//            }
-//        } catch (IOException e) {
-//            Log.e("HTTP", "IOException: " + e.getMessage());
-//            return null;
-//        }
-
-       String json=gson.toJson(listlinkimage);
-       Log.e("json",json);
-       return json;
+        String json = gson.toJson(listlinkimage);
+        Log.i("json", json);
+        return json;
 
     }
 

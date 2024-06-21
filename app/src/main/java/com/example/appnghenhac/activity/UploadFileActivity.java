@@ -17,6 +17,8 @@ import com.example.appnghenhac.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -56,7 +58,7 @@ public class UploadFileActivity extends AppCompatActivity {
     }
 
     //hàm này dùng để gửi định dạng file mp3 lên firebase
-    public void sendSongToFirebase(Uri uri,Uri image) throws FileNotFoundException {
+    public void sendSongToFirebase(Uri uri, Uri image) throws FileNotFoundException {
         // TODO: Send song to Firebase
         name_song = findViewById(R.id.name_song);
         name_artist = findViewById(R.id.name_artist);
@@ -70,6 +72,9 @@ public class UploadFileActivity extends AppCompatActivity {
         if (!name.isEmpty()) {
             if (!artist.isEmpty()) {
                 if (drawable != null) {
+                    //tạo firebase database để lưu trữ
+                    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                    DatabaseReference databaseReference = firebaseDatabase.getReference("list");
                     //tham chiếu đến file nhạc
                     FirebaseStorage firebaseStorage_song = FirebaseStorage.getInstance();
                     StorageReference storageReference = firebaseStorage_song.getReference();
@@ -110,6 +115,8 @@ public class UploadFileActivity extends AppCompatActivity {
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
                             // ...
+                            String dowloadurl = taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
+                            databaseReference.child(name).setValue(dowloadurl);
                             Toast.makeText(UploadFileActivity.this, "Upload image success", Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -144,7 +151,7 @@ public class UploadFileActivity extends AppCompatActivity {
                 Uri fileUri = data.getData();
                 Uri uri = getFileURI(fileUri);
                 try {
-                    sendSongToFirebase(uri,uri_image);
+                    sendSongToFirebase(uri, uri_image);
                 } catch (FileNotFoundException e) {
                     throw new RuntimeException(e);
                 }

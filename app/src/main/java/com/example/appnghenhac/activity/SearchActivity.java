@@ -62,7 +62,9 @@ public class SearchActivity extends AppCompatActivity {
         ArrayList<MusicForSearch> arrayList = new ArrayList<>();
         for (int i = 0; i < jsonArray.size(); i++) {
             MusicForSearch music = new MusicForSearch();
-            String link_img = jsonArray.get(i).getAsString();
+            String name = jsonArray.get(i).getAsJsonObject().get("name").getAsString();
+            music.setName(name);
+            String link_img = jsonArray.get(i).getAsJsonObject().get("img").getAsString();
             music.setImg(link_img);
             arrayList.add(music);
         }

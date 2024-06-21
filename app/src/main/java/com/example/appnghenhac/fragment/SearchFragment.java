@@ -1,5 +1,6 @@
 package com.example.appnghenhac.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.appnghenhac.R;
+import com.example.appnghenhac.activity.TestPlayMusicActivity;
 import com.example.appnghenhac.adapter.ListSearchAdapter;
 import com.example.appnghenhac.model.MusicForSearch;
 
@@ -33,6 +35,15 @@ public class SearchFragment extends Fragment {
         ArrayList<MusicForSearch> list = (ArrayList<MusicForSearch>) getArguments().getSerializable("list");
         ListSearchAdapter listSearchAdapter = new ListSearchAdapter(getActivity(), R.layout.listview_search_item, list);
         listView.setAdapter(listSearchAdapter);
+        listView.setOnItemClickListener((parent, viewparent, position, id) -> {
+            //lấy ra phần tử trong list view
+            MusicForSearch musicForSearch = (MusicForSearch) parent.getItemAtPosition(position);
+            //tạo intent để chuyển hướng sang trang phát nhạc
+            Intent intent = new Intent(getActivity(), TestPlayMusicActivity.class);
+            String song_name=musicForSearch.getName();
+            intent.putExtra("song_name",song_name);
+            startActivity(intent);
+        });
     }
 
     public ArrayList<MusicForSearch> getListMusic(ArrayList<MusicForSearch> result) {

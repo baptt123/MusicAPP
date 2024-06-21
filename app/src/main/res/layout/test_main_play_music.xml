@@ -65,6 +65,7 @@
         </ImageView>
 
         <ImageView
+            android:id="@+id/play_button"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="150dp"
@@ -74,6 +75,7 @@
         </ImageView>
 
         <ImageView
+            android:id="@+id/pause_button"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="230dp"

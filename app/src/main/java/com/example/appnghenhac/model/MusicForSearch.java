@@ -1,7 +1,9 @@
 package com.example.appnghenhac.model;
 
 import java.io.Serializable;
-
+/*
+class này xử lí cho chức năng tìm kiếm
+ */
 public class MusicForSearch implements Serializable {
     private String name;
     private String img;

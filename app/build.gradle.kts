@@ -14,7 +14,7 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
+        multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -58,5 +58,7 @@ dependencies {
     // https://mvnrepository.com/artifact/com.google.code.gson/gson
     implementation ("com.google.code.gson:gson:2.11.0")
     implementation ("com.google.firebase:firebase-analytics:20.0.0")
+    implementation ("androidx.multidex:multidex:2.0.1")
+    implementation("androidx.core:core-ktx:1.9.0")
 }
 

@@ -1,10 +1,16 @@
 package com.example.appnghenhac.asynctask;
 
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.Log;
 
+import androidx.fragment.app.FragmentTransaction;
+
+import com.example.appnghenhac.R;
+import com.example.appnghenhac.activity.HomeActivity;
+import com.example.appnghenhac.activity.TestAddFragmentRatingActivity;
+import com.example.appnghenhac.fragment.RatingFragment;
 import com.example.appnghenhac.model.Music;
-import com.example.appnghenhac.activity.RatingActivity;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -16,18 +22,21 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class GetListRatingTracks extends AsyncTask<Void, Void, String> {
-    private RatingActivity ratingActivity;
+public class AsyncTaskRating extends AsyncTask<Void, Void, String> {
+  /*
+  AsyncTask chịu trách nhiệm xử lí dữ liệu và nhúng vào fragment rating để hiển thị
+   */
+    private TestAddFragmentRatingActivity fragmentRatingActivity;
 
-    public GetListRatingTracks(RatingActivity ratingActivity) {
-        this.ratingActivity = ratingActivity;
+    public AsyncTaskRating(TestAddFragmentRatingActivity fragmentRatingActivity) {
+       this.fragmentRatingActivity=fragmentRatingActivity;
     }
 
     protected String doInBackground(Void... voids) {
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder()
-                .url("https://v1.nocodeapi.com/thanhtan/spotify/dLRHJVlVhqyRGneg/usersTop?type=tracks&time_range=short_term")
+                .url("https://v1.nocodeapi.com/thanhtan/spotify/dLRHJVlVhqyRGneg/usersTop?type=tracks&time_range=long_term")
                 .addHeader("Content-Type", "application/json")
                 .build();
 
@@ -70,8 +79,12 @@ public class GetListRatingTracks extends AsyncTask<Void, Void, String> {
                 System.out.println("Name: " + name + ", Image URL: " + urlStr);
 
             }
-            ratingActivity.getMusicNameFromAsyncTask(musicArrayList);
-
+            Bundle bundle=new Bundle();
+            bundle.putSerializable("list",musicArrayList);
+            RatingFragment ratingFragment=new RatingFragment();
+            ratingFragment.setArguments(bundle);
+            FragmentTransaction ft=fragmentRatingActivity.getSupportFragmentManager().beginTransaction().replace(R.id.listview_fragment_rating,ratingFragment);
+            ft.commit();
         }
     }
 

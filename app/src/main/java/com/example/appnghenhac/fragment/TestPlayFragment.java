@@ -12,10 +12,10 @@ import androidx.fragment.app.Fragment;
 import com.example.appnghenhac.R;
 
 public class TestPlayFragment extends Fragment {
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.test_play_fragment, container, false);
-        return view;
+//    @Nullable
+//    @Override
+//    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+//        View view = inflater.inflate(R.layout.test_play_fragment, container, false);
+//        return view;
     }
-}
+

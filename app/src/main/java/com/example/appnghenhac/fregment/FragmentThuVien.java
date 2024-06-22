@@ -1,12 +1,6 @@
 package com.example.appnghenhac.fregment;
 
-import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,15 +8,27 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import com.example.appnghenhac.R;
-import com.example.appnghenhac.activity.PlayListActivity;
+import com.example.appnghenhac.asynctask.musicService;
+import com.example.appnghenhac.model.Song;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link fragmentThuVien#newInstance} factory method to
+ * Use the {@link FragmentThuVien#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class fragmentThuVien extends Fragment {
+public class FragmentThuVien extends Fragment {
+    private FirebaseDatabase data ;
+    private DatabaseReference reference ;
+
+    private String root = "user";
+    private String leaf = "";
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -31,7 +37,7 @@ public class fragmentThuVien extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public fragmentThuVien() {
+    public FragmentThuVien() {
         // Required empty public constructor
     }
 
@@ -43,8 +49,8 @@ public class fragmentThuVien extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment fragmentThuVien.
      */
-    public static fragmentThuVien newInstance(String param1, String param2) {
-        fragmentThuVien fragment = new fragmentThuVien();
+    public static FragmentThuVien newInstance(String param1, String param2) {
+        FragmentThuVien fragment = new FragmentThuVien();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -77,11 +83,14 @@ public class fragmentThuVien extends Fragment {
         setNumberPlay();
         ImageButton imgbPlayList = view.findViewById(R.id.imgbPlayList);
 
+        new musicService(this).execute("1J3SmWwlYAG68LGKr86MVH");
+
+
         ln.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), PlayListActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), PlayListActivity.class);
+//                startActivity(intent);
             }
         });
 
@@ -94,9 +103,49 @@ public class fragmentThuVien extends Fragment {
             }
         });
 
+        String userName = getUserName(savedInstanceState);
+        leaf = userName;
+        data = FirebaseDatabase.getInstance();
+        reference = data.getReference();
+//        // ghi du lieu
+//        Map<String, String> pl = new ArrayMap<>();
+//        pl.put("pl001", "s001");
+//        pl.put("pl002", "s001,s002");
+//
+//        User u = new User("tam2", new Date("14/04/2003"), "", "013131313", pl);
+//        reference.child("user").child(u.getFullName()).setValue(u);
+
+        // Đọc dữ liệu từ Firebase
+//        reference.child(root).child(leaf).addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+//                    user user = dataSnapshot.getValue(com.example.appnghenhac.model.user.class);
+////                    String user = snapshot.getKey();
+//                    Log.d("home", user.toString());
+//                }
+//            }
+
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+
+
     }
+
+    private String getUserName(Bundle bundle) {
+//        TODO lay user name cua login
+        return "tam2";
+    }
+
 
     private void setNumberPlay() {
 //        TODO thiết lập số lượng play list
+    }
+
+    public void getSong(Song res) {
+//        TODO do no thing
     }
 }

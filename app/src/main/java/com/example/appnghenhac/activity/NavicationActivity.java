@@ -6,13 +6,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.appnghenhac.R;
-import com.example.appnghenhac.fregment.fragmentThuVien;
-import com.example.appnghenhac.fregment.fragment_trangChu;
+import com.example.appnghenhac.fregment.FragmentThuVien;
+import com.example.appnghenhac.fregment.FragmentTrangChu;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -26,9 +25,8 @@ public class NavicationActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 //        fragment
-        Fragment fragment = new fragment_trangChu();
+        Fragment fragment = new FragmentTrangChu();
         loadFragment(fragment);
-
 //        navigation
         BottomNavigationView bottom_navigation = findViewById(R.id.bottom_navigation);
         bottom_navigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -38,12 +36,12 @@ public class NavicationActivity extends AppCompatActivity {
                 Fragment selectedFragment = null;
                 if(item.getItemId()==R.id.home){
                     toolbar.setTitle("Trang Chủ");
-                    selectedFragment = new fragment_trangChu();
+                    selectedFragment = new FragmentTrangChu();
                     loadFragment(selectedFragment);
                     return true;
                 } else if (item.getItemId()==R.id.thuVien) {
                     toolbar.setTitle("Thư viện");
-                    selectedFragment = new fragmentThuVien();
+                    selectedFragment = new FragmentThuVien();
                     loadFragment(selectedFragment);
                     return true;
                 }

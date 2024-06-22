@@ -25,8 +25,6 @@ public class RatingActivity extends AppCompatActivity {
     }
 
     public void getMusicNameFromAsyncTask(ArrayList<Music> list) {
-
-
         displayListViewRanking(list);
     }
 

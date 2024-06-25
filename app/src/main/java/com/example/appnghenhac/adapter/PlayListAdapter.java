@@ -35,7 +35,6 @@ public class PlayListAdapter extends ArrayAdapter<PlayList> {
         LayoutInflater layoutInflater = context.getLayoutInflater();
         convertView = layoutInflater.inflate(resource, null);
         PlayList playList = objects.get(position);
-        Log.d("TAG", "getView: "+objects.get(position).toString() + playList.getListSong().size());
         TextView textViewPlayListName = (TextView) convertView.findViewById(R.id.textViewPlayListName);
         textViewPlayListName.setText(playList.getName());
 

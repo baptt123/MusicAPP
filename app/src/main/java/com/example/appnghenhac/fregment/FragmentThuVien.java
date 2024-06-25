@@ -9,10 +9,12 @@ import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -105,17 +107,13 @@ public class FragmentThuVien extends Fragment {
         data = FirebaseDatabase.getInstance();
         reference = data.getReference();
 
-//       thiet lap so playlist hien tai danh co
-        TextView textView = view.findViewById(R.id.numPlayList);
-        textView.setText(getNumberPlay());
 //        button them play list
-        ImageButton imageButtonAddPlayList = view.findViewById(R.id.imgbPlayList);
+        Button imageButtonAddPlayList = view.findViewById(R.id.imgbPlayList);
         imageButtonAddPlayList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO chức năng thêm play list
-                TextView tv = view.findViewById(R.id.tvPlayList);
-                tv.setText(tv.getText()+"+ 1");
+                Toast.makeText(getActivity(), "Them playList", Toast.LENGTH_SHORT).show();
             }
         });
 //      ListVIew
@@ -136,7 +134,7 @@ public class FragmentThuVien extends Fragment {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         PlayList p = pl.get(position);
                         Bundle bundle = new Bundle();
-                        bundle.putStringArrayList("listSong",pl.get(position).getListSong());
+                        bundle.putSerializable("playList",p);
 
                         Intent intent = new Intent(getActivity(),PlayListActivity.class);
                         intent.putExtras(bundle);
@@ -153,9 +151,6 @@ public class FragmentThuVien extends Fragment {
         });
 
 
-//        asynctask lấy thông tin bài hát
-//        new musicService(this).execute("1J3SmWwlYAG68LGKr86MVH");
-//
 
 
 ////        ghi du lieu
@@ -188,11 +183,6 @@ public class FragmentThuVien extends Fragment {
     private String getUserName(Bundle bundle) {
 //        TODO lay user name cua login
         return "tam2";
-    }
-
-    private String getNumberPlay() {
-//        TODO thiết lập số lượng play list
-        return "10";
     }
 
     public void setSong(Song song) {

@@ -3,10 +3,11 @@ package com.example.appnghenhac.model;
 import android.icu.text.Edits;
 import android.util.Log;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class PlayList {
+public class PlayList  implements Serializable {
     private String name;
     private ArrayList<String> listSong;
 

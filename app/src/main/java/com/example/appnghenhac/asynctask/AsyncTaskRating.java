@@ -4,90 +4,106 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.appnghenhac.R;
-import com.example.appnghenhac.activity.HomeActivity;
 import com.example.appnghenhac.activity.TestAddFragmentRatingActivity;
 import com.example.appnghenhac.fragment.RatingFragment;
 import com.example.appnghenhac.model.Music;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.CountDownLatch;
 
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-
-public class AsyncTaskRating extends AsyncTask<Void, Void, String> {
-  /*
-  AsyncTask chịu trách nhiệm xử lí dữ liệu và nhúng vào fragment rating để hiển thị
-   */
+public class AsyncTaskRating extends AsyncTask<String, Void, String> {
+    /*
+    AsyncTask chịu trách nhiệm xử lí dữ liệu và nhúng vào fragment rating để hiển thị
+     */
     private TestAddFragmentRatingActivity fragmentRatingActivity;
 
+
+    //thuộc tính khi gộp code
+    //private HomeActivity(MainActivity)
     public AsyncTaskRating(TestAddFragmentRatingActivity fragmentRatingActivity) {
-       this.fragmentRatingActivity=fragmentRatingActivity;
+        this.fragmentRatingActivity = fragmentRatingActivity;
     }
 
-    protected String doInBackground(Void... voids) {
-        OkHttpClient client = new OkHttpClient();
+    @Override
+    protected String doInBackground(String... strings) {
+        Gson gson = new Gson();
+        String param = strings[0];
+        ArrayList<Music> listmusic = new ArrayList<>();
+        FirebaseApp.initializeApp(fragmentRatingActivity);
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("list");
 
-        Request request = new Request.Builder()
-                .url("https://v1.nocodeapi.com/thanhtan/spotify/dLRHJVlVhqyRGneg/usersTop?type=tracks&time_range=long_term")
-                .addHeader("Content-Type", "application/json")
-                .build();
+        // Đặt CountDownLatch với giá trị lớn, để chờ cho đến khi tất cả dữ liệu được tải về
+        CountDownLatch latch = new CountDownLatch(1);
+        databaseReference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
+                // Đọc dữ liệu từ dataSnapshot
+                String childKey = dataSnapshot.getKey();
+                String childValue = dataSnapshot.getValue(String.class);
+                if (childKey.equals(param)) {
+                    Music music = new Music();
+                    music.setName(childKey);
+                    music.setImg(childValue);
+                    listmusic.add(music);
+                    Log.i("FirebaseData", "Name: " + childKey + ", Img: " + childValue);
+                } else {
+                    Log.e("FirebaseData", "Name: " + childKey + ", Img: " + childValue);
+                }
+                // Giảm latch
+                latch.countDown();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
 
         try {
-            Response response = client.newCall(request).execute();
-            if (response.isSuccessful()) {
-                //dữ liệu lấy về là dạng json
-                String json = response.body().string();
-                return json;
-            } else {
-                Log.e("HTTP", "Request was not successful: " + response.code());
-                return null;
-            }
-        } catch (IOException e) {
-            Log.e("HTTP", "IOException: " + e.getMessage());
-            return null;
+            latch.await(); // Chờ cho đến khi dữ liệu được tải về
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+
+        return gson.toJson(listmusic); // Chuyển danh sách nhạc thành chuỗi JSON và trả về
     }
 
+    @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         if (s != null) {
-            ArrayList<Music> musicArrayList = new ArrayList<>();
-            // Sử dụng Gson để xử lý JSON
-            Gson gson = new Gson();
-            JsonObject jsonResponse = gson.fromJson(s, JsonObject.class);
-            JsonArray tracks = jsonResponse.getAsJsonArray("items");
-
-            // Duyệt qua danh sách các track và lấy ra thuộc tính 'images' của mỗi track
-            for (int i = 0; i < tracks.size(); i++) {
-                JsonObject track = tracks.get(i).getAsJsonObject();
-                String name = track.get("name").getAsString();
-                JsonArray images = track.getAsJsonObject("album").getAsJsonArray("images");
-                JsonObject image = images.get(0).getAsJsonObject();
-                String urlStr = image.get("url").getAsString();
-                Music music = new Music();
-                music.setName(name);
-                music.setImg(urlStr);
-                musicArrayList.add(music);
-                System.out.println("Name: " + name + ", Image URL: " + urlStr);
-
-            }
-            Bundle bundle=new Bundle();
-            bundle.putSerializable("list",musicArrayList);
-            RatingFragment ratingFragment=new RatingFragment();
+            ArrayList<Music> musicArrayList =fragmentRatingActivity.sendArrayList(s);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("list", musicArrayList);
+            RatingFragment ratingFragment = new RatingFragment();
             ratingFragment.setArguments(bundle);
-            FragmentTransaction ft=fragmentRatingActivity.getSupportFragmentManager().beginTransaction().replace(R.id.listview_fragment_rating,ratingFragment);
+            FragmentTransaction ft = fragmentRatingActivity.getSupportFragmentManager().beginTransaction().replace(R.id.listview_fragment_rating, ratingFragment);
             ft.commit();
         }
     }
-
-
 }
-

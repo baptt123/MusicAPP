@@ -1,22 +1,41 @@
 package com.example.appnghenhac.fregment;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.collection.ArrayMap;
 import androidx.fragment.app.Fragment;
 
 import com.example.appnghenhac.R;
+import com.example.appnghenhac.activity.PlayListActivity;
+import com.example.appnghenhac.adapter.PlayListAdapter;
 import com.example.appnghenhac.asynctask.musicService;
+import com.example.appnghenhac.model.PlayList;
 import com.example.appnghenhac.model.Song;
+import com.example.appnghenhac.model.user;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,11 +43,7 @@ import com.google.firebase.database.FirebaseDatabase;
  * create an instance of this fragment.
  */
 public class FragmentThuVien extends Fragment {
-    private FirebaseDatabase data ;
-    private DatabaseReference reference ;
 
-    private String root = "user";
-    private String leaf = "";
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -75,26 +90,27 @@ public class FragmentThuVien extends Fragment {
         return inflater.inflate(R.layout.fragment_thu_vien, container, false);
     }
 
+    private FirebaseDatabase data ;
+    private DatabaseReference reference ;
+
+    private String root;
+    private String leaf = "";
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // Play list
-        LinearLayout ln =  view.findViewById(R.id.layoutPlayList);
-        setNumberPlay();
-        ImageButton imgbPlayList = view.findViewById(R.id.imgbPlayList);
+        //        firebase
+        root = "user";
+        leaf = getUserName(savedInstanceState);
+        data = FirebaseDatabase.getInstance();
+        reference = data.getReference();
 
-        new musicService(this).execute("1J3SmWwlYAG68LGKr86MVH");
-
-
-        ln.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), PlayListActivity.class);
-//                startActivity(intent);
-            }
-        });
-
-        imgbPlayList.setOnClickListener(new View.OnClickListener() {
+//       thiet lap so playlist hien tai danh co
+        TextView textView = view.findViewById(R.id.numPlayList);
+        textView.setText(getNumberPlay());
+//        button them play list
+        ImageButton imageButtonAddPlayList = view.findViewById(R.id.imgbPlayList);
+        imageButtonAddPlayList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO chức năng thêm play list
@@ -102,50 +118,84 @@ public class FragmentThuVien extends Fragment {
                 tv.setText(tv.getText()+"+ 1");
             }
         });
+//      ListVIew
+        ArrayList<PlayList> pl = new ArrayList<>();
+        ListView listView = view.findViewById(R.id.listViewPlayList);
 
-        String userName = getUserName(savedInstanceState);
-        leaf = userName;
-        data = FirebaseDatabase.getInstance();
-        reference = data.getReference();
-//        // ghi du lieu
+        reference.child(root).child(leaf).child("playList").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    PlayList playList = new PlayList(snapshot.getKey(), (String) snapshot.getValue());
+                    pl.add(playList);
+                }
+                PlayListAdapter playListAdapter = new PlayListAdapter(getActivity(), R.layout.list_item_playlist, pl);
+                listView.setAdapter(playListAdapter);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        PlayList p = pl.get(position);
+                        Bundle bundle = new Bundle();
+                        bundle.putStringArrayList("listSong",pl.get(position).getListSong());
+
+                        Intent intent = new Intent(getActivity(),PlayListActivity.class);
+                        intent.putExtras(bundle);
+
+                        startActivity(intent);
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("Firebase", "Error loading data: " + error.getMessage());
+            }
+        });
+
+
+//        asynctask lấy thông tin bài hát
+//        new musicService(this).execute("1J3SmWwlYAG68LGKr86MVH");
+//
+
+
+////        ghi du lieu
 //        Map<String, String> pl = new ArrayMap<>();
 //        pl.put("pl001", "s001");
 //        pl.put("pl002", "s001,s002");
 //
-//        User u = new User("tam2", new Date("14/04/2003"), "", "013131313", pl);
+//        user u = new user("tam2", new Date("14/04/2003"), "", "013131313", pl);
 //        reference.child("user").child(u.getFullName()).setValue(u);
-
-        // Đọc dữ liệu từ Firebase
+//
+////         Đọc dữ liệu từ Firebase
 //        reference.child(root).child(leaf).addListenerForSingleValueEvent(new ValueEventListener() {
 //            @Override
 //            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 //                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
 //                    user user = dataSnapshot.getValue(com.example.appnghenhac.model.user.class);
-////                    String user = snapshot.getKey();
 //                    Log.d("home", user.toString());
 //                }
 //            }
-
+//
 //            @Override
 //            public void onCancelled(@NonNull DatabaseError error) {
 //
 //            }
 //        });
-
-
     }
+
+
 
     private String getUserName(Bundle bundle) {
 //        TODO lay user name cua login
         return "tam2";
     }
 
-
-    private void setNumberPlay() {
+    private String getNumberPlay() {
 //        TODO thiết lập số lượng play list
+        return "10";
     }
 
-    public void getSong(Song res) {
+    public void setSong(Song song) {
 //        TODO do no thing
     }
 }

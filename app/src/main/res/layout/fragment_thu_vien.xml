@@ -18,8 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:orientation="horizontal"
-            android:background="@drawable/radius_img"
-            >
+            android:background="@drawable/radius_img">
 
             <TextView
                 android:id="@+id/tvPlayList"
@@ -27,6 +26,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/playList"
                 android:layout_gravity="center"
+                android:textSize="20dp"
                 android:layout_marginStart="20dp"/>
 
             <View
@@ -40,13 +40,14 @@
                 android:layout_height="wrap_content"
                 android:text="10"
                 android:layout_gravity="center"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginRight="10dp"
+                android:textSize="20dp"/>
             <ImageButton
                 android:id="@+id/imgbPlayList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10sp"
                 android:scaleType="fitXY"
                 android:src="@drawable/baseline_add_24"
                 android:background="@color/white"
@@ -54,88 +55,9 @@
         </LinearLayout>
 
         <ListView
-            android:id="@+id/lvpl"
+            android:id="@+id/listViewPlayList"
             android:layout_width="match_parent"
-            android:layout_height="195dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"/>
-
-
-        <LinearLayout
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@drawable/radius_img"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/favoriteMusicList"
-                android:layout_gravity="center"
-                android:layout_marginStart="10dp"/>
-
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="10"
-                android:layout_gravity="center"
-                android:layout_marginRight="10dp"/>
-            <ImageButton
-                android:id="@+id/imageButton2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginRight="10dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/baseline_add_24"
-                android:background="@color/white"
-                android:tooltipText="@string/CreatePlayList"/>
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@drawable/radius_img"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/historyMusicList"
-                android:layout_marginStart="10dp"
-                android:layout_gravity="center"/>
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="10"
-                android:layout_gravity="center"
-                android:layout_marginRight="10dp"/>
-            <ImageButton
-                android:id="@+id/imageButton3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginRight="10dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/baseline_add_24"
-                android:background="@color/white"
-                android:tooltipText="@string/CreatePlayList"/>
-
-
-        </LinearLayout>
-
     </LinearLayout>
 </FrameLayout>

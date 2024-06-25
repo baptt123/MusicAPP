@@ -28,6 +28,8 @@
     <string name="favoriteMusicList">bài nhạc yêu thích</string>
     <string name="historyMusicList">Lịch sử nghe nhạc</string>
     <string name="CreatePlayList">Tạo mới PlayList</string>
+    <string name="AddPlayList">Add Play List</string>
+    <string name="AddMusic">Add Music</string>
 
 
 </resources>

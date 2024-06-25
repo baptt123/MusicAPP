@@ -64,23 +64,20 @@ public class musicService extends AsyncTask<String, Void, String> {
           for(JsonElement element : tracks){
               JsonObject track = element.getAsJsonObject();
               JsonArray images = track.getAsJsonObject("album").getAsJsonArray("images");
-              JsonArray artists = track.getAsJsonObject("album").getAsJsonArray("artists");
+              String name = track.getAsJsonObject("album").get("name").toString();
+              song.setName(name);
+
 
               for (JsonElement e : images) {
                   JsonObject image = e.getAsJsonObject();
-                  if(image.get("width").equals("64")){
-                      String url = image.get("url").getAsString();
+                  if(image.get("width").getAsString().equals("64")){
+                      String url = image.get("url")+"";
                       song.setUrl(url);
                   }
               }
-              for (JsonElement e : artists) {
-                  JsonObject artist = e.getAsJsonObject();
-                      String name = artist.get("name").getAsString();
-                      song.setUrl(name);
-              }
               Log.d("TAM", song.toString());
           }
-            thuvien.getSong(song);
+            thuvien.setSong(song);
         }
 
     }

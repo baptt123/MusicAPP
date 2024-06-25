@@ -61,6 +61,9 @@ dependencies {
 //    implementation ("com.android.support:recyclerview-v7:27.1.1")
     implementation ("com.squareup.picasso:picasso:2.71828")
     implementation ("androidx.core:core:1.9.0")
+// menu
+    implementation ("com.google.android.material:material:1.9.0")
+//
     implementation("com.google.firebase:firebase-storage")
     implementation ("com.squareup.picasso:picasso:2.71828")
     // https://mvnrepository.com/artifact/com.google.code.gson/gson

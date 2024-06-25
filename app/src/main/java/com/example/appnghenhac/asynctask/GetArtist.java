@@ -1,17 +1,19 @@
 package com.example.appnghenhac.asynctask;
+
+import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
+
 import com.example.appnghenhac.activity.MainActivity;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
-import okhttp3.Request;
-import okhttp3.Response;
-import android.os.AsyncTask;
-import android.util.Log;
-
-import okhttp3.OkHttpClient;
 
 import java.io.IOException;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 
 public class GetArtist extends AsyncTask<Void, Void, String> {
@@ -34,9 +36,9 @@ public class GetArtist extends AsyncTask<Void, Void, String> {
             Response response = client.newCall(request).execute();
             if (response.isSuccessful()) {
                 //du lieu lay ve la dang json
-               String json=response.body().string();
-                Gson gson=new Gson();
-                JsonArray jsonObject= JsonParser.parseString(json).getAsJsonArray();
+                String json = response.body().string();
+                Gson gson = new Gson();
+                JsonArray jsonObject = JsonParser.parseString(json).getAsJsonArray();
 
                 return json;
             } else {
@@ -48,6 +50,7 @@ public class GetArtist extends AsyncTask<Void, Void, String> {
             return null;
         }
     }
+
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
@@ -59,7 +62,7 @@ public class GetArtist extends AsyncTask<Void, Void, String> {
         }
     }
 
-    }
+}
 
 
 

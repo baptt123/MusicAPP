@@ -19,8 +19,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
@@ -97,7 +95,7 @@ public class AsyncTaskRating extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         if (s != null) {
-            ArrayList<Music> musicArrayList =fragmentRatingActivity.sendArrayList(s);
+            ArrayList<Music> musicArrayList = fragmentRatingActivity.sendArrayList(s);
             Bundle bundle = new Bundle();
             bundle.putSerializable("list", musicArrayList);
             RatingFragment ratingFragment = new RatingFragment();

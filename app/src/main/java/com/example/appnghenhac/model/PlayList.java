@@ -1,19 +1,20 @@
 package com.example.appnghenhac.model;
 
-import android.icu.text.Edits;
-import android.util.Log;
-
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 
-public class PlayList  implements Serializable {
+public class PlayList implements Serializable {
     private String name;
     private ArrayList<String> listSong;
 
     public PlayList(String name, String listSong) {
         this.name = name;
         this.listSong = compareStringToListSong(listSong);
+    }
+
+    public PlayList(String name, ArrayList<String> listSong) {
+        this.name = name;
+        this.listSong = listSong;
     }
 
     private ArrayList<String> compareStringToListSong(String listSong) {
@@ -24,11 +25,6 @@ public class PlayList  implements Serializable {
             res.add(s[i]);
         }
         return res;
-    }
-
-    public PlayList(String name, ArrayList<String> listSong) {
-        this.name = name;
-        this.listSong = listSong;
     }
 
     public String getName() {

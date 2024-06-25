@@ -10,9 +10,9 @@
         android:title="@string/thuVien" />
     <item
         android:id="@+id/PlayMusic"
+        android:checked="true"
         android:icon="@drawable/baseline_play_arrow_24"
-        android:title="@string/choiNhac"
-        android:checked="true"/>
+        android:title="@string/choiNhac" />
     <item
         android:id="@+id/bxh"
         android:icon="@drawable/baseline_auto_awesome_24"

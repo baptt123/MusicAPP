@@ -1,182 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activity.MainActivity">
     <!--header-->
     <RelativeLayout
+        android:id="@+id/relative_header"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:id="@+id/relative_header"
         android:background="@color/sky_blue">
 
         <ImageView
+            android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/back"
-            android:src="@drawable/arrow"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:src="@drawable/arrow">
 
         </ImageView>
 
         <EditText
+            android:id="@+id/search_music"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:id="@+id/search_music"
+            android:layout_marginLeft="15dp"
             android:layout_toRightOf="@id/back"
-            android:text="Tìm kiếm nhạc"
-            android:layout_marginLeft="15dp">
+            android:text="Tìm kiếm nhạc">
 
         </EditText>
 
         <ImageView
+            android:id="@+id/icon_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/icon_search"
-            android:src="@drawable/search_interface_symbol"
-            android:layout_toRightOf="@id/search_music"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/search_music"
+            android:src="@drawable/search_interface_symbol">
 
         </ImageView>
+
         <ImageView
+            android:id="@+id/usericon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/usericon"
+            android:layout_marginTop="5dp"
             android:layout_toEndOf="@id/icon_search"
-            android:src="@drawable/user"
-            android:layout_marginTop="5dp">
+            android:src="@drawable/user">
 
         </ImageView>
     </RelativeLayout>
 
-<!--        <ImageView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:id="@+id/homeicon"-->
-<!--            android:src="@drawable/home">-->
-<!--        </ImageView>-->
-<!--        <ImageView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:id="@+id/libraryicon"-->
-<!--            android:src="@drawable/library"-->
-<!--            android:layout_marginStart="30dp"-->
-<!--            >-->
+    <!--        <ImageView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:id="@+id/homeicon"-->
+    <!--            android:src="@drawable/home">-->
+    <!--        </ImageView>-->
+    <!--        <ImageView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:id="@+id/libraryicon"-->
+    <!--            android:src="@drawable/library"-->
+    <!--            android:layout_marginStart="30dp"-->
+    <!--            >-->
 
-<!--        </ImageView>-->
-<!--        <ImageView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:id="@+id/playbuttonicon"-->
-<!--            android:src="@drawable/playbuttonmusic"-->
-<!--            android:layout_marginStart="50dp">-->
+    <!--        </ImageView>-->
+    <!--        <ImageView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:id="@+id/playbuttonicon"-->
+    <!--            android:src="@drawable/playbuttonmusic"-->
+    <!--            android:layout_marginStart="50dp">-->
 
-<!--        </ImageView>-->
-<!--        <ImageView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:id="@+id/ratingicon"-->
-<!--            android:src="@drawable/review"-->
-<!--            android:layout_marginStart="40dp"-->
-<!--            >-->
+    <!--        </ImageView>-->
+    <!--        <ImageView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:id="@+id/ratingicon"-->
+    <!--            android:src="@drawable/review"-->
+    <!--            android:layout_marginStart="40dp"-->
+    <!--            >-->
 
-<!--        </ImageView>-->
-<!--        <ImageView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:id="@+id/settingicon"-->
-<!--            android:src="@drawable/setting"-->
-<!--            android:layout_marginStart="50dp">-->
+    <!--        </ImageView>-->
+    <!--        <ImageView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:id="@+id/settingicon"-->
+    <!--            android:src="@drawable/setting"-->
+    <!--            android:layout_marginStart="50dp">-->
 
-<!--        </ImageView>-->
-<!--    </LinearLayout>-->
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="80dp"
-    android:orientation="vertical">
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Bài hát mới"
-    android:textSize="30dp">
+    <!--        </ImageView>-->
+    <!--    </LinearLayout>-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:orientation="vertical">
 
-</TextView>
-    <!--slider-->
-<com.denzcoskun.imageslider.ImageSlider
-    android:layout_width="wrap_content"
-    android:layout_height="100dp"
-    android:id="@+id/slider"
-    app:iss_auto_cycle="true"
-    app:iss_delay="1000"
-    app:iss_period="1000"
-    app:iss_text_align="center"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bài hát mới"
+            android:textSize="30dp">
 
-</LinearLayout>
+        </TextView>
+        <!--slider-->
+        <com.denzcoskun.imageslider.ImageSlider
+            android:id="@+id/slider"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            app:iss_auto_cycle="true"
+            app:iss_delay="1000"
+            app:iss_period="1000"
+            app:iss_text_align="center" />
+
+    </LinearLayout>
     <!--fragment area-->
     <LinearLayout
+        android:id="@+id/fragement_playicon"
         android:layout_width="wrap_content"
         android:layout_height="500dp"
         android:layout_marginTop="50dp"
-        android:orientation="horizontal"
-        android:id="@+id/fragement_playicon">
+        android:orientation="horizontal">
 
     </LinearLayout>
 
 
+    <!--    &lt;!&ndash;footer&ndash;&gt;-->
+    <!--    <LinearLayout android:orientation="horizontal"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="50dp"-->
+    <!--        android:id="@+id/footer"-->
+    <!--        android:layout_marginTop="590dp"-->
+    <!--        android:background="@color/sky_blue">-->
 
+    <!--        <ImageView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:id="@+id/homeicon"-->
+    <!--            android:src="@drawable/home">-->
+    <!--        </ImageView>-->
+    <!--        <ImageView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:id="@+id/libraryicon"-->
+    <!--            android:src="@drawable/library"-->
+    <!--            android:layout_marginStart="30dp"-->
+    <!--            >-->
 
-<!--    &lt;!&ndash;footer&ndash;&gt;-->
-<!--    <LinearLayout android:orientation="horizontal"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="50dp"-->
-<!--        android:id="@+id/footer"-->
-<!--        android:layout_marginTop="590dp"-->
-<!--        android:background="@color/sky_blue">-->
+    <!--        </ImageView>-->
+    <!--        <ImageView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:id="@+id/playbuttonicon"-->
+    <!--            android:src="@drawable/play_button"-->
+    <!--            android:layout_marginStart="50dp">-->
 
-<!--        <ImageView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:id="@+id/homeicon"-->
-<!--            android:src="@drawable/home">-->
-<!--        </ImageView>-->
-<!--        <ImageView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:id="@+id/libraryicon"-->
-<!--            android:src="@drawable/library"-->
-<!--            android:layout_marginStart="30dp"-->
-<!--            >-->
+    <!--        </ImageView>-->
+    <!--        <ImageView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:id="@+id/ratingicon"-->
+    <!--            android:src="@drawable/review"-->
+    <!--            android:layout_marginStart="40dp"-->
+    <!--            >-->
 
-<!--        </ImageView>-->
-<!--        <ImageView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:id="@+id/playbuttonicon"-->
-<!--            android:src="@drawable/play_button"-->
-<!--            android:layout_marginStart="50dp">-->
+    <!--        </ImageView>-->
+    <!--        <ImageView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:id="@+id/settingicon"-->
+    <!--            android:src="@drawable/setting"-->
+    <!--            android:layout_marginStart="50dp">-->
 
-<!--        </ImageView>-->
-<!--        <ImageView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:id="@+id/ratingicon"-->
-<!--            android:src="@drawable/review"-->
-<!--            android:layout_marginStart="40dp"-->
-<!--            >-->
-
-<!--        </ImageView>-->
-<!--        <ImageView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:id="@+id/settingicon"-->
-<!--            android:src="@drawable/setting"-->
-<!--            android:layout_marginStart="50dp">-->
-
-<!--        </ImageView>-->
-<!--    </LinearLayout>-->
+    <!--        </ImageView>-->
+    <!--    </LinearLayout>-->
 
 </RelativeLayout>

@@ -3,8 +3,6 @@ package com.example.appnghenhac.asynctask;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import androidx.fragment.app.Fragment;
-
 import com.example.appnghenhac.fregment.FragmentThuVien;
 import com.example.appnghenhac.model.Song;
 import com.google.gson.Gson;
@@ -29,7 +27,7 @@ public class musicService extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... strings) {
         OkHttpClient client = new OkHttpClient();
         String idSong = strings[0];
-        String url = "https://v1.nocodeapi.com/tam/spotify/gBsXWERIORAqClxR/tracks?ids="+idSong;
+        String url = "https://v1.nocodeapi.com/tam/spotify/gBsXWERIORAqClxR/tracks?ids=" + idSong;
         Request request = new Request
                 .Builder()
                 .url(url)
@@ -42,7 +40,7 @@ public class musicService extends AsyncTask<String, Void, String> {
                 String json = response.body().string();
                 return json;
             } else {
-                Log.e("HTTP", "Request was not successful: " + response.code()) ;
+                Log.e("HTTP", "Request was not successful: " + response.code());
                 return null;
             }
         } catch (IOException e) {
@@ -61,22 +59,22 @@ public class musicService extends AsyncTask<String, Void, String> {
             JsonArray tracks = jsonObject.getAsJsonArray("tracks");
 
 
-          for(JsonElement element : tracks){
-              JsonObject track = element.getAsJsonObject();
-              JsonArray images = track.getAsJsonObject("album").getAsJsonArray("images");
-              String name = track.getAsJsonObject("album").get("name").toString();
-              song.setName(name);
+            for (JsonElement element : tracks) {
+                JsonObject track = element.getAsJsonObject();
+                JsonArray images = track.getAsJsonObject("album").getAsJsonArray("images");
+                String name = track.getAsJsonObject("album").get("name").toString();
+                song.setName(name);
 
 
-              for (JsonElement e : images) {
-                  JsonObject image = e.getAsJsonObject();
-                  if(image.get("width").getAsString().equals("64")){
-                      String url = image.get("url")+"";
-                      song.setUrl(url);
-                  }
-              }
-              Log.d("TAM", song.toString());
-          }
+                for (JsonElement e : images) {
+                    JsonObject image = e.getAsJsonObject();
+                    if (image.get("width").getAsString().equals("64")) {
+                        String url = image.get("url") + "";
+                        song.setUrl(url);
+                    }
+                }
+                Log.d("TAM", song.toString());
+            }
             thuvien.setSong(song);
         }
 

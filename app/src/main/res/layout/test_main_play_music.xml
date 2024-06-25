@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     tools:context=".activity.TestPlayMusicActivity">
     <!--toolbar-->
@@ -31,6 +31,7 @@
         </ImageView>
 
     </LinearLayout>
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="500dp"
@@ -46,13 +47,13 @@
             android:textSize="50dp">
 
         </TextView>
+
         <ImageView
+            android:id="@+id/image_disk"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_margin="100dp"
-            android:src="@drawable/music_cd_svgrepo_com"
-            android:id="@+id/image_disk">
-        </ImageView>
+            android:src="@drawable/music_cd_svgrepo_com"></ImageView>
 
         <ImageView
             android:layout_width="30dp"

@@ -1,22 +1,10 @@
 package com.example.appnghenhac.activity;
 
-import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
-import android.webkit.*;
+import android.webkit.WebView;
 import android.widget.Button;
-import androidx.annotation.RequiresApi;
+
 import androidx.appcompat.app.AppCompatActivity;
-
-
-import com.example.appnghenhac.R;
-import com.example.appnghenhac.model.Music;
-
-import java.util.ArrayList;
 
 /*
 Author:Thanh Tân
@@ -27,6 +15,7 @@ Content:class home activity trước mắt tui giữ lại nha có chỉnh gì t
 public class HomeActivity extends AppCompatActivity {
     private WebView webView;
     private Button btn_dowload;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

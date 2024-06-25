@@ -1,175 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ProfileActivity"
-    android:background="@color/grey_light">
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:orientation="vertical">
-       <RelativeLayout
-           android:layout_width="match_parent"
-           android:layout_height="@dimen/size250dp"
-           android:background="@color/pink">
+    android:background="@color/grey_light"
+    tools:context=".ProfileActivity">
 
-           <ImageView
-               android:id="@+id/image_profile"
-               android:layout_width="150dp"
-               android:layout_height="150dp"
-               android:layout_centerInParent="true"
-               android:background="@drawable/baseline_account_circle_24" />
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:id="@+id/textview_show_welcome"
-               android:layout_below="@id/image_profile"
-               android:hint="Loading....."
-               android:layout_marginTop="5dp"
-               android:layout_centerHorizontal="true"
-               android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-               android:textColor="@color/white"/>
-       </RelativeLayout>
-       <RelativeLayout
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           android:padding="15dp"
-           android:layout_margin="15dp"
-           android:background="@color/white">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-           <!--Show name-->
-           <ImageView
-               android:layout_width="25dp"
-               android:layout_height="25dp"
-               android:id="@+id/ic_profile"
-               android:background="@drawable/baseline_account_circle_24"/>
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:id="@+id/textview_show_full_name"
-               android:layout_alignStart="@+id/ic_profile"
-               android:hint="Loading....."
-               android:layout_marginStart="50dp"
-               android:textSize="18sp"/>
-           <View
-               android:layout_width="match_parent"
-               android:layout_height="1dp"
-               android:layout_marginTop="20dp"
-               android:layout_below="@+id/textview_show_full_name"
-               android:background="@color/dark_grey"
-               android:id="@+id/divider_name"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size250dp"
+            android:background="@color/pink">
 
+            <ImageView
+                android:id="@+id/image_profile"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/baseline_account_circle_24" />
 
-           <!--Show email-->
-           <ImageView
-               android:layout_width="25dp"
-               android:layout_height="25dp"
-               android:id="@+id/ic_email"
-               android:background="@drawable/mail_24dp_fill0_wght400_grad0_opsz24"
-               android:layout_below="@id/divider_name"
-               android:layout_marginTop="20dp"/>
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:id="@+id/textview_show_email"
-               android:layout_alignStart="@+id/ic_email"
-               android:hint="Loading....."
-               android:layout_marginStart="50dp"
-               android:layout_marginTop="20dp"
-               android:layout_below="@id/divider_name"
-               android:textSize="18sp"/>
-           <View
-               android:layout_width="match_parent"
-               android:layout_height="1dp"
-               android:layout_marginTop="20dp"
-               android:layout_below="@+id/textview_show_email"
-               android:background="@color/dark_grey"
-               android:id="@+id/divider_email"/>
+            <TextView
+                android:id="@+id/textview_show_welcome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/image_profile"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:hint="Loading....."
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textColor="@color/white" />
+        </RelativeLayout>
 
-           <!--Show birthDate-->
-           <ImageView
-               android:layout_width="25dp"
-               android:layout_height="25dp"
-               android:id="@+id/ic_birthdate"
-               android:background="@drawable/date"
-               android:layout_below="@id/divider_email"
-               android:layout_marginTop="20dp"/>
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:id="@+id/textview_show_birthdate"
-               android:layout_alignStart="@+id/ic_birthdate"
-               android:hint="Loading....."
-               android:layout_marginStart="50dp"
-               android:layout_marginTop="20dp"
-               android:layout_below="@id/divider_email"
-               android:textSize="18sp"/>
-           <View
-               android:layout_width="match_parent"
-               android:layout_height="1dp"
-               android:layout_marginTop="20dp"
-               android:layout_below="@+id/textview_show_birthdate"
-               android:background="@color/dark_grey"
-               android:id="@+id/divider_birthdate"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="15dp"
+            android:background="@color/white"
+            android:padding="15dp">
+
+            <!--Show name-->
+            <ImageView
+                android:id="@+id/ic_profile"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/baseline_account_circle_24" />
+
+            <TextView
+                android:id="@+id/textview_show_full_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/ic_profile"
+                android:layout_marginStart="50dp"
+                android:hint="Loading....."
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/divider_name"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/textview_show_full_name"
+                android:layout_marginTop="20dp"
+                android:background="@color/dark_grey" />
 
 
-           <!--Show gender-->
-           <ImageView
-               android:layout_width="25dp"
-               android:layout_height="25dp"
-               android:id="@+id/ic_gender"
-               android:background="@drawable/transgender_24dp_fill0_wght400_grad0_opsz24"
-               android:layout_below="@id/divider_birthdate"
-               android:layout_marginTop="20dp"/>
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:id="@+id/textview_show_gender"
-               android:layout_alignStart="@+id/ic_gender"
-               android:hint="Loading....."
-               android:layout_marginStart="50dp"
-               android:layout_marginTop="20dp"
-               android:layout_below="@id/divider_birthdate"
-               android:textSize="18sp"/>
-           <View
-               android:layout_width="match_parent"
-               android:layout_height="1dp"
-               android:layout_marginTop="20dp"
-               android:layout_below="@+id/textview_show_gender"
-               android:background="@color/dark_grey"
-               android:id="@+id/divider_gender"/>
+            <!--Show email-->
+            <ImageView
+                android:id="@+id/ic_email"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_below="@id/divider_name"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/mail_24dp_fill0_wght400_grad0_opsz24" />
+
+            <TextView
+                android:id="@+id/textview_show_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/divider_name"
+                android:layout_alignStart="@+id/ic_email"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="20dp"
+                android:hint="Loading....."
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/divider_email"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/textview_show_email"
+                android:layout_marginTop="20dp"
+                android:background="@color/dark_grey" />
+
+            <!--Show birthDate-->
+            <ImageView
+                android:id="@+id/ic_birthdate"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_below="@id/divider_email"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/date" />
+
+            <TextView
+                android:id="@+id/textview_show_birthdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/divider_email"
+                android:layout_alignStart="@+id/ic_birthdate"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="20dp"
+                android:hint="Loading....."
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/divider_birthdate"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/textview_show_birthdate"
+                android:layout_marginTop="20dp"
+                android:background="@color/dark_grey" />
 
 
-           <!--Show phone number-->
-           <ImageView
-               android:layout_width="25dp"
-               android:layout_height="25dp"
-               android:id="@+id/ic_phone"
-               android:background="@drawable/call_24dp_fill0_wght400_grad0_opsz24"
-               android:layout_below="@id/divider_gender"
-               android:layout_marginTop="20dp"/>
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:id="@+id/textview_show_phone"
-               android:layout_alignStart="@+id/ic_phone"
-               android:hint="Loading....."
-               android:layout_marginStart="50dp"
-               android:layout_marginTop="20dp"
-               android:layout_below="@id/divider_gender"
-               android:textSize="18sp"/>
-           <ProgressBar
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:id="@+id/progress"
-               android:layout_centerHorizontal="true"
-               android:layout_centerVertical="true"
-               android:elevation="@dimen/size10dp"
-               android:visibility="gone"/>
+            <!--Show gender-->
+            <ImageView
+                android:id="@+id/ic_gender"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_below="@id/divider_birthdate"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/transgender_24dp_fill0_wght400_grad0_opsz24" />
 
-       </RelativeLayout>
-   </LinearLayout>
+            <TextView
+                android:id="@+id/textview_show_gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/divider_birthdate"
+                android:layout_alignStart="@+id/ic_gender"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="20dp"
+                android:hint="Loading....."
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/divider_gender"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/textview_show_gender"
+                android:layout_marginTop="20dp"
+                android:background="@color/dark_grey" />
+
+
+            <!--Show phone number-->
+            <ImageView
+                android:id="@+id/ic_phone"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_below="@id/divider_gender"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/call_24dp_fill0_wght400_grad0_opsz24" />
+
+            <TextView
+                android:id="@+id/textview_show_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/divider_gender"
+                android:layout_alignStart="@+id/ic_phone"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="20dp"
+                android:hint="Loading....."
+                android:textSize="18sp" />
+
+            <ProgressBar
+                android:id="@+id/progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:elevation="@dimen/size10dp"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+    </LinearLayout>
 
 
 </ScrollView>

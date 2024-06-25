@@ -52,6 +52,47 @@
         </ImageView>
     </RelativeLayout>
 
+<!--        <ImageView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/homeicon"-->
+<!--            android:src="@drawable/home">-->
+<!--        </ImageView>-->
+<!--        <ImageView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/libraryicon"-->
+<!--            android:src="@drawable/library"-->
+<!--            android:layout_marginStart="30dp"-->
+<!--            >-->
+
+<!--        </ImageView>-->
+<!--        <ImageView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/playbuttonicon"-->
+<!--            android:src="@drawable/playbuttonmusic"-->
+<!--            android:layout_marginStart="50dp">-->
+
+<!--        </ImageView>-->
+<!--        <ImageView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/ratingicon"-->
+<!--            android:src="@drawable/review"-->
+<!--            android:layout_marginStart="40dp"-->
+<!--            >-->
+
+<!--        </ImageView>-->
+<!--        <ImageView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/settingicon"-->
+<!--            android:src="@drawable/setting"-->
+<!--            android:layout_marginStart="50dp">-->
+
+<!--        </ImageView>-->
+<!--    </LinearLayout>-->
 <LinearLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"

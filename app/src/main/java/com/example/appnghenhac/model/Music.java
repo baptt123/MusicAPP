@@ -1,6 +1,8 @@
 package com.example.appnghenhac.model;
 
-public class Music {
+import java.io.Serializable;
+
+public class Music implements Serializable {
     private int popularity;
     //test de lay du lieu ve so lan phat nhac
     private int history;

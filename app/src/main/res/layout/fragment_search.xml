@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fragment_search_layout">
+    <!--fragment hiển thị khi trả kết quả từ search-->
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fragment_search_list"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="0dp"
+        android:background="@color/sky_blue">
+    </ListView>
+</RelativeLayout>

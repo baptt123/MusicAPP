@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/sky_blue"
-    tools:context=".activity.RatingActivity">
+    tools:context=".fragment.RatingFragment">
     <!--header-->
     <LinearLayout
         android:layout_width="match_parent"
@@ -94,7 +94,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
-            android:src="@drawable/play_button">
+            android:src="@drawable/playbuttonmusic">
 
         </ImageView>
 
@@ -116,4 +116,14 @@
 
         </ImageView>
     </LinearLayout>
+    <!--thanh progress bar-->
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Small.Inverse"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerInParent="true"
+        android:max="100"
+        android:progress="0"
+        android:visibility="invisible"/>
 </RelativeLayout>

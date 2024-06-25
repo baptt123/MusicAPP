@@ -30,6 +30,17 @@
     <string name="CreatePlayList">Tạo mới PlayList</string>
     <string name="AddPlayList">Add Play List</string>
     <string name="AddMusic">Add Music</string>
+    <string name="tendangnhap">Tên đăng nhập</string>
+    <string name="matkhau">Mật khẩu</string>
+    <string name="nhaplaimatkhau">Nhập lại mật khẩu</string>
+    <string name="dongy">Đồng ý</string>
+    <string name="dangky">ĐĂNG KÝ</string>
+    <string name="dangnhap">ĐĂNG NHẬP</string>
+    <string name="ngaysinh">Ngày sinh</string>
+    <string name="phone">Số điện thoại</string>
+    <string name="thoat">Thoát</string>
+    <string name="email">Email</string>
+    <string name="hoten">Họ và tên</string>
 
 
 </resources>

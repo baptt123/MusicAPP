@@ -54,15 +54,15 @@ public class ProfileActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        authProfile = FirebaseAuth.getInstance();
-        FirebaseUser firebaseUser = authProfile.getCurrentUser();
-        if(firebaseUser == null){
-            Toast.makeText(ProfileActivity.this, "Something!!!", Toast.LENGTH_SHORT).show();
-        }else{
-            progressBar.setVisibility(View.VISIBLE);
-            showUserProfile(firebaseUser);
-            
-        }
+//        authProfile = FirebaseAuth.getInstance();
+//        FirebaseUser firebaseUser = authProfile.getCurrentUser();
+//        if(firebaseUser == null){
+//            Toast.makeText(ProfileActivity.this, "Something!!!", Toast.LENGTH_SHORT).show();
+//        }else{
+//            progressBar.setVisibility(View.VISIBLE);
+//            showUserProfile(firebaseUser);
+//
+//        }
 
 
 
@@ -128,7 +128,7 @@ public class ProfileActivity extends AppCompatActivity {
             Intent intent = new Intent(ProfileActivity.this, UpdateProfileActivity.class);
             startActivity(intent);
             finish();
-       /*} else if(id == R.id.menu_update_email){
+   /*    } else if(id == R.id.menu_update_email){
             Intent intent = new Intent(ProfileActivity.this, UpdateEmailActivity.class);
             startActivity(intent);
         }else if(id == R.id.menu_change_password){

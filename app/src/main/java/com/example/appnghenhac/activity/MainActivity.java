@@ -5,40 +5,23 @@ package com.example.appnghenhac.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.media.MediaPlayer;
 import android.net.Uri;
-import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
-import com.example.appnghenhac.R;
-import com.example.appnghenhac.asynctask.GetArtist;
-import com.example.appnghenhac.model.Music;
-import com.example.appnghenhac.model.MusicFiles;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import org.jetbrains.annotations.NotNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.appnghenhac.R;
+import com.example.appnghenhac.model.MusicFiles;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import android.widget.ImageView;
 
 import com.denzcoskun.imageslider.ImageSlider;
-import com.example.appnghenhac.R;
-import com.example.appnghenhac.fragment.TestPlayFragment;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 
@@ -69,9 +52,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        initView();
-//        initView();
-        initView();
+
     }
 //    public void initView(){
 //        /*
@@ -97,13 +78,6 @@ public class MainActivity extends AppCompatActivity {
 //        getDatafromFirebase();
 //        DeleteDatafromFirebase();
     public void initView(){
-    playbuttonicon=findViewById(R.id.playbuttonicon);
-    playbuttonicon.setOnClickListener(v -> {
-        TestPlayFragment testPlayFragment=new TestPlayFragment();
-        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragement_playicon,testPlayFragment);
-        fragmentTransaction.commit();
-    });
     }
 
 

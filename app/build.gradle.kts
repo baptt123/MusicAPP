@@ -10,7 +10,12 @@ android {
 
     defaultConfig { 
         applicationId = "com.example.appnghenhac"
-        minSdk = 22
+        /*
+        minSdk=22 là của project mình
+        tôi chỉnh sửa để thêm thư viện firebase auth
+        mọi người khi lấy code nhớ chỉnh lại là 22 hoặc để 23 để chạy không bị lỗi nha
+         */
+        minSdk = 23
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -37,6 +42,9 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("com.android.volley:volley:1.2.1")
     implementation("androidx.media3:media3-session:1.3.1")
+    // https://mvnrepository.com/artifact/com.google.firebase/firebase-auth
+    implementation("com.google.firebase:firebase-auth:21.2.0")
+
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -53,6 +61,9 @@ dependencies {
 //    implementation ("com.android.support:recyclerview-v7:27.1.1")
     implementation ("com.squareup.picasso:picasso:2.71828")
     implementation ("androidx.core:core:1.9.0")
+// menu
+    implementation ("com.google.android.material:material:1.9.0")
+//
     implementation("com.google.firebase:firebase-storage")
     implementation ("com.squareup.picasso:picasso:2.71828")
     // https://mvnrepository.com/artifact/com.google.code.gson/gson

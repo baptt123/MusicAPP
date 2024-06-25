@@ -1,20 +1,10 @@
 package com.example.appnghenhac.login_register;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
-import android.util.Patterns;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.appnghenhac.R;
 //import com.example.appnghenhac.main.MainActivity;
 //import com.google.android.gms.tasks.OnCompleteListener;
 //import com.google.android.gms.tasks.Task;
@@ -24,11 +14,11 @@ import com.example.appnghenhac.R;
 //import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 
 public class DangNhapActivity extends AppCompatActivity {
-  private   Button btnDongYDN,btnDangKy;
-  private   EditText edEmail,edMatkhau;
-//  private   FirebaseAuth fAuth;
-  private   ProgressBar progressBar;
-  private static final String TAG = "DangNhapActivity";
+    private static final String TAG = "DangNhapActivity";
+    private Button btnDongYDN, btnDangKy;
+    private EditText edEmail, edMatkhau;
+    //  private   FirebaseAuth fAuth;
+    private ProgressBar progressBar;
 
 //    @Override
 //
@@ -94,7 +84,7 @@ public class DangNhapActivity extends AppCompatActivity {
 //        }
 
 
-    }
+}
 
 //    private void loginUser(String email, String pass) {
 //        fAuth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(DangNhapActivity.this,new OnCompleteListener<AuthResult>() {

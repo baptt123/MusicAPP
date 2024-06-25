@@ -48,7 +48,7 @@ public class AsyncTaskSearch extends AsyncTask<String, Void, String> {
 
                 String childKey = dataSnapshot.getKey();
                 String childValue = dataSnapshot.getValue(String.class);
-                if(childKey.equals(param)){
+                if (childKey.equals(param)) {
                     MusicForSearch music = new MusicForSearch();
                     music.setName(childKey);
                     music.setImg(childValue);
@@ -56,8 +56,8 @@ public class AsyncTaskSearch extends AsyncTask<String, Void, String> {
                     Log.i("FirebaseData", "Name: " + childKey + ", Img: " + childValue);
                     // Giảm latch
                     latch.countDown();
-                }else{
-                    Log.e("FirebaseData", "Name: " + childKey + ", Img: " + childValue );
+                } else {
+                    Log.e("FirebaseData", "Name: " + childKey + ", Img: " + childValue);
                     // Giảm latch
                     latch.countDown();
                 }

@@ -8,6 +8,7 @@ public class Music implements Serializable {
     private int history;
     private String name;
     private String img;
+
     public int getPopularity() {
         return popularity;
     }

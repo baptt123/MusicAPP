@@ -6,14 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import com.example.appnghenhac.R;
 import com.example.appnghenhac.model.Music;
 
 import java.util.ArrayList;
 
-public class    HistoryAdapter extends ArrayAdapter<Music> {
+public class HistoryAdapter extends ArrayAdapter<Music> {
     private Activity context;
     private int IDlayout;
     private ArrayList<Music> objects;

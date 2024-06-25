@@ -3,8 +3,10 @@ package com.example.appnghenhac.adapter;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import org.jetbrains.annotations.NotNull;
 
 public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyVieHolder> {
@@ -25,7 +27,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyVieHolder>
         return 0;
     }
 
-    public class MyVieHolder extends RecyclerView.ViewHolder{
+    public class MyVieHolder extends RecyclerView.ViewHolder {
 
         private Context mContex;
 

@@ -1,22 +1,12 @@
 package com.example.appnghenhac.activity;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.ListView;
-import android.widget.Toast;
-import androidx.annotation.NonNull;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.example.appnghenhac.R;
-import com.example.appnghenhac.adapter.HistoryAdapter;
-import com.example.appnghenhac.model.Music;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.database.*;
-import com.google.firebase.database.annotations.NotNull;
-
-import java.util.ArrayList;
 
 public class HistoryActivity extends AppCompatActivity {
 

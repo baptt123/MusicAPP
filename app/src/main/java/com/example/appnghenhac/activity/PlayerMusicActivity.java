@@ -5,18 +5,20 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.appnghenhac.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class PlayerMusicActivity extends AppCompatActivity {
-//    private ActivityMainBinding mBinding;
+    static MediaPlayer mediaPlayer;
+    //    private ActivityMainBinding mBinding;
     TextView song_name, artist_name, duration_played, duaration_total;
     ImageView cover_art, nextBtn, prevBtn, backBtn, shuffleBtn, repeatBtn;
     FloatingActionButton playPauseBtn;
     SeekBar seekBar;
 
-    static MediaPlayer mediaPlayer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

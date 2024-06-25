@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/pink"
     android:paddingLeft="@dimen/size16dp"
-    android:paddingBottom="@dimen/size16dp"
-    android:paddingRight="@dimen/size16dp"
     android:paddingTop="@dimen/size16dp"
+    android:paddingRight="@dimen/size16dp"
+    android:paddingBottom="@dimen/size16dp"
     tools:context=".login_register.DangKyActivity">
 
     <TextView
@@ -28,118 +28,124 @@
         android:id="@+id/lnKhungDangKy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true">
+        android:orientation="vertical">
+
         <EditText
             android:id="@+id/idFullName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/radius_edittext"
-            android:hint="@string/hoten"
-            android:textColor="@color/black"
-            android:padding="@dimen/size10dp"
             android:layout_margin="@dimen/size10dp"
+            android:background="@drawable/radius_edittext"
             android:drawableLeft="@drawable/baseline_account_circle_24"
             android:drawablePadding="@dimen/size10dp"
-            />
+            android:hint="@string/hoten"
+            android:padding="@dimen/size10dp"
+            android:textColor="@color/black" />
+
         <EditText
             android:id="@+id/idEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/radius_edittext"
-            android:hint="@string/email"
-            android:textColor="@color/black"
-            android:padding="@dimen/size10dp"
             android:layout_margin="@dimen/size10dp"
+            android:background="@drawable/radius_edittext"
             android:drawableLeft="@drawable/mail_24dp_fill0_wght400_grad0_opsz24"
             android:drawablePadding="@dimen/size10dp"
-            />
+            android:hint="@string/email"
+            android:padding="@dimen/size10dp"
+            android:textColor="@color/black" />
+
         <EditText
             android:id="@+id/idPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/radius_edittext"
-            android:hint="@string/matkhau"
-            android:textColor="@color/black"
-            android:padding="@dimen/size10dp"
             android:layout_margin="@dimen/size10dp"
+            android:background="@drawable/radius_edittext"
             android:drawableLeft="@drawable/unlock"
             android:drawablePadding="@dimen/size10dp"
+            android:hint="@string/matkhau"
+            android:padding="@dimen/size10dp"
             android:password="true"
-            />
+            android:textColor="@color/black" />
+
         <EditText
             android:id="@+id/idConfirmPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/radius_edittext"
-            android:hint="@string/nhaplaimatkhau"
-            android:textColor="@color/black"
-            android:padding="@dimen/size10dp"
             android:layout_margin="@dimen/size10dp"
+            android:background="@drawable/radius_edittext"
             android:drawableLeft="@drawable/unlock"
             android:drawablePadding="@dimen/size10dp"
+            android:hint="@string/nhaplaimatkhau"
+            android:padding="@dimen/size10dp"
             android:password="true"
-            />
+            android:textColor="@color/black" />
+
         <RadioGroup
             android:id="@+id/idRGender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <RadioButton
                 android:id="@+id/idNam"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nam"
-                />
+                android:text="Nam" />
+
             <RadioButton
                 android:id="@+id/idNu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nữ"/>
+                android:text="Nữ" />
         </RadioGroup>
+
         <EditText
             android:id="@+id/idBirthDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/radius_edittext"
-            android:hint="@string/ngaysinh"
-            android:textColor="@color/black"
-            android:padding="@dimen/size10dp"
             android:layout_margin="@dimen/size10dp"
+            android:background="@drawable/radius_edittext"
             android:drawableLeft="@drawable/date"
             android:drawablePadding="@dimen/size10dp"
+            android:hint="@string/ngaysinh"
+            android:padding="@dimen/size10dp"
+            android:textColor="@color/black"
 
             />
+
         <EditText
             android:id="@+id/idPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/radius_edittext"
-            android:hint="@string/phone"
-            android:textColor="@color/black"
-            android:padding="@dimen/size10dp"
             android:layout_margin="@dimen/size10dp"
+            android:background="@drawable/radius_edittext"
             android:drawableLeft="@drawable/call_24dp_fill0_wght400_grad0_opsz24"
             android:drawablePadding="@dimen/size10dp"
+            android:hint="@string/phone"
+            android:padding="@dimen/size10dp"
+            android:textColor="@color/black"
 
             />
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnDK"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="@string/dangky"
-            android:layout_weight="1"
             android:layout_gravity="center"
-            android:padding="@dimen/size10dp"/>
+            android:layout_weight="1"
+            android:padding="@dimen/size10dp"
+            android:text="@string/dangky" />
 
     </LinearLayout>
+
     <ProgressBar
+        android:id="@+id/idprogressbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/idprogressbar"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:elevation="@dimen/size10dp"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 </RelativeLayout>

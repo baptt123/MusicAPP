@@ -1,14 +1,13 @@
 package com.example.appnghenhac.fregment;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.appnghenhac.R;
 import com.google.firebase.FirebaseApp;
@@ -19,7 +18,6 @@ import com.google.firebase.FirebaseApp;
  * create an instance of this fragment.
  */
 public class FragmentTrangChu extends Fragment {
-
 
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -72,7 +70,6 @@ public class FragmentTrangChu extends Fragment {
         FirebaseApp.initializeApp(getActivity());
 
     }
-
 
 
 }

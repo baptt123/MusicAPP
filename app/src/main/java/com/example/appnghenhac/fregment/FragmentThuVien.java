@@ -6,28 +6,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.collection.ArrayMap;
 import androidx.fragment.app.Fragment;
 
 import com.example.appnghenhac.R;
 import com.example.appnghenhac.activity.PlayListActivity;
 import com.example.appnghenhac.adapter.PlayListAdapter;
-import com.example.appnghenhac.asynctask.musicService;
 import com.example.appnghenhac.model.PlayList;
 import com.example.appnghenhac.model.Song;
-import com.example.appnghenhac.model.user;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,9 +27,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -53,6 +42,10 @@ public class FragmentThuVien extends Fragment {
 
     private String mParam1;
     private String mParam2;
+    private FirebaseDatabase data;
+    private DatabaseReference reference;
+    private String root;
+    private String leaf = "";
 
     public FragmentThuVien() {
         // Required empty public constructor
@@ -92,12 +85,6 @@ public class FragmentThuVien extends Fragment {
         return inflater.inflate(R.layout.fragment_thu_vien, container, false);
     }
 
-    private FirebaseDatabase data ;
-    private DatabaseReference reference ;
-
-    private String root;
-    private String leaf = "";
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -123,7 +110,7 @@ public class FragmentThuVien extends Fragment {
         reference.child(root).child(leaf).child("playList").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     PlayList playList = new PlayList(snapshot.getKey(), (String) snapshot.getValue());
                     pl.add(playList);
                 }
@@ -134,9 +121,9 @@ public class FragmentThuVien extends Fragment {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         PlayList p = pl.get(position);
                         Bundle bundle = new Bundle();
-                        bundle.putSerializable("playList",p);
+                        bundle.putSerializable("playList", p);
 
-                        Intent intent = new Intent(getActivity(),PlayListActivity.class);
+                        Intent intent = new Intent(getActivity(), PlayListActivity.class);
                         intent.putExtras(bundle);
 
                         startActivity(intent);
@@ -149,8 +136,6 @@ public class FragmentThuVien extends Fragment {
                 Log.e("Firebase", "Error loading data: " + error.getMessage());
             }
         });
-
-
 
 
 ////        ghi du lieu
@@ -177,7 +162,6 @@ public class FragmentThuVien extends Fragment {
 //            }
 //        });
     }
-
 
 
     private String getUserName(Bundle bundle) {

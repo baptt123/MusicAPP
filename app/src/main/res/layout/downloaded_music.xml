@@ -1,191 +1,188 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/layot_top_btn"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/layot_top_btn"
-            android:background="@drawable/gredient_bg"
-            android:layout_alignParentTop="true">
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/gredient_bg">
 
         <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:id="@+id/back_btn"
-                android:src="@drawable/baseline_chevron_left"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="0dp"/>
+            android:id="@+id/back_btn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="0dp"
+            android:src="@drawable/baseline_chevron_left" />
+
         <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="Nhạc đã tải"
-                android:textColor="@color/white"
-                android:layout_toEndOf="@+id/back_btn"
-                android:layout_toStartOf="@+id/more_vert_btn"
-                android:gravity="center_horizontal"
-                android:background="@android:color/transparent"
-                android:textSize="18sp"
-                android:textStyle="bold"/>
-        <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:id="@+id/more_vert_btn"
-                android:src="@drawable/baseline_more_vert"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"/>
-    </RelativeLayout>
-    <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/tex"
-            android:layout_below="@+id/layot_top_btn">
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/more_vert_btn"
+            android:layout_toEndOf="@+id/back_btn"
+            android:background="@android:color/transparent"
+            android:gravity="center_horizontal"
+            android:text="Nhạc đã tải"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-        <TextView
-                android:id="@+id/text1"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="Bài hát"
-                android:layout_marginStart="20dp"
-                android:gravity="center_horizontal"
-                android:background="@android:color/transparent"
-                android:textSize="16sp"
-                android:textStyle="bold"/>
-
-        <TextView
-                android:id="@+id/text2"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="Playlist"
-                android:layout_toEndOf="@+id/text1"
-                android:layout_marginStart="10dp"
-                android:gravity="center_horizontal"
-                android:background="@android:color/transparent"
-                android:textSize="16sp"
-                android:textStyle="bold"/>
-
-        <TextView
-                android:id="@+id/text3"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="Video"
-                android:layout_toEndOf="@+id/text2"
-                android:layout_marginStart="10dp"
-                android:gravity="center_horizontal"
-                android:background="@android:color/transparent"
-                android:textSize="16sp"
-                android:textStyle="bold"/>
+        <ImageView
+            android:id="@+id/more_vert_btn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/baseline_more_vert" />
     </RelativeLayout>
 
     <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/tex1"
-            android:layout_below="@+id/tex">
+        android:id="@+id/tex"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/layot_top_btn">
 
         <TextView
-                android:id="@+id/text4"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="Tất cả"
-                android:layout_marginStart="10dp"
-                android:gravity="center_horizontal"
-                android:background="@android:color/transparent"
-                android:textSize="16sp"
-                android:textStyle="bold"/>
+            android:id="@+id/text1"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:background="@android:color/transparent"
+            android:gravity="center_horizontal"
+            android:text="Bài hát"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-        <ImageView
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/baseline_filter_alt"
-                android:src="@drawable/baseline_filter_alt"
-                android:layout_toEndOf="@+id/text4"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="200dp"
-        />
+        <TextView
+            android:id="@+id/text2"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/text1"
+            android:background="@android:color/transparent"
+            android:gravity="center_horizontal"
+            android:text="Playlist"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-        <ImageView
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/search"
-                android:src="@drawable/baseline_find_in_page_24"
-                android:layout_toEndOf="@+id/baseline_filter_alt"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="10dp"
-        />
-
-        <ImageView
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/menu"
-                android:src="@drawable/baseline_menu"
-                android:layout_toEndOf="@+id/search"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="10dp"
-        />
+        <TextView
+            android:id="@+id/text3"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/text2"
+            android:background="@android:color/transparent"
+            android:gravity="center_horizontal"
+            android:text="Video"
+            android:textSize="16sp"
+            android:textStyle="bold" />
     </RelativeLayout>
 
-    <LinearLayout android:orientation="horizontal"
-                  android:layout_width="match_parent"
-                  android:layout_height="50dp"
-                  android:id="@+id/footer"
-                  android:layout_marginTop="680dp"
-                  android:background="@color/sky_blue">
+    <RelativeLayout
+        android:id="@+id/tex1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/tex">
+
+        <TextView
+            android:id="@+id/text4"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:background="@android:color/transparent"
+            android:gravity="center_horizontal"
+            android:text="Tất cả"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <ImageView
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/homeicon"
-                android:src="@drawable/baseline_bookmark_24"
-                android:layout_marginStart="30dp"
-                android:layout_gravity="center"
-        >
-        </ImageView>
+            android:id="@+id/baseline_filter_alt"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="200dp"
+            android:layout_toEndOf="@+id/text4"
+            android:src="@drawable/baseline_filter_alt" />
+
         <ImageView
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/libraryicon"
-                android:src="@drawable/baseline_library_music"
-                android:layout_marginStart="40dp"
-                android:layout_gravity="center"
-        >
-        </ImageView>
+            android:id="@+id/search"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/baseline_filter_alt"
+            android:src="@drawable/baseline_find_in_page_24" />
+
         <ImageView
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/playbuttonicon"
-                android:src="@drawable/baseline_play_arrow_24"
-                android:layout_marginStart="40dp"
-                android:layout_gravity="center"
-        >
+            android:id="@+id/menu"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/search"
+            android:src="@drawable/baseline_menu" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="680dp"
+        android:background="@color/sky_blue"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/homeicon"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="30dp"
+            android:src="@drawable/baseline_bookmark_24"></ImageView>
+
+        <ImageView
+            android:id="@+id/libraryicon"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="40dp"
+            android:src="@drawable/baseline_library_music"></ImageView>
+
+        <ImageView
+            android:id="@+id/playbuttonicon"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="40dp"
+            android:src="@drawable/baseline_play_arrow_24">
 
         </ImageView>
+
         <ImageView
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/ratingicon"
-                android:src="@drawable/baseline_queue_music"
-                android:layout_marginStart="40dp"
-                android:layout_gravity="center"
-        >
+            android:id="@+id/ratingicon"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="40dp"
+            android:src="@drawable/baseline_queue_music">
 
         </ImageView>
+
         <ImageView
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/settingicon"
-                android:src="@drawable/baseline_settings_24"
-                android:layout_marginStart="40dp"
-                android:layout_gravity="center"
-        >
+            android:id="@+id/settingicon"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="40dp"
+            android:src="@drawable/baseline_settings_24">
 
         </ImageView>
     </LinearLayout>

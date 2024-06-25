@@ -26,9 +26,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 public class ProfileActivity extends AppCompatActivity {
-    private TextView textViewWelcome,textViewFullName,textViewEmail,textViewBirthdate,textViewGender,textViewPhoneNum;
+    private TextView textViewWelcome, textViewFullName, textViewEmail, textViewBirthdate, textViewGender, textViewPhoneNum;
     private ProgressBar progressBar;
-    private String fullname,email,birthdate,gender,phone;
+    private String fullname, email, birthdate, gender, phone;
     private ImageView imageView;
     private FirebaseAuth authProfile;
 
@@ -65,7 +65,6 @@ public class ProfileActivity extends AppCompatActivity {
 //        }
 
 
-
     }
 
     private void showUserProfile(FirebaseUser firebaseUser) {
@@ -76,14 +75,14 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ReadWriteUserDetails readUserDetails = snapshot.getValue(ReadWriteUserDetails.class);
-                if(readUserDetails != null ){
+                if (readUserDetails != null) {
                     fullname = firebaseUser.getDisplayName();
                     email = firebaseUser.getEmail();
                     birthdate = readUserDetails.birthDate;
                     gender = readUserDetails.gender;
                     phone = readUserDetails.phoneNumber;
 
-                    textViewWelcome.setText("WELCOME, "+fullname);
+                    textViewWelcome.setText("WELCOME, " + fullname);
                     textViewFullName.setText(fullname);
                     textViewEmail.setText(email);
                     textViewBirthdate.setText(birthdate);
@@ -95,15 +94,15 @@ public class ProfileActivity extends AppCompatActivity {
                     Uri uri = firebaseUser.getPhotoUrl();
                     //ImageView setImageUri() should not be used with regular Uris .So we are using Picasso
                     Picasso.get().load(uri).into(imageView);
-                }else {
-                    Toast.makeText(ProfileActivity.this,"Something went wrong!!!",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(ProfileActivity.this, "Something went wrong!!!", Toast.LENGTH_SHORT).show();
                 }
                 progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(ProfileActivity.this,"Something went wrong!!!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProfileActivity.this, "Something went wrong!!!", Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.GONE);
 
 
@@ -113,18 +112,18 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     //Create ActionBar Menu
-    public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.menu_profile,menu);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_profile, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
-    public boolean onOptionsItemSelected(@NonNull MenuItem item){
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.memu_refresh){
+        if (id == R.id.memu_refresh) {
             startActivity(getIntent());
             finish();
-            overridePendingTransition(0,0);
-        }else if(id == R.id.menu_update_profile ){
+            overridePendingTransition(0, 0);
+        } else if (id == R.id.menu_update_profile) {
             Intent intent = new Intent(ProfileActivity.this, UpdateProfileActivity.class);
             startActivity(intent);
             finish();
@@ -139,16 +138,16 @@ public class ProfileActivity extends AppCompatActivity {
         }else if(id == R.id.menu_delete_profile){
             Intent intent = new Intent(ProfileActivity.this,DeleteProfileActivity.class);
             startActivity(intent);*/
-        }else if(id == R.id.menu_logout){
+        } else if (id == R.id.menu_logout) {
             authProfile.signOut();
-            Toast.makeText(ProfileActivity.this,"Logged Out",Toast.LENGTH_SHORT).show();
+            Toast.makeText(ProfileActivity.this, "Logged Out", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(ProfileActivity.this, DangNhapActivity.class);
 
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();
-        }else {
-            Toast.makeText(ProfileActivity.this,"Something went wrong!!",Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(ProfileActivity.this, "Something went wrong!!", Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
 

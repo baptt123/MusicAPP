@@ -6,11 +6,6 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 
-import com.example.appnghenhac.activity.TestPlayMusicActivity;
-import com.example.appnghenhac.service.MusicService;
-
-import java.io.Serializable;
-
 public class MusicReceiver extends BroadcastReceiver {
     MediaPlayer mediaPlayer;
     Bundle extras;

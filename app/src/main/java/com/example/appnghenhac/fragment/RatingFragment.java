@@ -24,10 +24,10 @@ import java.util.ArrayList;
 
 
 public class RatingFragment extends Fragment {
-    private ImageView btn_return;
     ProgressBar progressBar;
-
+    private ImageView btn_return;
     private ListRatingAdapter userTopAdapter;
+
     private void setProgressBarDuration(int duration, ProgressBar progressBar) {
         ObjectAnimator progressAnimator = ObjectAnimator.ofInt(progressBar, "progress", 0, 100);
         progressAnimator.setDuration(duration);
@@ -51,9 +51,9 @@ public class RatingFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ListView listView = view.findViewById(R.id.listview_rating);
-        progressBar=view.findViewById(R.id.progress_bar);
-        setProgressBarDuration(5000,progressBar);
-        ArrayList<Music> list= (ArrayList<Music>) getArguments().getSerializable("list");
+        progressBar = view.findViewById(R.id.progress_bar);
+        setProgressBarDuration(5000, progressBar);
+        ArrayList<Music> list = (ArrayList<Music>) getArguments().getSerializable("list");
         ListRatingAdapter musicArrayAdapter = new ListRatingAdapter(getActivity(), R.layout.list_item_rating_board, list);
         listView.setAdapter(musicArrayAdapter);
         Toast.makeText(getActivity(), "Hiển thị dữ liêu thành công ", Toast.LENGTH_SHORT).show();

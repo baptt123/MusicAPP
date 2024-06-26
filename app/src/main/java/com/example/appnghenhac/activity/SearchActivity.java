@@ -52,6 +52,11 @@ public class SearchActivity extends AppCompatActivity {
             setProgressBarDuration(3000, progressBar);
             asyncTaskSearch.execute(result_search);
         });
+        back_home=findViewById(R.id.back_home);
+        back_home.setOnClickListener(v -> {
+            Intent intent = new Intent(this, HomeActivity.class);
+            startActivity(intent);
+        });
     }
 
 

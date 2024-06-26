@@ -1,8 +1,5 @@
 package com.example.appnghenhac.login_register;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,21 +11,21 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.appnghenhac.ProfileActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.appnghenhac.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
-import com.google.firebase.auth.FirebaseUser;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
+    private final static String TAG = "ForgotPasswordActivity";
     private Button buttonPasswordResset;
     private EditText editTextPasswordResetEmail;
     private ProgressBar progressBar;
     private FirebaseAuth auth;
-    private  final static String TAG= "ForgotPasswordActivity";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +53,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                     progressBar.setVisibility(View.VISIBLE);
                     resetPassword(email);
                 }
-            }});
+            }
+        });
     }
 
     private void resetPassword(String email) {
@@ -64,24 +62,24 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(ForgotPasswordActivity.this,"Please check your inbox for password reset link",Toast.LENGTH_SHORT).show();
+                if (task.isSuccessful()) {
+                    Toast.makeText(ForgotPasswordActivity.this, "Please check your inbox for password reset link", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(ForgotPasswordActivity.this, DangNhapActivity.class);
 
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                     finish();
-                }else {
-                    try{
+                } else {
+                    try {
                         throw task.getException();
-                    }catch (FirebaseAuthInvalidUserException e){
+                    } catch (FirebaseAuthInvalidUserException e) {
                         editTextPasswordResetEmail.setError("User does not exist or is no longer valid.Please register again");
                         editTextPasswordResetEmail.requestFocus();
-                    }catch (Exception e){
-                        Log.e(TAG,e.getMessage());
-                        Toast.makeText(ForgotPasswordActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        Log.e(TAG, e.getMessage());
+                        Toast.makeText(ForgotPasswordActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                    Toast.makeText(ForgotPasswordActivity.this,"Something went wrong!!!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ForgotPasswordActivity.this, "Something went wrong!!!", Toast.LENGTH_SHORT).show();
                 }
                 progressBar.setVisibility(View.GONE);
             }

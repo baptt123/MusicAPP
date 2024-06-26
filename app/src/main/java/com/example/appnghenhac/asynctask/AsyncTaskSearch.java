@@ -56,8 +56,8 @@ public class AsyncTaskSearch extends AsyncTask<String, Void, String> {
                     Log.i("FirebaseData", "Name: " + childKey + ", Img: " + childValue);
                     // Giảm latch
                     latch.countDown();
-                }else{
-                    Log.e("FirebaseData", "Name: " + childKey + ", Img: " + childValue );
+                } else {
+                    Log.e("FirebaseData", "Name: " + childKey + ", Img: " + childValue);
                     // Giảm latch
                     latch.countDown();
                 }

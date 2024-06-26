@@ -10,7 +10,7 @@ public class user implements Serializable {
     private Date birthDate;
     private String gender;
     private String phoneNumber;
-    private Map<String,String> playList = new HashMap<>();
+    private Map<String, String> playList = new HashMap<>();
 
     public user() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
@@ -40,12 +40,12 @@ public class user implements Serializable {
         this.birthDate = birthDate;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
     public String getFullName() {
         return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getGender() {

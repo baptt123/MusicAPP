@@ -40,9 +40,9 @@ public class SearchFragment extends Fragment {
             MusicForSearch musicForSearch = (MusicForSearch) parent.getItemAtPosition(position);
             //tạo intent để chuyển hướng sang trang phát nhạc
             Intent intent = new Intent(getActivity(), TestPlayMusicActivity.class);
-            String song_name=musicForSearch.getName();
-            Bundle bundle=new Bundle();
-            bundle.putString("name_song",song_name);
+            String song_name = musicForSearch.getName();
+            Bundle bundle = new Bundle();
+            bundle.putString("name_song", song_name);
             intent.putExtras(bundle);
             startActivity(intent);
         });

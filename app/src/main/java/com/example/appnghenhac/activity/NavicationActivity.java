@@ -1,13 +1,13 @@
 package com.example.appnghenhac.activity;
 
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
-import android.os.Bundle;
-import android.view.MenuItem;
 
 import com.example.appnghenhac.R;
 import com.example.appnghenhac.fregment.FragmentThuVien;
@@ -34,12 +34,12 @@ public class NavicationActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 // TODO yeu cay chuyen doi  sang dung frament chưa hoàn thành
                 Fragment selectedFragment = null;
-                if(item.getItemId()==R.id.home){
+                if (item.getItemId() == R.id.home) {
                     toolbar.setTitle("Trang Chủ");
                     selectedFragment = new FragmentTrangChu();
                     loadFragment(selectedFragment);
                     return true;
-                } else if (item.getItemId()==R.id.thuVien) {
+                } else if (item.getItemId() == R.id.thuVien) {
                     toolbar.setTitle("Thư viện");
                     selectedFragment = new FragmentThuVien();
                     loadFragment(selectedFragment);

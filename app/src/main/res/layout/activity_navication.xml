@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
 
-        app:title="@string/app_name"/>
+        app:title="@string/app_name" />
 
     <FrameLayout
         android:id="@+id/fragment_container"

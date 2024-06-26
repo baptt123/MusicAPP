@@ -9,28 +9,30 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ChooseFileActivity extends AppCompatActivity {
-    public MediaPlayer mediaPlayer;
     public final int PICK_FILE_REQUEST_CODE = 1;
+    public MediaPlayer mediaPlayer;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         openFilePicker();
     }
-    public void openFilePicker(){
-        Intent intent=new Intent(Intent.ACTION_GET_CONTENT);
+
+    public void openFilePicker() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("*/*");
         intent.addCategory(Intent.CATEGORY_OPENABLE);
-        startActivityForResult(intent,PICK_FILE_REQUEST_CODE);
+        startActivityForResult(intent, PICK_FILE_REQUEST_CODE);
 
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==PICK_FILE_REQUEST_CODE && resultCode==RESULT_OK){
-            if(data!=null){
-                Uri uri=data.getData();
-                mediaPlayer=MediaPlayer.create(this,uri);
+        if (requestCode == PICK_FILE_REQUEST_CODE && resultCode == RESULT_OK) {
+            if (data != null) {
+                Uri uri = data.getData();
+                mediaPlayer = MediaPlayer.create(this, uri);
                 mediaPlayer.start();
             }
         }

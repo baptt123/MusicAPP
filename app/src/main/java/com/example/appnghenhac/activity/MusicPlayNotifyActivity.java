@@ -1,25 +1,8 @@
 package com.example.appnghenhac.activity;
 
 
-import static com.example.appnghenhac.notification.MusicNotification.CHANNEL_ID_MUSIC;
-
-import android.annotation.SuppressLint;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Intent;
-import android.media.MediaPlayer;
-import android.net.Uri;
-import android.os.Bundle;
-import android.support.v4.media.session.MediaSessionCompat;
-import android.widget.Button;
-
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
 
-import com.example.appnghenhac.R;
-import com.example.appnghenhac.receiver.MusicReceiver;
 /*
 class này để test phát nhạc thông qua notification
  */

@@ -1,6 +1,5 @@
 package com.example.appnghenhac.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,11 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.appnghenhac.R;
-import com.example.appnghenhac.model.PlayList;
 import com.example.appnghenhac.model.Song;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class SongAdapter extends ArrayAdapter<Song> {
     private Context context;

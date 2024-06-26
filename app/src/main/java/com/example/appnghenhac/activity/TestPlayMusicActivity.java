@@ -1,12 +1,7 @@
 package com.example.appnghenhac.activity;
 
-import static com.example.appnghenhac.notification.MusicNotification.CHANNEL_ID_MUSIC;
-
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -16,7 +11,6 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
 
 import com.example.appnghenhac.R;
 import com.example.appnghenhac.config.Constants;

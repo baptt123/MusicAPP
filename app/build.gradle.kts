@@ -44,8 +44,6 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("com.android.volley:volley:1.2.1")
     implementation("androidx.media3:media3-session:1.3.1")
-    // https://mvnrepository.com/artifact/com.google.firebase/firebase-auth
-    implementation("com.google.firebase:firebase-auth:21.2.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
@@ -60,15 +58,19 @@ dependencies {
     implementation("androidx.media3:media3-ui:1.3.1")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("com.github.denzcoskun:ImageSlideshow:0.1.2")
-//    implementation ("com.android.support:recyclerview-v7:27.1.1")
+//    recyclerView
+    implementation ("com.android.support:recyclerview-v7:27.1.1")
     implementation("com.squareup.picasso:picasso:2.71828")
     implementation("androidx.core:core:1.9.0")
 // menu
     implementation("com.google.android.material:material:1.9.0")
-//
+// firebase
+    // https://mvnrepository.com/artifact/com.google.firebase/firebase-auth
+    implementation("com.google.firebase:firebase-auth:21.2.0")
+
     implementation("com.google.firebase:firebase-storage")
     implementation("com.squareup.picasso:picasso:2.71828")
-    // https://mvnrepository.com/artifact/com.google.code.gson/gson
+//  https://mvnrepository.com/artifact/com.google.code.gson/gson
     implementation("com.google.code.gson:gson:2.11.0")
     implementation("com.google.firebase:firebase-analytics:20.0.0")
     implementation("androidx.multidex:multidex:2.0.1")

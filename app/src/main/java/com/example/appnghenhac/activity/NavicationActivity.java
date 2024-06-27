@@ -10,8 +10,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.appnghenhac.R;
-import com.example.appnghenhac.fregment.FragmentThuVien;
-import com.example.appnghenhac.fregment.FragmentTrangChu;
+import com.example.appnghenhac.fragment.FragmentThuVien;
+import com.example.appnghenhac.fragment.FragmentTrangChu;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 

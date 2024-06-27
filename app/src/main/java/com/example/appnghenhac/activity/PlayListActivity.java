@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.appnghenhac.R;
-import com.example.appnghenhac.adapter.SongAdapter;
+import com.example.appnghenhac.adapter.SongInPlaylistAdapter;
 import com.example.appnghenhac.model.PlayList;
 import com.example.appnghenhac.model.Song;
 
@@ -29,15 +28,9 @@ public class PlayListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_play_list);
 //    toolbar
         Toolbar toolbar = findViewById(R.id.toolbarPlayLIst);
-        toolbar.setTitle("");
         setSupportActionBar(toolbar);
-//
-        ImageButton imageButton = findViewById(R.id.buttonReturn);
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
+        toolbar.setNavigationOnClickListener(v ->{
+            finish();
         });
 
         Intent intent = getIntent();
@@ -52,13 +45,14 @@ public class PlayListActivity extends AppCompatActivity {
 
         ListView lvSong = findViewById(R.id.listView);
         ArrayList<Song> listSong = getSong(playList.getListSong());
-        SongAdapter songAdapter = new SongAdapter(this, R.layout.list_item_song, listSong);
-        lvSong.setAdapter(songAdapter);
+        SongInPlaylistAdapter showSongInPlaylistAdapter = new SongInPlaylistAdapter(this, R.layout.list_item_song, listSong);
+        lvSong.setAdapter(showSongInPlaylistAdapter);
 
         Button button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                if()
                 Toast.makeText(PlayListActivity.this, "Them nhac", Toast.LENGTH_SHORT).show();
             }
         });

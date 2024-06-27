@@ -1,5 +1,6 @@
-package com.example.appnghenhac.fregment;
+package com.example.appnghenhac.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.appnghenhac.R;
+import com.example.appnghenhac.activity.AddPlaylistActivity;
 import com.example.appnghenhac.activity.PlayListActivity;
 import com.example.appnghenhac.adapter.PlayListAdapter;
 import com.example.appnghenhac.model.PlayList;
@@ -27,6 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,14 +42,10 @@ public class FragmentThuVien extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final int ADD_PLAYLIST_REQUEST = 1;
 
     private String mParam1;
     private String mParam2;
-    private FirebaseDatabase data;
-    private DatabaseReference reference;
-    private String root;
-    private String leaf = "";
-
     public FragmentThuVien() {
         // Required empty public constructor
     }
@@ -85,6 +84,12 @@ public class FragmentThuVien extends Fragment {
         return inflater.inflate(R.layout.fragment_thu_vien, container, false);
     }
 
+    private FirebaseDatabase data;
+    private DatabaseReference reference;
+    private String root;
+    private String leaf = "";
+    ArrayList<PlayList> pl;
+    PlayListAdapter playListAdapter;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -94,17 +99,8 @@ public class FragmentThuVien extends Fragment {
         data = FirebaseDatabase.getInstance();
         reference = data.getReference();
 
-//        button them play list
-        Button imageButtonAddPlayList = view.findViewById(R.id.imgbPlayList);
-        imageButtonAddPlayList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO chức năng thêm play list
-                Toast.makeText(getActivity(), "Them playList", Toast.LENGTH_SHORT).show();
-            }
-        });
 //      ListVIew
-        ArrayList<PlayList> pl = new ArrayList<>();
+       pl = new ArrayList<>();
         ListView listView = view.findViewById(R.id.listViewPlayList);
 
         reference.child(root).child(leaf).child("playList").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -114,7 +110,7 @@ public class FragmentThuVien extends Fragment {
                     PlayList playList = new PlayList(snapshot.getKey(), (String) snapshot.getValue());
                     pl.add(playList);
                 }
-                PlayListAdapter playListAdapter = new PlayListAdapter(getActivity(), R.layout.list_item_playlist, pl);
+                 playListAdapter = new PlayListAdapter(getActivity(), R.layout.list_item_playlist, pl);
                 listView.setAdapter(playListAdapter);
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -134,6 +130,19 @@ public class FragmentThuVien extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.e("Firebase", "Error loading data: " + error.getMessage());
+            }
+        });
+
+        //        button them play list
+        Button buttonAddPlayList = view.findViewById(R.id.imgbPlayList);
+        buttonAddPlayList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO chức năng thêm play list
+                Intent intent = new Intent(getActivity(), AddPlaylistActivity.class);
+                startActivity(intent);
+
+                Toast.makeText(getActivity(), "Them playList", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -163,6 +172,29 @@ public class FragmentThuVien extends Fragment {
 //        });
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ADD_PLAYLIST_REQUEST && resultCode == Activity.RESULT_OK) {
+            Bundle bundle = data.getExtras();
+            if (bundle != null) {
+                // Lấy Map từ Bundle
+                Map<String, String> playlistData = (Map<String, String>) bundle.getSerializable("listSong");
+                if (playlistData != null) {
+                    for (Map.Entry<String,String> s: playlistData.entrySet()) {
+                        PlayList p = new PlayList(s.getKey(), s.getValue());
+                        playListAdapter.add(p);
+                    }
+                    playListAdapter.notifyDataSetChanged();
+                    // Xử lý dữ liệu từ Map ở đây
+                    // Ví dụ: hiển thị thông tin, lưu vào Firebase, ...
+                }
+            }
+        }
+    }
+
+    private void loadPlaylistData() {
+    }
 
     private String getUserName(Bundle bundle) {
 //        TODO lay user name cua login

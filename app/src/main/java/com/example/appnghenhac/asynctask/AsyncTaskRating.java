@@ -1,5 +1,7 @@
 package com.example.appnghenhac.asynctask;
 
+import android.media.MediaParser;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -90,6 +92,8 @@ public class AsyncTaskRating extends AsyncTask<String, Void, String> {
 
         return gson.toJson(listmusic); // Chuyển danh sách nhạc thành chuỗi JSON và trả về
     }
+
+
 
     @Override
     protected void onPostExecute(String s) {

@@ -25,6 +25,7 @@ import java.io.IOException;
 
 /*
 class này dùng để xử lí ngầm các tác vụ
+(tham khảo)
  */
 public class MusicService extends Service {
     private static final String CHANNEL_ID = "MusicServiceChannel";

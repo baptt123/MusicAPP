@@ -41,7 +41,6 @@ public class PlayListActivity extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
         if (bundle != null) {
             playList = (PlayList) bundle.getSerializable("playList");
-            Log.d(TAG, "onCreate: " + playList.toString());
         }
 
         TextView textViewPlayListName = findViewById(R.id.tvPlName);
@@ -69,16 +68,12 @@ public class PlayListActivity extends AppCompatActivity {
 
     private void getSong(ArrayList<String> listSong) {
 //        asynctask lấy thông tin bài hát
-            Log.d(TAG+ "before", "getSong: "+listSong.toString());
             MusicAsynctask m = new MusicAsynctask(this);
             m.execute(listSong);
     }
 
 
-
-
     public void setSong(Song song) {
-        Log.d(TAG, "setSong: "+ song.toString());
         this.listSong.add(song);
         this.showSongInPlaylistAdapter.notifyDataSetChanged();
     }

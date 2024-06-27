@@ -35,7 +35,6 @@ public class MusicAsynctask extends AsyncTask<ArrayList<String>, Void, String> {
             }
             idsBuilder.append(id);
         }
-        Log.d(TAG, idsBuilder.toString());
         String url = "https://v1.nocodeapi.com/tam/spotify/gBsXWERIORAqClxR/tracks?ids=" + idsBuilder;
         Request request = new Request
                 .Builder()
@@ -89,7 +88,6 @@ public class MusicAsynctask extends AsyncTask<ArrayList<String>, Void, String> {
                     }
                 }
 
-                Log.d(TAG+ "album", "onPostExecute: "+song.getUrl());
 
                 ac.setSong(song);
             }

@@ -42,7 +42,6 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="text"
-                android:text=""
                 android:textSize="@dimen/size20dp"/>
         </LinearLayout>
 

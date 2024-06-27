@@ -41,7 +41,6 @@ public class SongInPlaylistAdapter extends ArrayAdapter<Song> {
         tv.setText(song.getName());
 
         ImageView imageView = convertView.findViewById(R.id.imageView);
-        Log.d("TAG", "getView: "+song.getUrl());
         Picasso.get()
                 .load(song.getUrl().substring(1,song.getUrl().length()-1))
                 .into(imageView);

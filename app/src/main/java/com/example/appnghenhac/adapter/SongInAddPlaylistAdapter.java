@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -56,20 +57,28 @@ public class SongInAddPlaylistAdapter extends RecyclerView.Adapter<SongInAddPlay
         //bind data to viewholder
         holder.getTextView().setText(song.getName());
         if (song.getUrl() != null) {
-            Log.d(TAG, "onBindViewHolder: "+song.getUrl());
             Picasso.get()
                     .load(song.getUrl())
                     .into(holder.getImageView());
         }
-
-//        holder.getCheckBox().setOnCheckedChangeListener((buttonView, isChecked) ->  {
-//                if (isChecked) {
-//                    elementClicked.add(song.getId());
-//                }else{
-//                    elementClicked.remove(song.getId());
-//                }
-//        });
-
+        holder.getLinearLayout().setOnClickListener(v -> {
+            if (!elementClicked.contains(song.getId())) {
+                    holder.getCheckBox().setChecked(true);
+                    elementClicked.add(song.getId());
+                }else{
+                    holder.getCheckBox().setChecked(false);
+                    elementClicked.remove(song.getId());
+                }
+        });
+        holder.getCheckBox().setOnClickListener(v -> {
+            if (!elementClicked.contains(song.getId())) {
+                holder.getCheckBox().setChecked(true);
+                elementClicked.add(song.getId());
+            }else{
+                holder.getCheckBox().setChecked(false);
+                elementClicked.remove(song.getId());
+            }
+        });
     }
 
     @Override
@@ -78,15 +87,18 @@ public class SongInAddPlaylistAdapter extends RecyclerView.Adapter<SongInAddPlay
     }
 
 
+
     class SongViewHolder extends RecyclerView.ViewHolder {
         private TextView textView;
         private ImageView imageView;
         private CheckBox checkBox;
+        private LinearLayout linearLayout;
         public SongViewHolder(@NonNull View itemView) {
             super(itemView);
             textView = (TextView) itemView.findViewById(R.id.tvSongName);
             imageView = (android.widget.ImageView) itemView.findViewById(R.id.imvUrl);
-            checkBox =  imageView.findViewById(R.id.checkbox);
+            checkBox =  itemView.findViewById(R.id.checkbox);
+            linearLayout = itemView.findViewById(R.id.linearLayout);
 
         }
 
@@ -112,6 +124,14 @@ public class SongInAddPlaylistAdapter extends RecyclerView.Adapter<SongInAddPlay
 
         public void setCheckBox(CheckBox checkBox) {
             this.checkBox = checkBox;
+        }
+
+        public LinearLayout getLinearLayout() {
+            return linearLayout;
+        }
+
+        public void setLinearLayout(LinearLayout linearLayout) {
+            this.linearLayout = linearLayout;
         }
     }
 

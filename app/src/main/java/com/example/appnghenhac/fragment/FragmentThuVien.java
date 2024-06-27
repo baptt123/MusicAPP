@@ -15,13 +15,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.example.appnghenhac.R;
 import com.example.appnghenhac.activity.AddPlaylistActivity;
 import com.example.appnghenhac.activity.PlayListActivity;
 import com.example.appnghenhac.adapter.PlayListAdapter;
 import com.example.appnghenhac.model.PlayList;
-import com.example.appnghenhac.model.Song;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,7 +29,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -83,12 +82,13 @@ public class FragmentThuVien extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_thu_vien, container, false);
     }
+    int REQUEST_CODE =123;
 
     private FirebaseDatabase data;
     private DatabaseReference reference;
     private String root;
     private String leaf = "";
-    ArrayList<PlayList> pl;
+    ArrayList<PlayList> playLists;
     PlayListAdapter playListAdapter;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -100,7 +100,7 @@ public class FragmentThuVien extends Fragment {
         reference = data.getReference();
 
 //      ListVIew
-       pl = new ArrayList<>();
+       playLists = new ArrayList<>();
         ListView listView = view.findViewById(R.id.listViewPlayList);
 
         reference.child(root).child(leaf).child("playList").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -108,22 +108,22 @@ public class FragmentThuVien extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     PlayList playList = new PlayList(snapshot.getKey(), (String) snapshot.getValue());
-                    pl.add(playList);
+                    playLists.add(playList);
                 }
-                 playListAdapter = new PlayListAdapter(getActivity(), R.layout.list_item_playlist, pl);
+                 playListAdapter = new PlayListAdapter(getActivity(), R.layout.list_item_playlist, playLists);
                 listView.setAdapter(playListAdapter);
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Toast.makeText(getActivity(), "hoat dong", Toast.LENGTH_SHORT).show();
-                        PlayList p = pl.get(position);
+                        PlayList p = playLists.get(position);
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("playList", p);
 
                         Intent intent = new Intent(getActivity(), PlayListActivity.class);
                         intent.putExtras(bundle);
 
-                        startActivity(intent);
+                       startActivity(intent);
                     }
                 });
             }
@@ -141,8 +141,7 @@ public class FragmentThuVien extends Fragment {
             public void onClick(View v) {
                 // TODO chức năng thêm play list
                 Intent intent = new Intent(getActivity(), AddPlaylistActivity.class);
-                startActivity(intent);
-
+                startActivityForResult(intent,REQUEST_CODE);
             }
         });
 
@@ -161,7 +160,6 @@ public class FragmentThuVien extends Fragment {
 //            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 //                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
 //                    user user = dataSnapshot.getValue(com.example.appnghenhac.model.user.class);
-//                    Log.d("home", user.toString());
 //                }
 //            }
 //
@@ -172,29 +170,19 @@ public class FragmentThuVien extends Fragment {
 //        });
     }
 
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == ADD_PLAYLIST_REQUEST && resultCode == Activity.RESULT_OK) {
-//            Bundle bundle = data.getExtras();
-//            if (bundle != null) {
-//                // Lấy Map từ Bundle
-//                Map<String, String> playlistData = (Map<String, String>) bundle.getSerializable("listSong");
-//                if (playlistData != null) {
-//                    for (Map.Entry<String,String> s: playlistData.entrySet()) {
-//                        PlayList p = new PlayList(s.getKey(), s.getValue());
-//                        playListAdapter.add(p);
-//                    }
-//                    playListAdapter.notifyDataSetChanged();
-//                    // Xử lý dữ liệu từ Map ở đây
-//                    // Ví dụ: hiển thị thông tin, lưu vào Firebase, ...
-//                }
-//            }
-//        }
-//    }
-//
-//    private void loadPlaylistData() {
-//    }
+
+    String TAG = "fragmentThuvien";
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d(TAG, "onActivityResult: co chay");
+        if (requestCode == ADD_PLAYLIST_REQUEST && resultCode == Activity.RESULT_OK) {
+            FragmentActivity activity = getActivity();
+            if (activity instanceof AddPlaylistActivity) {
+                ((AddPlaylistActivity) activity).recreateFragment();
+            }
+        }
+    }
 
     private String getUserName(Bundle bundle) {
 //        TODO lay user name cua login

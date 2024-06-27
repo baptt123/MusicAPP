@@ -1,13 +1,13 @@
 package com.example.appnghenhac.activity;
 
+
+import android.annotation.SuppressLint;
 import android.app.Notification;
-import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -19,10 +19,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
 import com.example.appnghenhac.R;
-import com.example.appnghenhac.config.Constants;
 import com.example.appnghenhac.model.MusicFiles;
+import com.example.appnghenhac.notification.MusicNotification;
 import com.example.appnghenhac.receiver.MusicReceiver;
-import com.example.appnghenhac.service.MusicService;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.SimpleDateFormat;
@@ -47,6 +46,7 @@ public class PlayerMusicActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.player_music);
         initView();
+        createNotification();
         addSong();
         khoitaoMediaPlayer();
 
@@ -204,11 +204,31 @@ public class PlayerMusicActivity extends AppCompatActivity {
 
 
     }
-public void createNotification(){
+
+    @SuppressLint("NotificationTrampoline")
+    public void createNotification() {
+        Intent changeActivity = new Intent(this, MusicReceiver.class);
+        changeActivity.setAction("Change");
+        PendingIntent changeActivityPendingIntent = PendingIntent.getBroadcast(this, 0, changeActivity, PendingIntent.FLAG_UPDATE_CURRENT);
+        Notification notification = new NotificationCompat.Builder(this, MusicNotification.CHANNEL_ID_MUSIC)
+                .setContentTitle("Playing music")
+                .setContentText("Chúc bạn nghe nhạc vui vẻ")
+                .setSmallIcon(R.drawable.music_cd_svgrepo_com)
+                .addAction(R.drawable.baseline_play_circle, "Change", changeActivityPendingIntent)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setOnlyAlertOnce(true)
+                .setAutoCancel(true)
+                .build();
+        NotificationManager notificationManager=(NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        if(notificationManager!=null){
+            notificationManager.notify(1,notification);
+        }
+
+    }
 
 }
 
-}
+
 
 
 

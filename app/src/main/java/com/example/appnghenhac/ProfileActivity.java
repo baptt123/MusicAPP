@@ -1,8 +1,12 @@
 package com.example.appnghenhac;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,6 +14,9 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,7 +45,6 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setTitle("Profile");
         setContentView(R.layout.layout_profile);
         textViewWelcome = findViewById(R.id.textview_show_welcome);
         textViewFullName = findViewById(R.id.textview_show_full_name);
@@ -47,6 +53,13 @@ public class ProfileActivity extends AppCompatActivity {
         textViewGender = findViewById(R.id.textview_show_gender);
         textViewPhoneNum = findViewById(R.id.textview_show_phone);
         progressBar = findViewById(R.id.progress);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setTitle("Profile");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
 
         imageView = findViewById(R.id.image_profile);
         imageView.setOnClickListener(v -> {
@@ -57,14 +70,45 @@ public class ProfileActivity extends AppCompatActivity {
         authProfile = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = authProfile.getCurrentUser();
         if(firebaseUser == null){
-            Toast.makeText(ProfileActivity.this, "Something!!!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ProfileActivity.this, "Something went wrong!!! User's details are not available at the moment", Toast.LENGTH_SHORT).show();
         }else{
+            checkIfEmailVerified(firebaseUser);
             progressBar.setVisibility(View.VISIBLE);
             showUserProfile(firebaseUser);
             
         }
 
 
+
+    }
+    // User's coming to ProfileActivity after successfully registration
+    private void checkIfEmailVerified(FirebaseUser firebaseUser) {
+        if (!firebaseUser.isEmailVerified()){
+            showArletDialog();
+        }
+    }
+    private void showArletDialog() {
+
+        //Setup the Alert Builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
+        builder.setTitle("Email Not Verified");
+        builder.setMessage("Please verify your email now. You can not login without email verification next time.");
+
+        //Open Email Apps if user clicks/taps continue button
+        builder.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_APP_EMAIL);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+        //Create the AlerDialog
+        AlertDialog alertDialog  = builder.create();
+
+        //Show the AlerDialog
+        alertDialog.show();
 
     }
 
@@ -128,17 +172,11 @@ public class ProfileActivity extends AppCompatActivity {
             Intent intent = new Intent(ProfileActivity.this, UpdateProfileActivity.class);
             startActivity(intent);
             finish();
-       /*} else if(id == R.id.menu_update_email){
-            Intent intent = new Intent(ProfileActivity.this, UpdateEmailActivity.class);
-            startActivity(intent);
-        }else if(id == R.id.menu_change_password){
+        /*}else if(id == R.id.menu_change_password){
             Intent intent = new Intent(ProfileActivity.this, ChangePasswordActivity.class);
             startActivity(intent);
         }else if(id == R.id.menu_settings){
-           Toast.makeText(ProfileActivity.this,"menu_setting",Toast.LENGTH_SHORT).show();
-        }else if(id == R.id.menu_delete_profile){
-            Intent intent = new Intent(ProfileActivity.this,DeleteProfileActivity.class);
-            startActivity(intent);*/
+           Toast.makeText(ProfileActivity.this,"menu_setting",Toast.LENGTH_SHORT).show();*/
         }else if(id == R.id.menu_logout){
             authProfile.signOut();
             Toast.makeText(ProfileActivity.this,"Logged Out",Toast.LENGTH_SHORT).show();

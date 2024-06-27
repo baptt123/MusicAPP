@@ -6,10 +6,11 @@
         android:icon="@drawable/sync_24dp_fill0_wght400_grad0_opsz24"
         android:alphabeticShortcut="r"
         android:orderInCategory="1"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom" />
 
     <item android:title="Update Profile"
-        android:id="@+id/menu_update_profile"/>
+        android:id="@+id/menu_update_profile"
+        />
     <item android:title="Update Email"
         android:id="@+id/menu_update_email"/>
     <item android:title="Settings"
@@ -20,6 +21,4 @@
         android:id="@+id/menu_delete_profile"/>
     <item android:title="Logout"
         android:id="@+id/menu_logout"/>
-
-
 </menu>

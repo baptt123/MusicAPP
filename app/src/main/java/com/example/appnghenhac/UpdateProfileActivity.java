@@ -2,6 +2,7 @@ package com.example.appnghenhac;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -50,13 +51,19 @@ public class UpdateProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profile);
-        getSupportActionBar().setTitle("Update Profile Details");
 
         progressBar = findViewById(R.id.progress);
         editTextUpdateName = findViewById(R.id.editText_update_profile_name);
         editTextUpdateBirthDate = findViewById(R.id.editText_update_profile_birthdate);
         editTextUpdatePhone = findViewById(R.id.editText_update_profile_phone);
         radioGroupUpdateGender = findViewById(R.id.radio_group_update_gender);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setTitle("Profile");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         auth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = auth.getCurrentUser();

@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.appnghenhac.R;
+import com.example.appnghenhac.activity.PlayerMusicActivity;
 import com.example.appnghenhac.activity.TestPlayMusicActivity;
 import com.example.appnghenhac.adapter.ListSearchAdapter;
 import com.example.appnghenhac.model.MusicForSearch;
@@ -39,7 +40,7 @@ public class SearchFragment extends Fragment {
             //lấy ra phần tử trong list view
             MusicForSearch musicForSearch = (MusicForSearch) parent.getItemAtPosition(position);
             //tạo intent để chuyển hướng sang trang phát nhạc
-            Intent intent = new Intent(getActivity(), TestPlayMusicActivity.class);
+            Intent intent = new Intent(getActivity(), PlayerMusicActivity.class);
             String song_name = musicForSearch.getName();
             Bundle bundle = new Bundle();
             bundle.putString("name_song", song_name);

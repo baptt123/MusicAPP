@@ -1,6 +1,7 @@
 package com.example.appnghenhac.model;
 
 import java.io.Serializable;
+
 /*
 class này xử lí cho chức năng tìm kiếm
  */

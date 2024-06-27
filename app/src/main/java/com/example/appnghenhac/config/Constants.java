@@ -1,4 +1,5 @@
 package com.example.appnghenhac.config;
+
 /*
 class này dùng để thiết lập các action cho pendingintent
  */

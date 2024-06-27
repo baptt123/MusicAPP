@@ -1,18 +1,17 @@
 package com.example.appnghenhac.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.appnghenhac.R;
 import com.example.appnghenhac.adapter.SongAdapter;
@@ -23,6 +22,7 @@ import java.util.ArrayList;
 
 public class PlayListActivity extends AppCompatActivity {
     private PlayList playList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,15 +44,15 @@ public class PlayListActivity extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
         if (bundle != null) {
             playList = (PlayList) bundle.getSerializable("playList");
-            Log.d("TAG", "onCreate: " +playList.toString());
+            Log.d("TAG", "onCreate: " + playList.toString());
         }
 
         TextView textViewPlayListName = findViewById(R.id.tvPlName);
         textViewPlayListName.setText(playList.getName());
 
         ListView lvSong = findViewById(R.id.listView);
-        ArrayList<Song> listSong=  getSong(playList.getListSong());
-        SongAdapter songAdapter = new SongAdapter(this, R.layout.list_item_song,listSong );
+        ArrayList<Song> listSong = getSong(playList.getListSong());
+        SongAdapter songAdapter = new SongAdapter(this, R.layout.list_item_song, listSong);
         lvSong.setAdapter(songAdapter);
 
         Button button = findViewById(R.id.button);
@@ -70,7 +70,7 @@ public class PlayListActivity extends AppCompatActivity {
 //        asynctask lấy thông tin bài hát
 //        new musicService(this).execute("1J3SmWwlYAG68LGKr86MVH");
 //
-            Song song = new Song(s,"");
+            Song song = new Song(s, "");
             res.add(song);
         }
         return res;

@@ -64,7 +64,7 @@ public class PlayListActivity extends AppCompatActivity {
 //        asynctask lấy thông tin bài hát
 //        new musicService(this).execute("1J3SmWwlYAG68LGKr86MVH");
 //
-            Song song = new Song(s, "");
+            Song song = new Song("s001",s, "");
             res.add(song);
         }
         return res;

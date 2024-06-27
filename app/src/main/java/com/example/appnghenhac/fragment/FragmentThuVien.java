@@ -172,29 +172,29 @@ public class FragmentThuVien extends Fragment {
 //        });
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == ADD_PLAYLIST_REQUEST && resultCode == Activity.RESULT_OK) {
-            Bundle bundle = data.getExtras();
-            if (bundle != null) {
-                // Lấy Map từ Bundle
-                Map<String, String> playlistData = (Map<String, String>) bundle.getSerializable("listSong");
-                if (playlistData != null) {
-                    for (Map.Entry<String,String> s: playlistData.entrySet()) {
-                        PlayList p = new PlayList(s.getKey(), s.getValue());
-                        playListAdapter.add(p);
-                    }
-                    playListAdapter.notifyDataSetChanged();
-                    // Xử lý dữ liệu từ Map ở đây
-                    // Ví dụ: hiển thị thông tin, lưu vào Firebase, ...
-                }
-            }
-        }
-    }
-
-    private void loadPlaylistData() {
-    }
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == ADD_PLAYLIST_REQUEST && resultCode == Activity.RESULT_OK) {
+//            Bundle bundle = data.getExtras();
+//            if (bundle != null) {
+//                // Lấy Map từ Bundle
+//                Map<String, String> playlistData = (Map<String, String>) bundle.getSerializable("listSong");
+//                if (playlistData != null) {
+//                    for (Map.Entry<String,String> s: playlistData.entrySet()) {
+//                        PlayList p = new PlayList(s.getKey(), s.getValue());
+//                        playListAdapter.add(p);
+//                    }
+//                    playListAdapter.notifyDataSetChanged();
+//                    // Xử lý dữ liệu từ Map ở đây
+//                    // Ví dụ: hiển thị thông tin, lưu vào Firebase, ...
+//                }
+//            }
+//        }
+//    }
+//
+//    private void loadPlaylistData() {
+//    }
 
     private String getUserName(Bundle bundle) {
 //        TODO lay user name cua login

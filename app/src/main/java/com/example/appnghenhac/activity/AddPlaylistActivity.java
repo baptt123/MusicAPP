@@ -36,6 +36,7 @@ public class AddPlaylistActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_playlist);
+//        toolbar
         Toolbar toolbar = findViewById(R.id.toolbar3);
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(v -> {
@@ -44,16 +45,16 @@ public class AddPlaylistActivity extends AppCompatActivity {
         // play list name
         EditText editText = findViewById(R.id.editTextText);
 
-
 //        arraylist resturn
         Map<String,Object> listSong = new HashMap<>();
+        ArrayList<String> elementClickeds = new ArrayList<>();
 
 //      listview
         RecyclerView recyclerView = findViewById(R.id.recycler);
 
         ArrayList<Song> songs = new ArrayList<Song>();
-        songs.add(new Song("chung ta cua hien tai", "https://i.scdn.co/image/ab67616d00001e02bc146f67374ea7e19c5d0c80"));
-        songs.add(new Song("chung ta cua hien tai 2", "https://i.scdn.co/image/ab67616d00001e02bc146f67374ea7e19c5d0c80"));
+        songs.add(new Song("s001","chung ta cua hien tai", "https://i.scdn.co/image/ab67616d00001e02bc146f67374ea7e19c5d0c80"));
+        songs.add(new Song("s002","chung ta cua hien tai 2", "https://i.scdn.co/image/ab67616d00001e02bc146f67374ea7e19c5d0c80"));
 
         SongInAddPlaylistAdapter songAdapter = new SongInAddPlaylistAdapter(this, songs);
         recyclerView.setAdapter(songAdapter);
@@ -62,21 +63,13 @@ public class AddPlaylistActivity extends AppCompatActivity {
         GridLayoutManager gridLayout = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(gridLayout);
 
-//        lv.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-//        lv.setOnItemClickListener((parent, view, position,id)->{
-//            Song selectedItem = songs.get(position);
-//            if (songs.contains(selectedItem)) {
-//                songs.remove(selectedItem);
-//            } else {
-//                songs.add(selectedItem);
-//            }
-//        });
+
 
 //      buton save
         Button button = findViewById(R.id.buttonDone);
         button.setOnClickListener(v->{
             if (editText.getText().equals("") || editText.getText() == null) {
-                Log.d("TAG", "onCreate: "+editText.getText());
+                Log.d("TAG", "onCreate: "+editText.getText() +","+songAdapter.getElementClicked().toString());
                 Toast.makeText(this, "chua nhap ten play list ko the tao", Toast.LENGTH_SHORT).show();
             }else{
                 listSong.put(editText.getText().toString(), "soo1,s002,s003");

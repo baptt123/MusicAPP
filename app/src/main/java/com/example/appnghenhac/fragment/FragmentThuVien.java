@@ -41,7 +41,7 @@ public class FragmentThuVien extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private static final int ADD_PLAYLIST_REQUEST = 1;
+    private static final int ADD_PLAYLIST_REQUEST = 123;
 
     private String mParam1;
     private String mParam2;
@@ -141,7 +141,7 @@ public class FragmentThuVien extends Fragment {
             public void onClick(View v) {
                 // TODO chức năng thêm play list
                 Intent intent = new Intent(getActivity(), AddPlaylistActivity.class);
-                startActivityForResult(intent,REQUEST_CODE);
+                startActivityForResult(intent,ADD_PLAYLIST_REQUEST);
             }
         });
 
@@ -175,18 +175,23 @@ public class FragmentThuVien extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.d(TAG, "onActivityResult: co chay");
+        Log.d(TAG, "onActivityResult: co chay" +requestCode +":"+ ADD_PLAYLIST_REQUEST +","+resultCode+":"+Activity.RESULT_OK);
         if (requestCode == ADD_PLAYLIST_REQUEST && resultCode == Activity.RESULT_OK) {
-            FragmentActivity activity = getActivity();
-            if (activity instanceof AddPlaylistActivity) {
-                ((AddPlaylistActivity) activity).recreateFragment();
+            Bundle bundle = data.getExtras();
+            if (bundle != null) {
+                String playlistName = bundle.getString("playlistName");
+                ArrayList<String> songs = (ArrayList<String>) bundle.getStringArrayList("lists");
+                PlayList n = new PlayList(playlistName, songs);
+                playLists.add(n);
+                playListAdapter.notifyDataSetChanged();
+                Log.d(TAG, "onActivityResult: "+ n);
             }
         }
     }
 
     private String getUserName(Bundle bundle) {
 //        TODO lay user name cua login
-        return "tam2";
+        return "user001";
     }
 
 

@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.appnghenhac.R;
 import com.example.appnghenhac.adapter.SongInAddPlaylistAdapter;
 import com.example.appnghenhac.fragment.FragmentThuVien;
+import com.example.appnghenhac.model.PlayList;
 import com.example.appnghenhac.model.Song;
 import com.example.appnghenhac.model.user;
 import com.google.firebase.database.DatabaseReference;
@@ -47,7 +48,6 @@ public class AddPlaylistActivity extends AppCompatActivity {
 
 //        arraylist resturn
         Map<String,Object> listSong = new HashMap<>();
-        ArrayList<String> elementClickeds = new ArrayList<>();
 
 //      listview
         RecyclerView recyclerView = findViewById(R.id.recycler);
@@ -80,32 +80,36 @@ public class AddPlaylistActivity extends AppCompatActivity {
                     Log.d(TAG, "onCreate: "+editText.getText() +","+songAdapter.getElementClicked().toString());
                     Toast.makeText(this, "chua nhap ten play list ko the tao", Toast.LENGTH_SHORT).show();
                 }else{
-                    listSong.put(editText.getText().toString(), "soo1,s002,s003");
+                    String s = "";
+                    if(songAdapter.getElementClicked().size()<=0){
+                        Toast.makeText(this, "chua chon bai hat ch play list ko the tao", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    for(String song: songAdapter.getElementClicked()){
+                        s += song+",";
+                    }
+                    listSong.put(editText.getText().toString(), s);
 //                ghi du lieu
                     FirebaseDatabase data = FirebaseDatabase.getInstance();
                     DatabaseReference reference = data.getReference();
 //                  TODO tai khoan user o dau
-                    user u = new user("tam2", new Date("14/04/2003"), "name", "013131313", null);
+                    user u = new user("user001", new Date("14/04/2003"), "name", "013131313", null);
                     reference.child("user").child(u.getFullName()).child("playList").updateChildren(listSong);
 
                     Intent returnItent = new Intent();
+                    Bundle bundle = new Bundle();
+                    ArrayList<String> lists = new ArrayList<>();
+                    for (Map.Entry<String,Object> en : listSong.entrySet()) {
+                        lists.add(en.getValue().toString());
+                    }
+                    bundle.putString("playlistName",editText.getText().toString());
+                    bundle.putStringArrayList("lists",lists);
+                    returnItent.putExtras(bundle);
                     setResult(Activity.RESULT_OK, returnItent);
                     finish();
                 }
         });
     }
 
-    public void recreateFragment() {
 
-        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-        if (currentFragment != null) {
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.remove(currentFragment);
-            fragmentTransaction.commitNow();
-        }
-        Fragment newFragment = new FragmentThuVien();
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.fragment_container, newFragment);
-        fragmentTransaction.commit();
-    }
 }

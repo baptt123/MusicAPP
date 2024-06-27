@@ -3,7 +3,7 @@ package com.example.appnghenhac.asynctask;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.appnghenhac.fragment.FragmentThuVien;
+import com.example.appnghenhac.activity.PlayListActivity;
 import com.example.appnghenhac.model.Song;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -11,23 +11,32 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class musicService extends AsyncTask<String, Void, String> {
-    private FragmentThuVien thuvien;
-
-    public musicService(FragmentThuVien thuvien) {
-        this.thuvien = thuvien;
+public class MusicAsynctask extends AsyncTask<ArrayList<String>, Void, String> {
+    private PlayListActivity ac;
+    String TAG = "MusicAsynctask";
+    public MusicAsynctask(PlayListActivity ac) {
+        this.ac = ac;
     }
 
     @Override
-    protected String doInBackground(String... strings) {
+    protected String doInBackground(ArrayList<String>... strings) {
         OkHttpClient client = new OkHttpClient();
-        String idSong = strings[0];
-        String url = "https://v1.nocodeapi.com/tam/spotify/gBsXWERIORAqClxR/tracks?ids=" + idSong;
+        ArrayList<String> idSongs = strings[0];
+        StringBuilder idsBuilder = new StringBuilder();
+        for (String id : idSongs) {
+            if (idsBuilder.length() > 0) {
+                idsBuilder.append(",");
+            }
+            idsBuilder.append(id);
+        }
+        Log.d(TAG, idsBuilder.toString());
+        String url = "https://v1.nocodeapi.com/tam/spotify/gBsXWERIORAqClxR/tracks?ids=" + idsBuilder;
         Request request = new Request
                 .Builder()
                 .url(url)
@@ -52,7 +61,6 @@ public class musicService extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        Song song = new Song();
         if (s != null) {
             Gson gson = new Gson();
             JsonObject jsonObject = gson.fromJson(s, JsonObject.class);
@@ -60,22 +68,31 @@ public class musicService extends AsyncTask<String, Void, String> {
 
 
             for (JsonElement element : tracks) {
+                Song song = new Song();
+
                 JsonObject track = element.getAsJsonObject();
-                JsonArray images = track.getAsJsonObject("album").getAsJsonArray("images");
-                String name = track.getAsJsonObject("album").get("name").toString();
+                JsonObject album = track.getAsJsonObject("album");
+                JsonArray images = album.getAsJsonArray("images");
+
+                String name =track.get("name").toString();
                 song.setName(name);
+
+                String id = track.get("id").toString();
+                song.setId(id);
 
 
                 for (JsonElement e : images) {
                     JsonObject image = e.getAsJsonObject();
                     if (image.get("width").getAsString().equals("64")) {
-                        String url = image.get("url") + "";
+                        String url = image.get("url") .toString();
                         song.setUrl(url);
                     }
                 }
-                Log.d("TAM", song.toString());
+
+                Log.d(TAG+ "album", "onPostExecute: "+song.getUrl());
+
+                ac.setSong(song);
             }
-            thuvien.setSong(song);
         }
 
     }

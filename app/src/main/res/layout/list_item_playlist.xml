@@ -33,10 +33,11 @@
             android:text="10"
             android:textSize="25dp" />
 
-        <ImageButton
+        <ImageView
             android:id="@+id/playMusic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="fitXY"
             android:layout_marginEnd="20dp"
             android:src="@drawable/baseline_play_arrow_24" />
 

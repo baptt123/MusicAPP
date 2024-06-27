@@ -14,13 +14,17 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.appnghenhac.R;
 import com.example.appnghenhac.adapter.SongInPlaylistAdapter;
+import com.example.appnghenhac.asynctask.MusicAsynctask;
 import com.example.appnghenhac.model.PlayList;
 import com.example.appnghenhac.model.Song;
 
 import java.util.ArrayList;
 
 public class PlayListActivity extends AppCompatActivity {
+    private static final String TAG = "PlayListActivity";
     private PlayList playList;
+    private ArrayList<Song> listSong;
+    private SongInPlaylistAdapter showSongInPlaylistAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,15 +41,18 @@ public class PlayListActivity extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
         if (bundle != null) {
             playList = (PlayList) bundle.getSerializable("playList");
-            Log.d("TAG", "onCreate: " + playList.toString());
+            Log.d(TAG, "onCreate: " + playList.toString());
         }
 
         TextView textViewPlayListName = findViewById(R.id.tvPlName);
         textViewPlayListName.setText(playList.getName());
 
+//      danh sach nhac
         ListView lvSong = findViewById(R.id.listView);
-        ArrayList<Song> listSong = getSong(playList.getListSong());
-        SongInPlaylistAdapter showSongInPlaylistAdapter = new SongInPlaylistAdapter(this, R.layout.list_item_song, listSong);
+        listSong = new ArrayList<>();
+        getSong(playList.getListSong());
+
+         showSongInPlaylistAdapter = new SongInPlaylistAdapter(this, R.layout.list_item_song, listSong);
         lvSong.setAdapter(showSongInPlaylistAdapter);
 
         Button button = findViewById(R.id.button);
@@ -58,17 +65,21 @@ public class PlayListActivity extends AppCompatActivity {
         });
     }
 
-    private ArrayList<Song> getSong(ArrayList<String> listSong) {
-        ArrayList<Song> res = new ArrayList<>();
-        for (String s : listSong) {
+    private ArrayList<MusicAsynctask> runningTasks;
+
+    private void getSong(ArrayList<String> listSong) {
 //        asynctask lấy thông tin bài hát
-//        new musicService(this).execute("1J3SmWwlYAG68LGKr86MVH");
-//
-            Song song = new Song("s001",s, "");
-            res.add(song);
-        }
-        return res;
+            Log.d(TAG+ "before", "getSong: "+listSong.toString());
+            MusicAsynctask m = new MusicAsynctask(this);
+            m.execute(listSong);
     }
 
 
+
+
+    public void setSong(Song song) {
+        Log.d(TAG, "setSong: "+ song.toString());
+        this.listSong.add(song);
+        this.showSongInPlaylistAdapter.notifyDataSetChanged();
+    }
 }

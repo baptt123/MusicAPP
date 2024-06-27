@@ -115,6 +115,7 @@ public class FragmentThuVien extends Fragment {
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Toast.makeText(getActivity(), "hoat dong", Toast.LENGTH_SHORT).show();
                         PlayList p = pl.get(position);
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("playList", p);
@@ -142,7 +143,6 @@ public class FragmentThuVien extends Fragment {
                 Intent intent = new Intent(getActivity(), AddPlaylistActivity.class);
                 startActivity(intent);
 
-                Toast.makeText(getActivity(), "Them playList", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -201,7 +201,5 @@ public class FragmentThuVien extends Fragment {
         return "tam2";
     }
 
-    public void setSong(Song song) {
-//        TODO do no thing
-    }
+
 }

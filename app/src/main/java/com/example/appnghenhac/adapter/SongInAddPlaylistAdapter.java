@@ -1,6 +1,7 @@
 package com.example.appnghenhac.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,19 +56,19 @@ public class SongInAddPlaylistAdapter extends RecyclerView.Adapter<SongInAddPlay
         //bind data to viewholder
         holder.getTextView().setText(song.getName());
         if (song.getUrl() != null) {
-
+            Log.d(TAG, "onBindViewHolder: "+song.getUrl());
             Picasso.get()
                     .load(song.getUrl())
                     .into(holder.getImageView());
         }
 
-        holder.getCheckBox().setOnCheckedChangeListener((buttonView, isChecked) ->  {
-                if (isChecked) {
-                    elementClicked.add(song.getId());
-                }else{
-                    elementClicked.remove(song.getId());
-                }
-        });
+//        holder.getCheckBox().setOnCheckedChangeListener((buttonView, isChecked) ->  {
+//                if (isChecked) {
+//                    elementClicked.add(song.getId());
+//                }else{
+//                    elementClicked.remove(song.getId());
+//                }
+//        });
 
     }
 

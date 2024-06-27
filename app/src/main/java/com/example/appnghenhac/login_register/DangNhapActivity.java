@@ -136,7 +136,7 @@ public class DangNhapActivity extends AppCompatActivity {
                         Toast.makeText(DangNhapActivity.this,"Bạn đã đăng nhập thành công",Toast.LENGTH_SHORT).show();
 
                         //Open user profile
-                        startActivity(new Intent(DangNhapActivity.this, ProfileActivity.class));
+                        startActivity(new Intent(DangNhapActivity.this, MainActivity.class));
                         finish();
                     }else{
                         firebaseUser.sendEmailVerification();
@@ -197,7 +197,7 @@ public class DangNhapActivity extends AppCompatActivity {
         super.onStart();
         if(fAuth.getCurrentUser() != null){
             Toast.makeText(DangNhapActivity.this,"Đã đăng nhập!!",Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(DangNhapActivity.this, ProfileActivity.class));
+            startActivity(new Intent(DangNhapActivity.this, MainActivity.class));
             finish();
         }else {
             Toast.makeText(DangNhapActivity.this,"Bạn có thể đăng nhập ngay bây giờ!!",Toast.LENGTH_SHORT).show();

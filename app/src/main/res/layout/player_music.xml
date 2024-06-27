@@ -68,13 +68,13 @@
 
 
         <ImageView
-            android:id="@+id/id_love"
+            android:id="@+id/id_love_song"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginTop="440dp"
             android:layout_marginEnd="367dp"
             android:layout_marginRight="350dp"
-            android:src="@drawable/heart" />
+            android:src="@drawable/heart"/>
 
 
     <TextView

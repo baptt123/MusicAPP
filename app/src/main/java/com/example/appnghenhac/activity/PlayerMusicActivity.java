@@ -13,7 +13,10 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
@@ -24,6 +27,11 @@ import com.example.appnghenhac.notification.MusicNotification;
 import com.example.appnghenhac.receiver.MusicReceiver;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -34,6 +42,7 @@ import java.util.ArrayList;
 public class PlayerMusicActivity extends AppCompatActivity {
     TextView song_name, artist_name, duration_played, duaration_total;
     ImageView cover_art, nextBtn, prevBtn, backBtn, shuffleBtn, repeatBtn;
+    ImageView love_song;
     FloatingActionButton playPauseBtn;
     SeekBar seekBar;
 
@@ -101,6 +110,10 @@ public class PlayerMusicActivity extends AppCompatActivity {
         repeatBtn = findViewById(R.id.id_repeat);
         playPauseBtn = findViewById(R.id.play_pause);
         seekBar = findViewById(R.id.seekBar);
+        love_song = findViewById(R.id.id_love_song);
+        love_song.setOnClickListener(v -> {
+            addMusicFavorite();
+        });
         loadSongsFromFirebase(music_song_string);
     }
 
@@ -174,5 +187,50 @@ public class PlayerMusicActivity extends AppCompatActivity {
         if (notificationManager != null) {
             notificationManager.notify(1, notification);
         }
+    }
+
+    public void addMusicFavorite() {
+        MusicNameApplication musicNameApplication = (MusicNameApplication) getApplicationContext();
+        String song = musicNameApplication.getSongName();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference dbref = database.getReference().child("Register User").child("AXdfh9IzCFXdypOiPJ9ECqiLXSn1");
+        dbref.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                if (snapshot.exists()) {
+                    if (snapshot.hasChild("favourite")) {
+                        String value = snapshot.child("favourite").getValue(String.class);
+                        if(!value.contains(song)){
+                            value=value+","+song;
+                            dbref.child("favourite").setValue(value);
+                            Toast.makeText(PlayerMusicActivity.this, "Them vao danh sach yeu thich thanh cong", Toast.LENGTH_SHORT).show();
+                        }
+                    }else if(!snapshot.hasChild("favourite")){
+                        dbref.child("favourite").setValue(song);
+                        Toast.makeText(PlayerMusicActivity.this, "Tao moi va  du lieu thanh cong", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

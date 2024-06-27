@@ -13,9 +13,12 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
+
 import com.example.appnghenhac.R;
+import com.example.appnghenhac.application.MusicNameApplication;
 import com.example.appnghenhac.model.MusicFiles;
 import com.example.appnghenhac.notification.MusicNotification;
 import com.example.appnghenhac.receiver.MusicReceiver;
@@ -43,8 +46,10 @@ public class PlayerMusicActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.player_music);
-        initView();
-        createNotification();
+        MusicNameApplication musicNameApplication = (MusicNameApplication) getApplicationContext();
+        String song = musicNameApplication.getSongName();
+        initView(song);
+        createNotification(song);
         FirebaseApp.initializeApp(this);
         backBtn.setOnClickListener(v -> onBackPressed());
 
@@ -57,10 +62,12 @@ public class PlayerMusicActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {}
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {}
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
         });
 
         playPauseBtn.setOnClickListener(v -> {
@@ -77,11 +84,11 @@ public class PlayerMusicActivity extends AppCompatActivity {
         });
     }
 
-    private void initView() {
+    private void initView(String song) {
         song_name = findViewById(R.id.song_name);
-        Bundle bundle = getIntent().getExtras();
-        String music_song = bundle.getString("name_song");
-        song_name.setText(music_song);
+//        Bundle bundle = getIntent().getExtras();
+//        String music_song = bundle.getString("name_song");
+        song_name.setText(song);
         String music_song_string = song_name.getText().toString();
         artist_name = findViewById(R.id.song_arist);
         duration_played = findViewById(R.id.durationPlayed);
@@ -150,7 +157,7 @@ public class PlayerMusicActivity extends AppCompatActivity {
     }
 
     @SuppressLint("NotificationTrampoline")
-    public void createNotification() {
+    public void createNotification(String name) {
         Intent changeActivity = new Intent(this, MusicReceiver.class);
         changeActivity.setAction("Change");
         PendingIntent changeActivityPendingIntent = PendingIntent.getBroadcast(this, 0, changeActivity, PendingIntent.FLAG_UPDATE_CURRENT);

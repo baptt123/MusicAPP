@@ -15,6 +15,7 @@ import com.example.appnghenhac.R;
 import com.example.appnghenhac.activity.PlayerMusicActivity;
 import com.example.appnghenhac.activity.TestPlayMusicActivity;
 import com.example.appnghenhac.adapter.ListSearchAdapter;
+import com.example.appnghenhac.application.MusicNameApplication;
 import com.example.appnghenhac.model.MusicForSearch;
 
 import java.util.ArrayList;
@@ -45,6 +46,8 @@ public class SearchFragment extends Fragment {
             Bundle bundle = new Bundle();
             bundle.putString("name_song", song_name);
             intent.putExtras(bundle);
+            MusicNameApplication musicNameApplication=(MusicNameApplication) getActivity().getApplicationContext();
+            musicNameApplication.setSongName(song_name);
             startActivity(intent);
         });
     }

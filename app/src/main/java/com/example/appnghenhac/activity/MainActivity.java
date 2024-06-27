@@ -2,24 +2,49 @@ package com.example.appnghenhac.activity;
 /*
 @Author :Thanh Tan
  */
-
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
+import android.media.MediaPlayer;
 import android.net.Uri;
-import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.widget.ImageView;
-
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import androidx.viewpager.widget.ViewPager;
+import com.example.appnghenhac.R;
+import com.example.appnghenhac.asynctask.GetArtist;
+import com.example.appnghenhac.model.Music;
+import com.example.appnghenhac.model.MusicFiles;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import org.jetbrains.annotations.NotNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
+
+import android.os.Bundle;
+import android.widget.ImageView;
 
 import com.denzcoskun.imageslider.ImageSlider;
 import com.example.appnghenhac.R;
-import com.example.appnghenhac.model.MusicFiles;
+import com.example.appnghenhac.fragment.TestPlayFragment;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    public static ArrayList<MusicFiles> musicFiles;
     ImageSlider imageSlider;
     ImageView playbuttonicon;
     //    GetArtist getArtist = new GetArtist(this);
@@ -42,53 +67,15 @@ public class MainActivity extends AppCompatActivity {
 //
 //    }
 
-    //    public void startMedia(){
-//        MediaPlayer mediaPlayer=MediaPlayer.create(this,R.raw.emcuangayhomqua);
-//        mediaPlayer.start();
-//    }
-    public static ArrayList<MusicFiles> getAllAudio(Context context) {
-        ArrayList<MusicFiles> tempAudioList = new ArrayList<>();
-        Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-        String[] projection = {
-                MediaStore.Audio.Media.ALBUM,
-                MediaStore.Audio.Media.TITLE,
-                MediaStore.Audio.Media.DURATION,
-                MediaStore.Audio.Media.DATA,
-                MediaStore.Audio.Media.ARTIST
-        };
-        Cursor cursor = context.getContentResolver().query(uri, projection, null, null, null);
-        if (cursor != null) {
-            while (cursor.moveToNext()) {
-                String album = cursor.getString(0);
-                String title = cursor.getString(1);
-                String duration = cursor.getString(2);
-                String path = cursor.getString(3);
-                String artist = cursor.getString(4);
-                MusicFiles musicFiles = new MusicFiles(path, title, artist, album, duration);
-                tempAudioList.add(musicFiles);
-//                Lay log.e kiem tra
-                Log.e("Path" + path, "Album" + album);
-            }
-            cursor.close();
-        }
-        return tempAudioList;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+//        initView();
+//        initView();
+        initView();
     }
-
-
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        startMedia();
-//    }
-
-    //    public void initView(){
+//    public void initView(){
 //        /*
 //        Dữ liệu để test
 //
@@ -111,8 +98,59 @@ public class MainActivity extends AppCompatActivity {
 //        addDatatoFirebase();
 //        getDatafromFirebase();
 //        DeleteDatafromFirebase();
-    public void initView() {
+    public void initView(){
+    playbuttonicon=findViewById(R.id.playbuttonicon);
+    playbuttonicon.setOnClickListener(v -> {
+        TestPlayFragment testPlayFragment=new TestPlayFragment();
+        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragement_playicon,testPlayFragment);
+        fragmentTransaction.commit();
+    });
     }
+
+
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        startMedia();
+//    }
+
+    //    public void startMedia(){
+//        MediaPlayer mediaPlayer=MediaPlayer.create(this,R.raw.emcuangayhomqua);
+//        mediaPlayer.start();
+//    }
+//    private void initViewPage(){
+//        ViewPager viewPager = findViewById(com.denzcoskun.imageslider.R.id.view_pager);
+//
+//    }
+//    public static ArrayList<MusicFiles> getAllAudio(Context context) {
+//        ArrayList<MusicFiles> tempAudioList = new ArrayList<>();
+//        Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+//        String[] projection = {
+//                MediaStore.Audio.Media.ALBUM,
+//                MediaStore.Audio.Media.TITLE,
+//                MediaStore.Audio.Media.DURATION,
+//                MediaStore.Audio.Media.DATA,
+//                MediaStore.Audio.Media.ARTIST
+//        };
+//        Cursor cursor = context.getContentResolver().query(uri, projection, null, null, null);
+//        if (cursor != null) {
+//            while (cursor.moveToNext()) {
+//                String album = cursor.getString(0);
+//                String title = cursor.getString(1);
+//                String duration = cursor.getString(2);
+//                String path = cursor.getString(3);
+//                String artist = cursor.getString(4);
+////                MusicFiles musicFiles = new MusicFiles(path, title, artist, album, duration);
+//                MusicFiles musicFiles = new MusicFiles(path, title, artist);
+//                tempAudioList.add(musicFiles);
+////                Lay log.e kiem tra
+//                Log.e("Path" + path, "Album" + album);
+//            }
+//            cursor.close();
+//        }
+//        return tempAudioList;
+//    }
 }
 
 

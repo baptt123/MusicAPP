@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/baseline_bookmark_24"
+        android:title="@string/trangChu" />
+    <item
+        android:id="@+id/thuVien"
+        android:icon="@drawable/baseline_library_music_24"
+        android:title="@string/thuVien" />
+    <item
+        android:id="@+id/PlayMusic"
+        android:checked="true"
+        android:icon="@drawable/baseline_play_arrow_24"
+        android:title="@string/choiNhac" />
+    <item
+        android:id="@+id/bxh"
+        android:icon="@drawable/baseline_auto_awesome_24"
+        android:title="@string/bxh" />
+    <item
+        android:id="@+id/setting"
+        android:icon="@drawable/baseline_bookmark_24"
+        android:title="@string/caiDat" />
+
+</menu>

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/sky_blue"
-    tools:context=".activity.RatingActivity">
+    tools:context=".fragment.RatingFragment">
     <!--header-->
     <LinearLayout
         android:layout_width="match_parent"
@@ -48,18 +48,19 @@
 
 
         </androidx.appcompat.widget.AppCompatButton>
-        
-      
+
+
     </RelativeLayout>
     <!--listview-->
     <RelativeLayout
+        android:id="@+id/listviewrelativerating"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/listviewrelativerating">
+        android:layout_height="wrap_content">
+
         <ListView
+            android:id="@+id/listview_rating"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/listview_rating"
             android:layout_marginTop="150dp"
             android:scrollbars="horizontal">
 
@@ -94,7 +95,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
-            android:src="@drawable/play_button">
+            android:src="@drawable/playbuttonmusic">
 
         </ImageView>
 
@@ -125,5 +126,5 @@
         android:layout_centerInParent="true"
         android:max="100"
         android:progress="0"
-        android:visibility="invisible"/>
+        android:visibility="invisible" />
 </RelativeLayout>

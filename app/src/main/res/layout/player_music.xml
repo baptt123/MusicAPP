@@ -55,12 +55,12 @@
                 android:src="@drawable/mtp"
                 android:scaleType="centerCrop"
                 android:id="@+id/cover_art"/>
-        <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:id="@+id/imageViewGreedient"
-                android:src="@drawable/gredient_bg"
-                android:layout_alignParentBottom="true"/>
+<!--        <ImageView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="250dp"-->
+<!--                android:id="@+id/imageViewGreedient"-->
+<!--                android:src="@drawable/gredient_bg"-->
+<!--                android:layout_alignParentBottom="true"/>-->
     </RelativeLayout>
     <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent">
 
@@ -121,7 +121,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/play_pause"
-                android:src="@drawable/baseline_play_circle"
+                android:src="@drawable/baseline_play_arrow_24"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:focusable="true"
@@ -154,7 +154,7 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1:26"
+                android:text="00:00"
                 android:id="@+id/durationPlayed"
                 android:textColor="@color/black"
                 android:layout_marginStart="10dp"

@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.viewpager.widget.ViewPager;
 import com.example.appnghenhac.R;
 import com.example.appnghenhac.asynctask.GetArtist;
 import com.example.appnghenhac.model.Music;
@@ -43,6 +44,7 @@ import com.example.appnghenhac.fragment.TestPlayFragment;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    public static ArrayList<MusicFiles> musicFiles;
     ImageSlider imageSlider;
     ImageView playbuttonicon;
     //    GetArtist getArtist = new GetArtist(this);
@@ -117,33 +119,38 @@ public class MainActivity extends AppCompatActivity {
 //        MediaPlayer mediaPlayer=MediaPlayer.create(this,R.raw.emcuangayhomqua);
 //        mediaPlayer.start();
 //    }
-    public static ArrayList<MusicFiles> getAllAudio(Context context) {
-        ArrayList<MusicFiles> tempAudioList = new ArrayList<>();
-        Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-        String[] projection = {
-                MediaStore.Audio.Media.ALBUM,
-                MediaStore.Audio.Media.TITLE,
-                MediaStore.Audio.Media.DURATION,
-                MediaStore.Audio.Media.DATA,
-                MediaStore.Audio.Media.ARTIST
-        };
-        Cursor cursor = context.getContentResolver().query(uri, projection, null, null, null);
-        if (cursor != null) {
-            while (cursor.moveToNext()) {
-                String album = cursor.getString(0);
-                String title = cursor.getString(1);
-                String duration = cursor.getString(2);
-                String path = cursor.getString(3);
-                String artist = cursor.getString(4);
-                MusicFiles musicFiles = new MusicFiles(path, title, artist, album, duration);
-                tempAudioList.add(musicFiles);
-//                Lay log.e kiem tra
-                Log.e("Path" + path, "Album" + album);
-            }
-            cursor.close();
-        }
-        return tempAudioList;
-    }
+//    private void initViewPage(){
+//        ViewPager viewPager = findViewById(com.denzcoskun.imageslider.R.id.view_pager);
+//
+//    }
+//    public static ArrayList<MusicFiles> getAllAudio(Context context) {
+//        ArrayList<MusicFiles> tempAudioList = new ArrayList<>();
+//        Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+//        String[] projection = {
+//                MediaStore.Audio.Media.ALBUM,
+//                MediaStore.Audio.Media.TITLE,
+//                MediaStore.Audio.Media.DURATION,
+//                MediaStore.Audio.Media.DATA,
+//                MediaStore.Audio.Media.ARTIST
+//        };
+//        Cursor cursor = context.getContentResolver().query(uri, projection, null, null, null);
+//        if (cursor != null) {
+//            while (cursor.moveToNext()) {
+//                String album = cursor.getString(0);
+//                String title = cursor.getString(1);
+//                String duration = cursor.getString(2);
+//                String path = cursor.getString(3);
+//                String artist = cursor.getString(4);
+////                MusicFiles musicFiles = new MusicFiles(path, title, artist, album, duration);
+//                MusicFiles musicFiles = new MusicFiles(path, title, artist);
+//                tempAudioList.add(musicFiles);
+////                Lay log.e kiem tra
+//                Log.e("Path" + path, "Album" + album);
+//            }
+//            cursor.close();
+//        }
+//        return tempAudioList;
+//    }
 }
 
 

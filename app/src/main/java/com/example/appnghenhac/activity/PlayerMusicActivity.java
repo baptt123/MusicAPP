@@ -16,22 +16,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
 import com.example.appnghenhac.R;
 import com.example.appnghenhac.application.MusicNameApplication;
+import com.example.appnghenhac.login_register.DangNhapActivity;
 import com.example.appnghenhac.model.MusicFiles;
 import com.example.appnghenhac.notification.MusicNotification;
 import com.example.appnghenhac.receiver.MusicReceiver;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -192,45 +193,51 @@ public class PlayerMusicActivity extends AppCompatActivity {
     public void addMusicFavorite() {
         MusicNameApplication musicNameApplication = (MusicNameApplication) getApplicationContext();
         String song = musicNameApplication.getSongName();
+        if (song == null || song.isEmpty()) {
+            Toast.makeText(this, "Không có tên bài hát để thêm", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        if (auth.getCurrentUser() == null) {
+            Toast.makeText(this, "Bạn chưa đăng nhập! Sẽ quay về trang đăng nhập", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, DangNhapActivity.class));
+            return;
+        }
+
+        String userID = auth.getCurrentUser().getUid();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference dbref = database.getReference().child("Register User").child("AXdfh9IzCFXdypOiPJ9ECqiLXSn1");
-        dbref.addChildEventListener(new ChildEventListener() {
+        DatabaseReference userRef = database.getReference().child("Register User").child(userID);
+
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    if (snapshot.hasChild("favourite")) {
-                        String value = snapshot.child("favourite").getValue(String.class);
-                        if(!value.contains(song)){
-                            value=value+","+song;
-                            dbref.child("favourite").setValue(value);
-                            Toast.makeText(PlayerMusicActivity.this, "Them vao danh sach yeu thich thanh cong", Toast.LENGTH_SHORT).show();
+                    String currentFavorites = snapshot.child("favourite").getValue(String.class);
+                    if (currentFavorites != null) {
+                        if (!currentFavorites.contains(song)) {
+                            String updatedFavorites = currentFavorites + "," + song;
+                            userRef.child("favourite").setValue(updatedFavorites);
+                            Toast.makeText(PlayerMusicActivity.this, "Thêm vào danh sách yêu thích thành công", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(PlayerMusicActivity.this, "Bài hát đã có trong danh sách yêu thích", Toast.LENGTH_SHORT).show();
                         }
-                    }else if(!snapshot.hasChild("favourite")){
-                        dbref.child("favourite").setValue(song);
-                        Toast.makeText(PlayerMusicActivity.this, "Tao moi va  du lieu thanh cong", Toast.LENGTH_SHORT).show();
+                    } else {
+                        userRef.child("favourite").setValue(song);
+                        Toast.makeText(PlayerMusicActivity.this, "Tạo mới và thêm dữ liệu thành công", Toast.LENGTH_SHORT).show();
                     }
+                } else {
+                    Toast.makeText(PlayerMusicActivity.this, "Không tìm thấy dữ liệu người dùng", Toast.LENGTH_SHORT).show();
+                    userRef.child("favourite").setValue(song);
+                    Toast.makeText(PlayerMusicActivity.this, "Tạo mới và thêm dữ liệu thành công", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Toast.makeText(PlayerMusicActivity.this, "Lỗi khi truy cập dữ liệu", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
 }

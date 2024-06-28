@@ -16,7 +16,9 @@ import com.example.appnghenhac.model.MusicForFavourite;
 import com.example.appnghenhac.model.MusicForSearch;
 
 import java.util.ArrayList;
-
+/*
+Fragment dùng hiển thị dữ liệu của bài hát yêu thích
+ */
 public class FavouriteFragment extends Fragment {
     private ListView listView_favourite;
     @Nullable
@@ -35,8 +37,6 @@ public class FavouriteFragment extends Fragment {
         listView_favourite.setAdapter(adapter);
         listView_favourite.setOnItemClickListener((parent, view1, position, id) -> {
             MusicForFavourite musicForFavourite=(MusicForFavourite) parent.getItemAtPosition(position);
-
-
         });
     }
 

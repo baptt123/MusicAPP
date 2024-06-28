@@ -19,7 +19,9 @@ import com.example.appnghenhac.application.MusicNameApplication;
 import com.example.appnghenhac.model.MusicForSearch;
 
 import java.util.ArrayList;
-
+/*
+Fragment dùng để hiển thị dữ liệu cho kết quả tìm kiếm
+ */
 public class SearchFragment extends Fragment {
     ListView listView;
 
@@ -43,11 +45,13 @@ public class SearchFragment extends Fragment {
             //tạo intent để chuyển hướng sang trang phát nhạc
             Intent intent = new Intent(getActivity(), PlayerMusicActivity.class);
             String song_name = musicForSearch.getName();
+            String img=musicForSearch.getImg();
             Bundle bundle = new Bundle();
             bundle.putString("name_song", song_name);
             intent.putExtras(bundle);
             MusicNameApplication musicNameApplication=(MusicNameApplication) getActivity().getApplicationContext();
             musicNameApplication.setSongName(song_name);
+            musicNameApplication.setImg(img);
             startActivity(intent);
         });
     }

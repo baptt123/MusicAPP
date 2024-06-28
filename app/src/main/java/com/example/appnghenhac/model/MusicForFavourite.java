@@ -1,7 +1,9 @@
 package com.example.appnghenhac.model;
 
 import java.io.Serializable;
-
+/*
+class này dùng cho chức năng danh sách bài hát yêu thích
+ */
 public class MusicForFavourite implements Serializable {
     private String link_img;
     private String name;

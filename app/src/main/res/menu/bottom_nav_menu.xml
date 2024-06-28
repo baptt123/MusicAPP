@@ -14,9 +14,9 @@
         android:icon="@drawable/baseline_play_arrow_24"
         android:title="@string/choiNhac" />
     <item
-        android:id="@+id/bxh"
+        android:id="@+id/Favourite"
         android:icon="@drawable/baseline_auto_awesome_24"
-        android:title="@string/bxh" />
+        android:title="Danh sách yêu thích" />
     <item
         android:id="@+id/setting"
         android:icon="@drawable/baseline_bookmark_24"

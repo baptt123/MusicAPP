@@ -16,7 +16,9 @@ import com.example.appnghenhac.model.MusicForFavourite;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-
+/*
+class này dùng cho việc setAdapter cho chức năng hiển thị danh sách yêu thích
+ */
 public class ListFavouriteAdapter extends ArrayAdapter<MusicForFavourite> {
     private Activity context;
     private int resource;

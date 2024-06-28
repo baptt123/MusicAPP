@@ -41,7 +41,7 @@ public class SongsFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
 //        Khởi tạo danh sách bài hát
         if(musicFiles == null || musicFiles.isEmpty()){
-            addSong();
+//            addSong();
         }
 //        !(musicFiles.size() <1 )
         if(musicFiles != null && !musicFiles.isEmpty()){
@@ -60,9 +60,9 @@ public class SongsFragment extends Fragment {
         }
         return view;
     }
-    private void addSong() {
-        musicFiles = new ArrayList<>();
-        musicFiles.add(new MusicFiles(R.raw.emcuangayhomqua,"Em của ngày hôm qua", "Sơn Tùng Mtp",R.drawable.sontung));
-        musicFiles.add(new MusicFiles(R.raw.chayngaydi,"Chạy ngay đi", "Sơn Tùng Mtp",R.drawable.chayngaydi));
-    }
+//    private void addSong() {
+//        musicFiles = new ArrayList<>();
+//        musicFiles.add(new MusicFiles(R.raw.emcuangayhomqua,"Em của ngày hôm qua", "Sơn Tùng Mtp",R.drawable.sontung));
+//        musicFiles.add(new MusicFiles(R.raw.chayngaydi,"Chạy ngay đi", "Sơn Tùng Mtp",R.drawable.chayngaydi));
+//    }
 }

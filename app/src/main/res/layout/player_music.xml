@@ -48,15 +48,17 @@
     <RelativeLayout
         android:id="@+id/card"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="400dp"
         android:layout_below="@+id/layot_top_btn">
 
         <ImageView
-            android:id="@+id/cover_art"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/mtp" />
+                android:id="@+id/cover_art"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginStart="50dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/dianhac"/>
         <!--        <ImageView-->
         <!--                android:layout_width="match_parent"-->
         <!--                android:layout_height="250dp"-->
@@ -66,23 +68,20 @@
     </RelativeLayout>
 
 
-
-        <ImageView
+    <ImageView
             android:id="@+id/id_love"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:layout_marginTop="440dp"
+            android:layout_marginTop="460dp"
             android:layout_marginEnd="367dp"
-            android:layout_marginRight="350dp"
-            android:src="@drawable/heart" />
-
-
+            android:layout_marginRight="380dp"
+            android:src="@drawable/heart"/>
     <TextView
         android:id="@+id/song_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/card"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="40dp"
         android:layout_marginEnd="32dp"
         android:ellipsize="end"
         android:gravity="center_horizontal"
@@ -141,7 +140,7 @@
             android:layout_centerVertical="true"
             android:clickable="true"
             android:focusable="true"
-            android:src="@drawable/baseline_play_arrow_24" />
+            android:src="@drawable/baseline_pause" />
 
         <ImageView
             android:id="@+id/id_next"

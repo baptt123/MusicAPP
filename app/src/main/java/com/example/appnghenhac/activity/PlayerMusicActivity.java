@@ -10,6 +10,8 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -38,12 +40,15 @@ public class PlayerMusicActivity extends AppCompatActivity {
     static ArrayList<MusicFiles> listSongs = new ArrayList<>();
     static MediaPlayer mediaPlayer;
     private Handler handler = new Handler();
+    Animation animation;
+//    float currentRotation = 0; // Biến lưu góc quay hiện tại của cover_art
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.player_music);
         initView();
+        animation = AnimationUtils.loadAnimation(this, R.anim.disc_rotate);
         createNotification();
         FirebaseApp.initializeApp(this);
         backBtn.setOnClickListener(v -> onBackPressed());
@@ -68,10 +73,13 @@ public class PlayerMusicActivity extends AppCompatActivity {
                 if (mediaPlayer.isPlaying()) {
                     mediaPlayer.pause();
                     playPauseBtn.setImageResource(R.drawable.baseline_play_arrow_24);
+                    cover_art.clearAnimation();
                 } else {
                     mediaPlayer.start();
                     playPauseBtn.setImageResource(R.drawable.baseline_pause);
                     updateSeekBar();
+//                    currentRotation=cover_art.setRotation(c);
+                    cover_art.startAnimation(animation);
                 }
             }
         });
@@ -122,6 +130,7 @@ public class PlayerMusicActivity extends AppCompatActivity {
                 mediaPlayer.setLooping(true);
                 updateSeekBar();
                 setTimeTotal();
+                cover_art.startAnimation(animation);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

@@ -1,7 +1,7 @@
 package com.example.appnghenhac.model;
 
 public class MusicFiles {
-    private int path;
+    private String path;
     private String title;
     private String artist;
     private int coverArt;
@@ -15,7 +15,7 @@ public class MusicFiles {
 //        this.album = album;
 //        this.duration = duration;
 //    }
-    public MusicFiles(int path, String title, String artist,int coverArt) {
+    public MusicFiles(String path, String title, String artist,int coverArt) {
         this.path = path;
         this.title = title;
         this.artist = artist;
@@ -32,11 +32,11 @@ public class MusicFiles {
         this.coverArt = coverArt;
     }
 
-    public int getPath() {
+    public String getPath() {
         return path;
     }
 
-    public void setPath(int path) {
+    public void setPath(String path) {
         this.path = path;
     }
 

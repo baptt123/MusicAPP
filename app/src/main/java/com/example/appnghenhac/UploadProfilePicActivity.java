@@ -3,7 +3,9 @@ package com.example.appnghenhac;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.appcompat.widget.Toolbar;
+
 
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -162,6 +164,7 @@ public class UploadProfilePicActivity extends AppCompatActivity {
 
     public boolean onCreateOptionMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_profile,menu);
+
         return super.onCreateOptionsMenu(menu);
     }
 

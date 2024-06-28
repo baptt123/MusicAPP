@@ -100,12 +100,12 @@ public class MainActivity extends AppCompatActivity {
 //        DeleteDatafromFirebase();
     public void initView(){
     playbuttonicon=findViewById(R.id.playbuttonicon);
-    playbuttonicon.setOnClickListener(v -> {
-        TestPlayFragment testPlayFragment=new TestPlayFragment();
-        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragement_playicon,testPlayFragment);
-        fragmentTransaction.commit();
-    });
+//    playbuttonicon.setOnClickListener(v -> {
+//        TestPlayFragment testPlayFragment=new TestPlayFragment();
+//        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+//        fragmentTransaction.replace(R.id.fragement_playicon,testPlayFragment);
+//        fragmentTransaction.commit();
+//    });
     }
 
 

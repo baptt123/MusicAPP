@@ -22,7 +22,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.appnghenhac.ProfileActivity;
 import com.example.appnghenhac.R;
+import com.example.appnghenhac.activity.HomeActivity;
 import com.example.appnghenhac.activity.MainActivity;
+import com.example.appnghenhac.activity.NavicationActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

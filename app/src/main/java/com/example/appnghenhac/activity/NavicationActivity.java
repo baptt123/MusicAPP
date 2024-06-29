@@ -1,7 +1,9 @@
 package com.example.appnghenhac.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +20,7 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class NavicationActivity extends AppCompatActivity {
+    private ImageView search_icon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +54,18 @@ public class NavicationActivity extends AppCompatActivity {
                     toolbar.setTitle("Danh sách yêu thích");
                     loadFragmentFavourite();
                     return true;
+                } else if (item.getItemId() == R.id.AddMusic) {
+                    changeIntoAddMusic();
+                    return true;
                 }
+
                 return false;
             }
+        });
+        search_icon=findViewById(R.id.search_icon);
+        search_icon.setOnClickListener( v -> {
+            Intent intent=new Intent(this, SearchActivity.class);
+            startActivity(intent);
         });
     }
 
@@ -63,8 +75,19 @@ public class NavicationActivity extends AppCompatActivity {
         transaction.addToBackStack(null);
         transaction.commit();
     }
-    public void loadFragmentFavourite(){
-        AsyncTaskFavourite asyncTaskFavourite=new AsyncTaskFavourite(this);
+
+    public void loadFragmentFavourite() {
+        AsyncTaskFavourite asyncTaskFavourite = new AsyncTaskFavourite(this);
         asyncTaskFavourite.execute(FirebaseAuth.getInstance().getCurrentUser().getUid());
+    }
+
+    public void changeIntoAddMusic() {
+        Intent intent = new Intent(this, UploadFileActivity.class);
+        startActivity(intent);
+    }
+
+    public void changeIntoSearch() {
+        Intent intent = new Intent(this, SearchActivity.class);
+        startActivity(intent);
     }
 }

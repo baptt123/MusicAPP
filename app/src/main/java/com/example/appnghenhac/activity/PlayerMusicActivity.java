@@ -62,7 +62,7 @@ public class PlayerMusicActivity extends AppCompatActivity {
         MusicNameApplication musicNameApplication = (MusicNameApplication) getApplicationContext();
         String song = musicNameApplication.getSongName();
         initView(song);
-        createNotification(song);
+//        createNotification(song);
         FirebaseApp.initializeApp(this);
         backBtn.setOnClickListener(v -> onBackPressed());
 
@@ -177,25 +177,25 @@ public class PlayerMusicActivity extends AppCompatActivity {
     }
 
     //tạo notification
-    @SuppressLint("NotificationTrampoline")
-    public void createNotification(String name) {
-        Intent changeActivity = new Intent(this, MusicReceiver.class);
-        changeActivity.setAction("Change");
-        PendingIntent changeActivityPendingIntent = PendingIntent.getBroadcast(this, 0, changeActivity, PendingIntent.FLAG_UPDATE_CURRENT);
-        Notification notification = new NotificationCompat.Builder(this, MusicNotification.CHANNEL_ID_MUSIC)
-                .setContentTitle("Playing music")
-                .setContentText("Chúc bạn nghe nhạc vui vẻ")
-                .setSmallIcon(R.drawable.music_cd_svgrepo_com)
-                .addAction(R.drawable.baseline_play_circle, "Change", changeActivityPendingIntent)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setOnlyAlertOnce(true)
-                .setAutoCancel(true)
-                .build();
-        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        if (notificationManager != null) {
-            notificationManager.notify(1, notification);
-        }
-    }
+//    @SuppressLint("NotificationTrampoline")
+//    public void createNotification(String name) {
+//        Intent changeActivity = new Intent(this, MusicReceiver.class);
+//        changeActivity.setAction("Change");
+//        PendingIntent changeActivityPendingIntent = PendingIntent.getBroadcast(this, 0, changeActivity, PendingIntent.FLAG_UPDATE_CURRENT);
+//        Notification notification = new NotificationCompat.Builder(this, MusicNotification.CHANNEL_ID_MUSIC)
+//                .setContentTitle("Playing music")
+//                .setContentText("Chúc bạn nghe nhạc vui vẻ")
+//                .setSmallIcon(R.drawable.music_cd_svgrepo_com)
+//                .addAction(R.drawable.baseline_play_circle, "Change", changeActivityPendingIntent)
+//                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+//                .setOnlyAlertOnce(true)
+//                .setAutoCancel(true)
+//                .build();
+//        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+//        if (notificationManager != null) {
+//            notificationManager.notify(1, notification);
+//        }
+//    }
 
     //hàm thêm bài hát yêu thích
     public void addMusicFavorite() {

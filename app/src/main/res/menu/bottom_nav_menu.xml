@@ -12,7 +12,7 @@
         android:id="@+id/PlayMusic"
         android:checked="true"
         android:icon="@drawable/baseline_play_arrow_24"
-        android:title="@string/choiNhac" />
+        android:title="Phát nhạc" />
     <item
         android:id="@+id/Favourite"
         android:icon="@drawable/baseline_auto_awesome_24"

@@ -10,22 +10,12 @@
         android:id="@+id/toolbarPlayLIst"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageButton
-            android:id="@+id/buttonReturn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/baseline_chevron_left" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:text="@string/playList"
-            android:textSize="20sp" />
-
-    </androidx.appcompat.widget.Toolbar>
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/playList"
+        app:navigationIcon="@drawable/baseline_chevron_left"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,36 +29,27 @@
             android:id="@+id/tvPlName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginTop="@dimen/size20dp"
             android:gravity="center"
             android:text="play list name"
             android:textSize="25dp" />
 
-        <ScrollView
-            android:id="@+id/scrollable"
+        <ListView
+            android:id="@+id/listView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginVertical="5dp"
+            android:layout_margin="@dimen/size20dp"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <ListView
-                    android:id="@+id/listView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="5dp"
-                    android:layout_marginVertical="10dp" />
-            </LinearLayout>
-
-        </ScrollView>
 
         <Button
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/size20dp"
             android:text="@string/AddMusic" />
     </LinearLayout>
 

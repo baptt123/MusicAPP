@@ -1,13 +1,15 @@
 package com.example.appnghenhac.model;
 
 public class Song {
+    private String id;
     private String name;
     private String url;
 
     public Song() {
     }
 
-    public Song(String name, String url) {
+    public Song(String id, String name, String url) {
+        this.id = id;
         this.name = name;
         this.url = url;
     }
@@ -26,6 +28,14 @@ public class Song {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override

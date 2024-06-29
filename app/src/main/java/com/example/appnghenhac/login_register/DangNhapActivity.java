@@ -213,3 +213,47 @@ public class DangNhapActivity extends AppCompatActivity {
         }
     }
 }
+
+//    private void loginUser(String email, String pass) {
+//        fAuth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(DangNhapActivity.this,new OnCompleteListener<AuthResult>() {
+//            @Override
+//            public void onComplete(@NonNull Task<AuthResult> task) {
+//                if(task.isSuccessful()){
+//                    Toast.makeText(DangNhapActivity.this,"You are logged in now",Toast.LENGTH_SHORT).show();
+//
+//                }else {
+//                    try{
+//                        throw task.getException();
+//
+//                    }catch (FirebaseAuthInvalidUserException e){
+//                        edEmail.setError("User does not exists or is no longer valid. Please register again.");
+//                        edEmail.requestFocus();
+//
+//                    }catch (FirebaseAuthInvalidCredentialsException e){
+//                        edEmail.setError("Invalid credentials");
+//                        edEmail.requestFocus();
+//                    }catch (Exception e){
+//                        Log.e(TAG,e.getMessage());
+//                        Toast.makeText(DangNhapActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+//                    }
+//                    Toast.makeText(DangNhapActivity.this,"Something went wrong!",Toast.LENGTH_SHORT).show();
+//
+//                }
+//                progressBar.setVisibility(View.GONE);
+//            }
+//        });
+//    }
+//
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        if(fAuth.getCurrentUser() != null){
+//            Toast.makeText(DangNhapActivity.this,"Already logged in!!",Toast.LENGTH_SHORT).show();
+//            startActivity(new Intent(DangNhapActivity.this, MainActivity.class));
+
+//            finish();
+//        }else {
+//            Toast.makeText(DangNhapActivity.this,"You can login now!!",Toast.LENGTH_SHORT).show();
+//        }
+//    }
+

@@ -41,6 +41,9 @@
     <string name="thoat">Thoát</string>
     <string name="email">Email</string>
     <string name="hoten">Họ và tên</string>
+    <string name="addSong">Thêm nhạc vào playList</string>
+    <string name="playListName">Tên PlayList :</string>
+    <string name="CacbaiNhacCoThe">Các bài nhạc có thể thêm vào PlayList</string>
 
 
 </resources>

@@ -1,5 +1,6 @@
-package com.example.appnghenhac.fregment;
+package com.example.appnghenhac.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,12 +15,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.example.appnghenhac.R;
+import com.example.appnghenhac.activity.AddPlaylistActivity;
 import com.example.appnghenhac.activity.PlayListActivity;
 import com.example.appnghenhac.adapter.PlayListAdapter;
 import com.example.appnghenhac.model.PlayList;
-import com.example.appnghenhac.model.Song;
+import com.google.firebase.Firebase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +32,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.StringTokenizer;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,14 +46,10 @@ public class FragmentThuVien extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final int ADD_PLAYLIST_REQUEST = 123;
 
     private String mParam1;
     private String mParam2;
-    private FirebaseDatabase data;
-    private DatabaseReference reference;
-    private String root;
-    private String leaf = "";
-
     public FragmentThuVien() {
         // Required empty public constructor
     }
@@ -84,60 +87,100 @@ public class FragmentThuVien extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_thu_vien, container, false);
     }
+    int REQUEST_CODE =123;
 
+    private FirebaseDatabase data;
+    private DatabaseReference reference;
+    private String root;
+    private String myUser = "";
+    ArrayList<PlayList> playLists;
+    PlayListAdapter playListAdapter;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //        firebase
+//                firebase
         root = "user";
-        leaf = getUserName(savedInstanceState);
+        myUser = getUserName();
         data = FirebaseDatabase.getInstance();
         reference = data.getReference();
 
-//        button them play list
-        Button imageButtonAddPlayList = view.findViewById(R.id.imgbPlayList);
-        imageButtonAddPlayList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO chức năng thêm play list
-                Toast.makeText(getActivity(), "Them playList", Toast.LENGTH_SHORT).show();
-            }
-        });
 //      ListVIew
-        ArrayList<PlayList> pl = new ArrayList<>();
+        playLists = new ArrayList<>();
         ListView listView = view.findViewById(R.id.listViewPlayList);
 
-        reference.child(root).child(leaf).child("playList").addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.child(root).child(myUser).child("playList").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     PlayList playList = new PlayList(snapshot.getKey(), (String) snapshot.getValue());
-                    pl.add(playList);
+                    playLists.add(playList);
                 }
-                PlayListAdapter playListAdapter = new PlayListAdapter(getActivity(), R.layout.list_item_playlist, pl);
+                 playListAdapter = new PlayListAdapter(getActivity(), R.layout.list_item_playlist, playLists);
                 listView.setAdapter(playListAdapter);
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        PlayList p = pl.get(position);
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("playList", p);
+                listView.setOnItemClickListener((parent, view1, position, id) ->  {
+                    PlayList p = playLists.get(position);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("playList", p);
 
-                        Intent intent = new Intent(getActivity(), PlayListActivity.class);
-                        intent.putExtras(bundle);
+                    Intent intent = new Intent(getActivity(), PlayListActivity.class);
+                    intent.putExtras(bundle);
 
-                        startActivity(intent);
-                    }
+                    startActivity(intent);
                 });
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.e("Firebase", "Error loading data: " + error.getMessage());
             }
         });
 
+        //        button them play list
+        Button buttonAddPlayList = view.findViewById(R.id.imgbPlayList);
+        buttonAddPlayList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO chức năng thêm play list
+                Intent intent = new Intent(getActivity(), AddPlaylistActivity.class);
+                startActivityForResult(intent,ADD_PLAYLIST_REQUEST);
+            }
+        });
+    }
+    //        lay ten user
+    private String getUserName() {
+        String res = "";
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if(firebaseUser != null){
+            res = firebaseUser.getUid();
+        }
+//        TODO doi thanh res
+        return "user001";
+    }
 
+    String TAG = "fragmentThuvien";
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ADD_PLAYLIST_REQUEST && resultCode == Activity.RESULT_OK) {
+            Bundle bundle = data.getExtras();
+            if (bundle != null) {
+                String playlistName = bundle.getString("playlistName");
+                ArrayList<String> songsgetFromBundle = (ArrayList<String>) bundle.getStringArrayList("lists");
+                StringTokenizer songIdTokenizer = new StringTokenizer(songsgetFromBundle.get(0),",");
+                ArrayList<String> listSongs = new ArrayList<>();
+                while (songIdTokenizer.hasMoreTokens()){
+                    String idsong = songIdTokenizer.nextToken();
+                    listSongs.add(idsong);
+                }
+                PlayList n = new PlayList(playlistName, listSongs);
+                playLists.add(n);
+                playListAdapter.notifyDataSetChanged();
+            }
+        }
+    }
+
+
+
+}
 ////        ghi du lieu
 //        Map<String, String> pl = new ArrayMap<>();
 //        pl.put("pl001", "s001");
@@ -152,7 +195,6 @@ public class FragmentThuVien extends Fragment {
 //            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 //                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
 //                    user user = dataSnapshot.getValue(com.example.appnghenhac.model.user.class);
-//                    Log.d("home", user.toString());
 //                }
 //            }
 //
@@ -161,15 +203,3 @@ public class FragmentThuVien extends Fragment {
 //
 //            }
 //        });
-    }
-
-
-    private String getUserName(Bundle bundle) {
-//        TODO lay user name cua login
-        return "tam2";
-    }
-
-    public void setSong(Song song) {
-//        TODO do no thing
-    }
-}

@@ -172,11 +172,11 @@ public class ProfileActivity extends AppCompatActivity {
             Intent intent = new Intent(ProfileActivity.this, UpdateProfileActivity.class);
             startActivity(intent);
             finish();
-        /*}else if(id == R.id.menu_change_password){
+        }else if(id == R.id.menu_change_password){
             Intent intent = new Intent(ProfileActivity.this, ChangePasswordActivity.class);
             startActivity(intent);
         }else if(id == R.id.menu_settings){
-           Toast.makeText(ProfileActivity.this,"menu_setting",Toast.LENGTH_SHORT).show();*/
+           Toast.makeText(ProfileActivity.this,"menu_setting",Toast.LENGTH_SHORT).show();
         }else if(id == R.id.menu_logout){
             authProfile.signOut();
             Toast.makeText(ProfileActivity.this,"Logged Out",Toast.LENGTH_SHORT).show();

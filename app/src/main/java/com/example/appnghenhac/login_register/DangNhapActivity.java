@@ -122,6 +122,7 @@ public class DangNhapActivity extends AppCompatActivity {
 //        if(fAuth.getCurrentUser() != null){
 //            Toast.makeText(DangNhapActivity.this,"Already logged in!!",Toast.LENGTH_SHORT).show();
 //            startActivity(new Intent(DangNhapActivity.this, MainActivity.class));
+
 //            finish();
 //        }else {
 //            Toast.makeText(DangNhapActivity.this,"You can login now!!",Toast.LENGTH_SHORT).show();

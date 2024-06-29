@@ -21,6 +21,8 @@ import com.example.appnghenhac.fragment.FragmentThuVien;
 import com.example.appnghenhac.model.PlayList;
 import com.example.appnghenhac.model.Song;
 import com.example.appnghenhac.model.user;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -57,12 +59,6 @@ public class AddPlaylistActivity extends AppCompatActivity {
         songs.add(new Song("3fw9v7CztM2mqu1jCtbg9f","chung ta cua hien tai", "https://i.scdn.co/image/ab67616d00001e02bc146f67374ea7e19c5d0c80"));
         songs.add(new Song("211PBKJlAG1CxXUEjN5nqq","chung ta cua hien tai 2", "https://i.scdn.co/image/ab67616d00001e02bc146f67374ea7e19c5d0c80"));
         songs.add(new Song("513yY4zlOPYCAnqH614sl1","chung ta cua hien tai 3", "https://i.scdn.co/image/ab67616d00001e02bc146f67374ea7e19c5d0c80"));
-        songs.add(new Song("3fw9v7CztM2mqu1jCtbg9f","chung ta cua hien tai", "https://i.scdn.co/image/ab67616d00001e02bc146f67374ea7e19c5d0c80"));
-        songs.add(new Song("211PBKJlAG1CxXUEjN5nqq","chung ta cua hien tai 2", "https://i.scdn.co/image/ab67616d00001e02bc146f67374ea7e19c5d0c80"));
-        songs.add(new Song("513yY4zlOPYCAnqH614sl1","chung ta cua hien tai 3", "https://i.scdn.co/image/ab67616d00001e02bc146f67374ea7e19c5d0c80"));
-        songs.add(new Song("3fw9v7CztM2mqu1jCtbg9f","chung ta cua hien tai", "https://i.scdn.co/image/ab67616d00001e02bc146f67374ea7e19c5d0c80"));
-        songs.add(new Song("211PBKJlAG1CxXUEjN5nqq","chung ta cua hien tai 2", "https://i.scdn.co/image/ab67616d00001e02bc146f67374ea7e19c5d0c80"));
-        songs.add(new Song("513yY4zlOPYCAnqH614sl1","chung ta cua hien tai 3", "https://i.scdn.co/image/ab67616d00001e02bc146f67374ea7e19c5d0c80"));
 
         SongInAddPlaylistAdapter songAdapter = new SongInAddPlaylistAdapter(this, songs);
         recyclerView.setAdapter(songAdapter);
@@ -70,8 +66,6 @@ public class AddPlaylistActivity extends AppCompatActivity {
 //        RecyclerView scroll vertical
         GridLayoutManager gridLayout = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(gridLayout);
-
-
 
 //      buton save
         Button button = findViewById(R.id.buttonDone);
@@ -93,8 +87,8 @@ public class AddPlaylistActivity extends AppCompatActivity {
                     FirebaseDatabase data = FirebaseDatabase.getInstance();
                     DatabaseReference reference = data.getReference();
 //                  TODO tai khoan user o dau
-                    user u = new user("user001", new Date("14/04/2003"), "name", "013131313", null);
-                    reference.child("user").child(u.getFullName()).child("playList").updateChildren(listSong);
+                    String userID = getUserId();
+                    reference.child("user").child(userID).child("playList").updateChildren(listSong);
 
                     Intent returnItent = new Intent();
                     Bundle bundle = new Bundle();
@@ -109,6 +103,16 @@ public class AddPlaylistActivity extends AppCompatActivity {
                     finish();
                 }
         });
+    }
+
+    private String getUserId() {
+        String res = "";
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if(firebaseUser != null){
+            res = firebaseUser.getUid();
+        }
+//        TODO doi thanh res
+        return "user001";
     }
 
 

@@ -22,6 +22,9 @@ import com.example.appnghenhac.activity.AddPlaylistActivity;
 import com.example.appnghenhac.activity.PlayListActivity;
 import com.example.appnghenhac.adapter.PlayListAdapter;
 import com.example.appnghenhac.model.PlayList;
+import com.google.firebase.Firebase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,6 +32,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.StringTokenizer;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -87,23 +92,23 @@ public class FragmentThuVien extends Fragment {
     private FirebaseDatabase data;
     private DatabaseReference reference;
     private String root;
-    private String leaf = "";
+    private String myUser = "";
     ArrayList<PlayList> playLists;
     PlayListAdapter playListAdapter;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //        firebase
+//                firebase
         root = "user";
-        leaf = getUserName(savedInstanceState);
+        myUser = getUserName();
         data = FirebaseDatabase.getInstance();
         reference = data.getReference();
 
 //      ListVIew
-       playLists = new ArrayList<>();
+        playLists = new ArrayList<>();
         ListView listView = view.findViewById(R.id.listViewPlayList);
 
-        reference.child(root).child(leaf).child("playList").addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.child(root).child(myUser).child("playList").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
@@ -112,22 +117,17 @@ public class FragmentThuVien extends Fragment {
                 }
                  playListAdapter = new PlayListAdapter(getActivity(), R.layout.list_item_playlist, playLists);
                 listView.setAdapter(playListAdapter);
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Toast.makeText(getActivity(), "hoat dong", Toast.LENGTH_SHORT).show();
-                        PlayList p = playLists.get(position);
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("playList", p);
+                listView.setOnItemClickListener((parent, view1, position, id) ->  {
+                    PlayList p = playLists.get(position);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("playList", p);
 
-                        Intent intent = new Intent(getActivity(), PlayListActivity.class);
-                        intent.putExtras(bundle);
+                    Intent intent = new Intent(getActivity(), PlayListActivity.class);
+                    intent.putExtras(bundle);
 
-                       startActivity(intent);
-                    }
+                    startActivity(intent);
                 });
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.e("Firebase", "Error loading data: " + error.getMessage());
@@ -144,8 +144,43 @@ public class FragmentThuVien extends Fragment {
                 startActivityForResult(intent,ADD_PLAYLIST_REQUEST);
             }
         });
+    }
+    //        lay ten user
+    private String getUserName() {
+        String res = "";
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if(firebaseUser != null){
+            res = firebaseUser.getUid();
+        }
+//        TODO doi thanh res
+        return "user001";
+    }
+
+    String TAG = "fragmentThuvien";
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ADD_PLAYLIST_REQUEST && resultCode == Activity.RESULT_OK) {
+            Bundle bundle = data.getExtras();
+            if (bundle != null) {
+                String playlistName = bundle.getString("playlistName");
+                ArrayList<String> songsgetFromBundle = (ArrayList<String>) bundle.getStringArrayList("lists");
+                StringTokenizer songIdTokenizer = new StringTokenizer(songsgetFromBundle.get(0),",");
+                ArrayList<String> listSongs = new ArrayList<>();
+                while (songIdTokenizer.hasMoreTokens()){
+                    String idsong = songIdTokenizer.nextToken();
+                    listSongs.add(idsong);
+                }
+                PlayList n = new PlayList(playlistName, listSongs);
+                playLists.add(n);
+                playListAdapter.notifyDataSetChanged();
+            }
+        }
+    }
 
 
+
+}
 ////        ghi du lieu
 //        Map<String, String> pl = new ArrayMap<>();
 //        pl.put("pl001", "s001");
@@ -168,31 +203,3 @@ public class FragmentThuVien extends Fragment {
 //
 //            }
 //        });
-    }
-
-
-    String TAG = "fragmentThuvien";
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Log.d(TAG, "onActivityResult: co chay" +requestCode +":"+ ADD_PLAYLIST_REQUEST +","+resultCode+":"+Activity.RESULT_OK);
-        if (requestCode == ADD_PLAYLIST_REQUEST && resultCode == Activity.RESULT_OK) {
-            Bundle bundle = data.getExtras();
-            if (bundle != null) {
-                String playlistName = bundle.getString("playlistName");
-                ArrayList<String> songs = (ArrayList<String>) bundle.getStringArrayList("lists");
-                PlayList n = new PlayList(playlistName, songs);
-                playLists.add(n);
-                playListAdapter.notifyDataSetChanged();
-                Log.d(TAG, "onActivityResult: "+ n);
-            }
-        }
-    }
-
-    private String getUserName(Bundle bundle) {
-//        TODO lay user name cua login
-        return "user001";
-    }
-
-
-}

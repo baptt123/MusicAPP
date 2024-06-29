@@ -22,9 +22,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.appnghenhac.ProfileActivity;
 import com.example.appnghenhac.R;
+
 import com.example.appnghenhac.activity.HomeActivity;
 import com.example.appnghenhac.activity.MainActivity;
 import com.example.appnghenhac.activity.NavicationActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -138,7 +140,9 @@ public class DangNhapActivity extends AppCompatActivity {
                         Toast.makeText(DangNhapActivity.this,"Bạn đã đăng nhập thành công",Toast.LENGTH_SHORT).show();
 
                         //Open user profile
+
                         startActivity(new Intent(DangNhapActivity.this, ProfileActivity.class));
+
                         finish();
                     }else{
                         firebaseUser.sendEmailVerification();
@@ -199,7 +203,10 @@ public class DangNhapActivity extends AppCompatActivity {
         super.onStart();
         if(fAuth.getCurrentUser() != null){
             Toast.makeText(DangNhapActivity.this,"Đã đăng nhập!!",Toast.LENGTH_SHORT).show();
+
             startActivity(new Intent(DangNhapActivity.this, ProfileActivity.class));
+
+
             finish();
         }else {
             Toast.makeText(DangNhapActivity.this,"Bạn có thể đăng nhập ngay bây giờ!!",Toast.LENGTH_SHORT).show();

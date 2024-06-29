@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
-        android:name=".notification.MusicNotification"
+        android:name=".application.MusicNameApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:enableOnBackInvokedCallback="true"
@@ -21,8 +21,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppNgheNhac"
         tools:targetApi="tiramisu">
-
-
+        <activity
+            android:name=".activity.NavicationActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
         <activity
             android:name=".UpdateEmailActivity"
             android:exported="false" />
@@ -42,6 +46,7 @@
             android:name=".login_register.DangNhapActivity"
             android:exported="true">
 
+
         </activity>
 
         <activity
@@ -50,11 +55,11 @@
 
 
         </activity>
-        <activity
-            android:name=".fragment.RatingFragment"
-            android:exported="true">
+        <!--        <activity-->
+        <!--            android:name=".fragment.RatingFragment"-->
+        <!--            android:exported="true">-->
 
-        </activity>
+        <!--        </activity>-->
         <activity
             android:name=".activity.HomeActivity"
             android:exported="true">
@@ -84,7 +89,13 @@
             android:exported="true" />
         <activity
             android:name=".activity.SearchActivity"
-            android:exported="true" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activity.UploadFileActivity"
             android:exported="true">
@@ -98,44 +109,40 @@
             android:exported="true">
 
         </activity>
-        <activity
-            android:name=".activity.TestAddFragmentRatingActivity"
-            android:exported="true">
+        <!--        <activity-->
+        <!--            android:name=".activity.TestAddFragmentRatingActivity"-->
+        <!--            android:exported="true">-->
 
-        </activity>
+        <!--        </activity>-->
 
-        <activity
-            android:name=".activity.TestPlayMusicActivity"
-            android:exported="true">
+        <!--        <activity-->
+        <!--            android:name=".activity.TestPlayMusicActivity"-->
+        <!--            android:exported="true">-->
 
-        </activity>
+        <!--        </activity>-->
         <!--        tam-->
-        <activity
-            android:name=".activity.NavicationActivity"
-            android:exported="true">
+        <!--        <activity-->
+        <!--            android:name=".activity.NavicationActivity"-->
+        <!--            android:exported="true">-->
 
-        </activity>
+        <!--        </activity>-->
         <activity
             android:name=".activity.PlayerMusicActivity"
             android:enabled="true"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
-        <activity
-            android:name=".activity.PlayListActivity"
-            android:exported="true" />
+        <!--        <activity-->
+        <!--            android:name=".activity.PlayListActivity"-->
+        <!--            android:exported="true" />-->
         <!--        tam end-->
 
 
         <!--    service-->
-        <service
-            android:name=".service.MusicService"
-            android:enabled="true"
-            android:exported="false"></service>
+        <!--        <service-->
+        <!--            android:name=".service.MusicService"-->
+        <!--            android:enabled="true"-->
+        <!--            android:exported="false"></service>-->
         <!--    receiver-->
         <receiver
             android:name=".receiver.MusicReceiver"

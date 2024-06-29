@@ -48,7 +48,7 @@ public class AsyncTaskSearch extends AsyncTask<String, Void, String> {
 
                 String childKey = dataSnapshot.getKey();
                 String childValue = dataSnapshot.getValue(String.class);
-                if (childKey.equals(param)) {
+                if(childKey.contains(param)){
                     MusicForSearch music = new MusicForSearch();
                     music.setName(childKey);
                     music.setImg(childValue);

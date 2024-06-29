@@ -12,12 +12,16 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.appnghenhac.R;
+import com.example.appnghenhac.activity.PlayerMusicActivity;
 import com.example.appnghenhac.activity.TestPlayMusicActivity;
 import com.example.appnghenhac.adapter.ListSearchAdapter;
+import com.example.appnghenhac.application.MusicNameApplication;
 import com.example.appnghenhac.model.MusicForSearch;
 
 import java.util.ArrayList;
-
+/*
+Fragment dùng để hiển thị dữ liệu cho kết quả tìm kiếm
+ */
 public class SearchFragment extends Fragment {
     ListView listView;
 
@@ -39,11 +43,15 @@ public class SearchFragment extends Fragment {
             //lấy ra phần tử trong list view
             MusicForSearch musicForSearch = (MusicForSearch) parent.getItemAtPosition(position);
             //tạo intent để chuyển hướng sang trang phát nhạc
-            Intent intent = new Intent(getActivity(), TestPlayMusicActivity.class);
+            Intent intent = new Intent(getActivity(), PlayerMusicActivity.class);
             String song_name = musicForSearch.getName();
+            String img=musicForSearch.getImg();
             Bundle bundle = new Bundle();
             bundle.putString("name_song", song_name);
             intent.putExtras(bundle);
+            MusicNameApplication musicNameApplication=(MusicNameApplication) getActivity().getApplicationContext();
+            musicNameApplication.setSongName(song_name);
+            musicNameApplication.setImg(img);
             startActivity(intent);
         });
     }

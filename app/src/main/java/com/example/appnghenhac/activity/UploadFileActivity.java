@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.appnghenhac.R;
+import com.example.appnghenhac.login_register.DangNhapActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
@@ -36,7 +37,7 @@ public class UploadFileActivity extends AppCompatActivity {
     private Button btn_send_file_song_to_firebase;
     private int PICK_FILE_REQUEST_CODE = 1;
     private int PICK_IMAGE_REQUEST_CODE = 2;
-
+    private ImageView back_home;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +55,11 @@ public class UploadFileActivity extends AppCompatActivity {
         btn_send_file_song_to_firebase = findViewById(R.id.btn_send_file_song_to_firebase);
         btn_send_file_song_to_firebase.setOnClickListener(v -> {
             openFilePicker();
+        });
+        back_home=findViewById(R.id.back_home);
+        back_home.setOnClickListener(v -> {
+            Intent intent=new Intent(this, DangNhapActivity.class);
+            startActivity(intent);
         });
     }
 
@@ -84,8 +90,8 @@ public class UploadFileActivity extends AppCompatActivity {
                     // Tạo một tên duy nhất cho tệp
                     String fileNamesong = name;
                     // Tạo tham chiếu tới vị trí bạn muốn lưu trữ tệp trong Firebase Storage
-                    StorageReference fileReference = storageReference.child("uploads/" + "files/" + fileNamesong);
-                    StorageReference imageReference = storageReference_image.child("uploads/" + "pictures/" + fileNamesong + "_image");
+                    StorageReference fileReference = storageReference.child("upload/" + "files/" + fileNamesong);
+                    StorageReference imageReference = storageReference_image.child("upload/" + "picture/" + fileNamesong + "_image");
                     // Upload file
                     //truyền uri vào để đưa lên firebase
                     UploadTask uploadTask_file_song = fileReference.putFile(uri);

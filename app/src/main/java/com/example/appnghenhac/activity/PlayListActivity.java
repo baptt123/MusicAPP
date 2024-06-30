@@ -11,9 +11,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appnghenhac.R;
 import com.example.appnghenhac.adapter.SongInPlaylistAdapter;
+import com.example.appnghenhac.adapter.SongPlayListRecyclerView;
 import com.example.appnghenhac.asynctask.MusicAsynctask;
 import com.example.appnghenhac.model.PlayList;
 import com.example.appnghenhac.model.Song;
@@ -24,7 +27,7 @@ public class PlayListActivity extends AppCompatActivity {
     private static final String TAG = "PlayListActivity";
     private PlayList playList;
     private ArrayList<Song> listSong;
-    private SongInPlaylistAdapter showSongInPlaylistAdapter;
+    private SongPlayListRecyclerView recyclerViewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +49,17 @@ public class PlayListActivity extends AppCompatActivity {
         TextView textViewPlayListName = findViewById(R.id.tvPlName);
         textViewPlayListName.setText(playList.getName());
 
-//      danh sach nhac
-        ListView lvSong = findViewById(R.id.listView);
+        // data
         listSong = new ArrayList<>();
         getSong(playList.getListSong());
+//      danh sach nhac recycle view
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        recyclerViewAdapter = new SongPlayListRecyclerView(listSong, this, playList.getName());
+        recyclerView.setAdapter(recyclerViewAdapter);
+        //        RecyclerView scroll vertical
+        GridLayoutManager gridLayout = new GridLayoutManager(this, 2);
+        recyclerView.setLayoutManager(gridLayout);
 
-         showSongInPlaylistAdapter = new SongInPlaylistAdapter(this, R.layout.list_item_song, listSong);
-        lvSong.setAdapter(showSongInPlaylistAdapter);
 
         Button button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +82,6 @@ public class PlayListActivity extends AppCompatActivity {
 
     public void setSong(Song song) {
         this.listSong.add(song);
-        this.showSongInPlaylistAdapter.notifyDataSetChanged();
+        this.recyclerViewAdapter.notifyDataSetChanged();
     }
 }

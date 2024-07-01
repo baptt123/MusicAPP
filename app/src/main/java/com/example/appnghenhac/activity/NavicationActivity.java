@@ -59,7 +59,7 @@ public class NavicationActivity extends AppCompatActivity {
                     loadFragmentFavourite();
                     return true;
                 } else if (item.getItemId() == R.id.AddMusic) {
-                    changeIntoAddMusic();
+                    changeIntoProfile();
                     return true;
                 } else if (item.getItemId() == R.id.PlayMusic) {
                     toolbar.setTitle("Danh sách bài hát ");
@@ -75,11 +75,11 @@ public class NavicationActivity extends AppCompatActivity {
             Intent intent = new Intent(this, SearchActivity.class);
             startActivity(intent);
         });
-        profile_icon = findViewById(R.id.profile_icon);
-        profile_icon.setOnClickListener(v -> {
-            Intent intent = new Intent(this, ProfileActivity.class);
-            startActivity(intent);
-        });
+//        profile_icon = findViewById(R.id.profile_icon);
+//        profile_icon.setOnClickListener(v -> {
+//            Intent intent = new Intent(this, ProfileActivity.class);
+//            startActivity(intent);
+//        });
     }
 
     private void loadFragmentMusic() {
@@ -102,8 +102,8 @@ public class NavicationActivity extends AppCompatActivity {
         asyncTaskFavourite.execute(FirebaseAuth.getInstance().getCurrentUser().getUid());
     }
 
-    public void changeIntoAddMusic() {
-        Intent intent = new Intent(this, UploadFileActivity.class);
+    public void changeIntoProfile() {
+        Intent intent = new Intent(this, ProfileActivity.class);
         startActivity(intent);
     }
 

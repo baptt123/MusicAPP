@@ -41,13 +41,13 @@
         app:layout_constraintBottom_toBottomOf="@id/toolbar"
         android:layout_marginEnd="8dp" />
 
-    <ImageView
-        android:id="@+id/profile_icon"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="44dp"
-        android:src="@drawable/profile_circle_svgrepo_com"
-        app:layout_constraintEnd_toStartOf="@id/search_icon"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <ImageView-->
+<!--        android:id="@+id/profile_icon"-->
+<!--        android:layout_width="50dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_marginTop="4dp"-->
+<!--        android:layout_marginEnd="44dp"-->
+<!--        android:src="@drawable/profile_circle_svgrepo_com"-->
+<!--        app:layout_constraintEnd_toStartOf="@id/search_icon"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>

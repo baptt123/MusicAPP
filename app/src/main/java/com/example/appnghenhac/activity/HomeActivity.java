@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.appnghenhac.ProfileActivity;
 import com.example.appnghenhac.R;
 
 import com.example.appnghenhac.asynctask.AsyncTaskFavourite;
@@ -59,7 +60,7 @@ public class HomeActivity extends AppCompatActivity {
                     loadFragmentFavourite();
                     return true;
                 } else if (item.getItemId() == R.id.AddMusic) {
-                    changeIntoAddMusic();
+                    changeIntoProfile();
                     return true;
                 }else if(item.getItemId()==R.id.PlayMusic){
                     toolbar.setTitle("Danh sách bài hát ");
@@ -104,6 +105,10 @@ public class HomeActivity extends AppCompatActivity {
 
     public void changeIntoSearch() {
         Intent intent = new Intent(this, SearchActivity.class);
+        startActivity(intent);
+    }
+    public void changeIntoProfile() {
+        Intent intent = new Intent(this, ProfileActivity.class);
         startActivity(intent);
     }
 }

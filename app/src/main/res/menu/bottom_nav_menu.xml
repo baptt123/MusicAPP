@@ -11,15 +11,15 @@
     <item
         android:id="@+id/PlayMusic"
         android:checked="true"
-        android:icon="@drawable/baseline_play_arrow_24"
-        android:title="Phát nhạc" />
+        android:icon="@drawable/musiclist_svgrepo_com"
+        android:title="Danh sách bài hát" />
     <item
         android:id="@+id/Favourite"
         android:icon="@drawable/baseline_auto_awesome_24"
         android:title="Danh sách yêu thích" />
     <item
         android:id="@+id/AddMusic"
-        android:icon="@drawable/baseline_bookmark_24"
-        android:title="Thêm nhạc" />
+        android:icon="@drawable/profile_circle_svgrepo_com"
+        android:title="Thông tin cá nhân" />
 
 </menu>

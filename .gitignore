@@ -13,3 +13,6 @@
 .externalNativeBuild
 .cxx
 local.properties
+# IntelliJ IDEA / Android Studio
+.idea/vcs.xml
+.idea/*

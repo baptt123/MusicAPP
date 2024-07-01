@@ -3,6 +3,6 @@
     <solid android:color="@android:color/transparent" /> <!-- Màu nền -->
     <stroke
         android:width="2dp"
-        android:color="@color/grey_light" /> <!-- Màu của đường viền -->
+        android:color="@color/grey" /> <!-- Màu của đường viền -->
     <corners android:radius="16dp" /> <!-- Bán kính bo góc -->
 </shape>

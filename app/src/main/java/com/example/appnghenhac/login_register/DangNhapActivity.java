@@ -22,7 +22,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.appnghenhac.ProfileActivity;
 import com.example.appnghenhac.R;
+
+import com.example.appnghenhac.activity.HomeActivity;
 import com.example.appnghenhac.activity.MainActivity;
+import com.example.appnghenhac.activity.NavicationActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -136,7 +140,9 @@ public class DangNhapActivity extends AppCompatActivity {
                         Toast.makeText(DangNhapActivity.this,"Bạn đã đăng nhập thành công",Toast.LENGTH_SHORT).show();
 
                         //Open user profile
-                        startActivity(new Intent(DangNhapActivity.this, MainActivity.class));
+
+                        startActivity(new Intent(DangNhapActivity.this, ProfileActivity.class));
+
                         finish();
                     }else{
                         firebaseUser.sendEmailVerification();
@@ -197,10 +203,57 @@ public class DangNhapActivity extends AppCompatActivity {
         super.onStart();
         if(fAuth.getCurrentUser() != null){
             Toast.makeText(DangNhapActivity.this,"Đã đăng nhập!!",Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(DangNhapActivity.this, MainActivity.class));
+
+            startActivity(new Intent(DangNhapActivity.this, ProfileActivity.class));
+
+
             finish();
         }else {
             Toast.makeText(DangNhapActivity.this,"Bạn có thể đăng nhập ngay bây giờ!!",Toast.LENGTH_SHORT).show();
         }
     }
 }
+
+//    private void loginUser(String email, String pass) {
+//        fAuth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(DangNhapActivity.this,new OnCompleteListener<AuthResult>() {
+//            @Override
+//            public void onComplete(@NonNull Task<AuthResult> task) {
+//                if(task.isSuccessful()){
+//                    Toast.makeText(DangNhapActivity.this,"You are logged in now",Toast.LENGTH_SHORT).show();
+//
+//                }else {
+//                    try{
+//                        throw task.getException();
+//
+//                    }catch (FirebaseAuthInvalidUserException e){
+//                        edEmail.setError("User does not exists or is no longer valid. Please register again.");
+//                        edEmail.requestFocus();
+//
+//                    }catch (FirebaseAuthInvalidCredentialsException e){
+//                        edEmail.setError("Invalid credentials");
+//                        edEmail.requestFocus();
+//                    }catch (Exception e){
+//                        Log.e(TAG,e.getMessage());
+//                        Toast.makeText(DangNhapActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+//                    }
+//                    Toast.makeText(DangNhapActivity.this,"Something went wrong!",Toast.LENGTH_SHORT).show();
+//
+//                }
+//                progressBar.setVisibility(View.GONE);
+//            }
+//        });
+//    }
+//
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        if(fAuth.getCurrentUser() != null){
+//            Toast.makeText(DangNhapActivity.this,"Already logged in!!",Toast.LENGTH_SHORT).show();
+//            startActivity(new Intent(DangNhapActivity.this, MainActivity.class));
+
+//            finish();
+//        }else {
+//            Toast.makeText(DangNhapActivity.this,"You can login now!!",Toast.LENGTH_SHORT).show();
+//        }
+//    }
+

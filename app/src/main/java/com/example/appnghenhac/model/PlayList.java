@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class PlayList implements Serializable {
+    public Object n;
     private String name;
     private ArrayList<String> listSong;
 

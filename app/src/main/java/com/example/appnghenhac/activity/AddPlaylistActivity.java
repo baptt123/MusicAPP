@@ -29,6 +29,7 @@ import java.util.Map;
 public class AddPlaylistActivity extends AppCompatActivity {
 
     private String TAG = "AddPlaylistActivity";
+    private String root = "Register User";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +83,7 @@ public class AddPlaylistActivity extends AppCompatActivity {
                         DatabaseReference reference = data.getReference();
 //                      TODO tai khoan user o dau
                         String userID = UserService.getInstance().getUserId();
-                        reference.child("user").child(userID).child("playList").updateChildren(listSong);
+                        reference.child(root).child(userID).child("playList").updateChildren(listSong);
 
                         Intent returnItent = new Intent();
                         Bundle bundle = new Bundle();

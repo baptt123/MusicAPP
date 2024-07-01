@@ -14,7 +14,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.appnghenhac.R;
-import com.example.appnghenhac.login_register.DangNhapActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
@@ -58,7 +57,7 @@ public class UploadFileActivity extends AppCompatActivity {
         });
         back_home=findViewById(R.id.back_home);
         back_home.setOnClickListener(v -> {
-            Intent intent=new Intent(this, NavicationActivity.class);
+            Intent intent=new Intent(this, HomeActivity.class);
             startActivity(intent);
         });
     }

@@ -1,5 +1,6 @@
 package com.example.appnghenhac.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +21,7 @@ import com.example.appnghenhac.adapter.SongPlayListRecyclerView;
 import com.example.appnghenhac.asynctask.MusicAsynctask;
 import com.example.appnghenhac.model.PlayList;
 import com.example.appnghenhac.model.Song;
+import com.example.appnghenhac.service.PlayListService;
 
 import java.util.ArrayList;
 
@@ -37,6 +39,7 @@ public class PlayListActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbarPlayLIst);
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(v ->{
+            setResult(Activity.RESULT_OK);
             finish();
         });
 
@@ -61,13 +64,18 @@ public class PlayListActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(gridLayout);
 
 
-        Button button = findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
+        Button buttonDone = findViewById(R.id.button);
+        buttonDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if()
                 Toast.makeText(PlayListActivity.this, "Them nhac", Toast.LENGTH_SHORT).show();
             }
+        });
+        Button buttonDelete = findViewById(R.id.buttonDelete);
+        buttonDelete.setOnClickListener(v ->{
+            PlayListService.getInstance().deletePlayList(playList.getName());
+            setResult(Activity.RESULT_OK);
+            finish();
         });
     }
 
@@ -83,5 +91,9 @@ public class PlayListActivity extends AppCompatActivity {
     public void setSong(Song song) {
         this.listSong.add(song);
         this.recyclerViewAdapter.notifyDataSetChanged();
+    }
+
+    public void loadAgaint(ArrayList<String> listSong) {
+
     }
 }

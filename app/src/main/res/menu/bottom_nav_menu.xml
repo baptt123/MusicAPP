@@ -12,14 +12,14 @@
         android:id="@+id/PlayMusic"
         android:checked="true"
         android:icon="@drawable/baseline_play_arrow_24"
-        android:title="@string/choiNhac" />
+        android:title="Phát nhạc" />
     <item
         android:id="@+id/Favourite"
         android:icon="@drawable/baseline_auto_awesome_24"
         android:title="Danh sách yêu thích" />
     <item
-        android:id="@+id/setting"
+        android:id="@+id/AddMusic"
         android:icon="@drawable/baseline_bookmark_24"
-        android:title="@string/caiDat" />
+        android:title="Thêm nhạc" />
 
 </menu>

@@ -54,7 +54,7 @@ public class SearchActivity extends AppCompatActivity {
         });
         back_home=findViewById(R.id.back_home);
         back_home.setOnClickListener(v -> {
-            Intent intent = new Intent(this, HomeActivity.class);
+            Intent intent = new Intent(this, NavicationActivity.class);
             startActivity(intent);
         });
     }

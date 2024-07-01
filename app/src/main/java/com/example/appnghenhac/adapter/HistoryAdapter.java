@@ -6,8 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import com.example.appnghenhac.R;
 import com.example.appnghenhac.model.Music;
 
@@ -34,7 +36,7 @@ public class HistoryAdapter extends ArrayAdapter<Music> {
         convertView = layoutInflater.inflate(IDlayout, null);
         //tao object va set up de xuat thanh listview
         Music music = objects.get(position);
-        TextView textView = convertView.findViewById(R.id.history);
+        TextView textView = convertView.findViewById(R.id.textView2);
         textView.setText(String.valueOf(music.getHistory()));
         return convertView;
     }

@@ -1,58 +1,64 @@
 package com.example.appnghenhac.fragment;
 
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ListView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
 import com.example.appnghenhac.R;
-import org.jetbrains.annotations.NotNull;
+import com.example.appnghenhac.activity.PlayerMusicActivity;
+import com.example.appnghenhac.activity.TestPlayMusicActivity;
+import com.example.appnghenhac.adapter.ListSearchAdapter;
+import com.example.appnghenhac.application.MusicNameApplication;
+import com.example.appnghenhac.model.MusicForSearch;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-
+import java.util.ArrayList;
+/*
+Fragment dùng để hiển thị dữ liệu cho kết quả tìm kiếm
+ */
 public class SearchFragment extends Fragment {
-    private MediaPlayer mediaPlayer;
-    private EditText editText;
-    private Button btn_play;
+    ListView listView;
 
     @Nullable
-    @org.jetbrains.annotations.Nullable
     @Override
-    public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.search, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_search, container, false);
         return view;
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        editText=getView().findViewById(R.id.timkiem);
-        btn_play=getView().findViewById(R.id.btnplay);
-        btn_play.setOnClickListener(v -> {
-         String value_edittext=   editText.getText().toString();
-            try {
-                mediaPlayer=new MediaPlayer();
-                //xet loai am thanh dang duoc chay
-                mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                //lay nguon am thanh
-                mediaPlayer.setDataSource(value_edittext);
-                //khoi chạy(sau xu li them bat dong bo)
-                mediaPlayer.start();
-            } catch (MalformedURLException e) {
-                throw new RuntimeException(e);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        listView = view.findViewById(R.id.fragment_search_list);
+        ArrayList<MusicForSearch> list = (ArrayList<MusicForSearch>) getArguments().getSerializable("list");
+        ListSearchAdapter listSearchAdapter = new ListSearchAdapter(getActivity(), R.layout.listview_search_item, list);
+        listView.setAdapter(listSearchAdapter);
+        listView.setOnItemClickListener((parent, viewparent, position, id) -> {
+            //lấy ra phần tử trong list view
+            MusicForSearch musicForSearch = (MusicForSearch) parent.getItemAtPosition(position);
+            //tạo intent để chuyển hướng sang trang phát nhạc
+            Intent intent = new Intent(getActivity(), PlayerMusicActivity.class);
+            String song_name = musicForSearch.getName();
+            String img=musicForSearch.getImg();
+            Bundle bundle = new Bundle();
+            bundle.putString("name_song", song_name);
+            intent.putExtras(bundle);
+            MusicNameApplication musicNameApplication=(MusicNameApplication) getActivity().getApplicationContext();
+            musicNameApplication.setSongName(song_name);
+            musicNameApplication.setImg(img);
+            startActivity(intent);
         });
     }
+
+    public ArrayList<MusicForSearch> getListMusic(ArrayList<MusicForSearch> result) {
+        return result;
+    }
+
+
 }

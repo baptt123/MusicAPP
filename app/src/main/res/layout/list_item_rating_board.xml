@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/music_list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+    <!-- custom item cho listvieư bảng xếp hạng-->
+    <ImageView
+        android:id="@+id/music_icon"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:src="@drawable/sontung">
+
+    </ImageView>
+
+    <TextView
+        android:id="@+id/music_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tên bài hát"
+        android:textSize="20dp">
+
+    </TextView>
+
+</LinearLayout>

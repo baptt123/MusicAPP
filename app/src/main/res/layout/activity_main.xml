@@ -1,29 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.MainActivity">
+    <!--header-->
+    <RelativeLayout
+        android:id="@+id/relative_header"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
-        tools:context=".main.MainActivity">
-    <TextView android:layout_width="wrap_content" android:layout_height="match_parent"
-              android:id="@+id/textdata"
-              android:text="@string/helloworld"
-              tools:layout_editor_absoluteX="99dp" app:layout_constraintTop_toTopOf="parent"
-              android:layout_marginTop="200dp"
-              android:textSize="50dp">
+        android:layout_height="50dp"
+        android:background="@color/sky_blue">
 
-    </TextView>
-    <Button android:layout_width="140dp" android:layout_height="40dp"
-            android:id="@+id/chuyenhuong"
-            android:text="@string/Chuyentrang" tools:layout_editor_absoluteY="111dp"
-            tools:layout_editor_absoluteX="135dp">
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/arrow">
 
-    </Button>
-    <Button android:layout_width="178dp" android:layout_height="35dp"
-            android:id="@+id/chuyenhuonglichsu"
-            android:text="@string/ChuyenLichSu" tools:layout_editor_absoluteY="165dp"
-            tools:layout_editor_absoluteX="127dp">
+        </ImageView>
 
-    </Button>
+        <EditText
+            android:id="@+id/search_music"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@id/back"
+            android:text="Tìm kiếm nhạc">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </EditText>
+
+        <ImageView
+            android:id="@+id/icon_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/search_music"
+            android:src="@drawable/search_interface_symbol">
+
+        </ImageView>
+
+        <ImageView
+            android:id="@+id/usericon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@id/icon_search"
+            android:src="@drawable/user">
+
+        </ImageView>
+    </RelativeLayout>
+
+    <!--        <ImageView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:id="@+id/homeicon"-->
+    <!--            android:src="@drawable/home">-->
+    <!--        </ImageView>-->
+    <!--        <ImageView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:id="@+id/libraryicon"-->
+    <!--            android:src="@drawable/library"-->
+    <!--            android:layout_marginStart="30dp"-->
+    <!--            >-->
+
+    <!--        </ImageView>-->
+    <!--        <ImageView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:id="@+id/playbuttonicon"-->
+    <!--            android:src="@drawable/playbuttonmusic"-->
+    <!--            android:layout_marginStart="50dp">-->
+
+    <!--        </ImageView>-->
+    <!--        <ImageView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:id="@+id/ratingicon"-->
+    <!--            android:src="@drawable/review"-->
+    <!--            android:layout_marginStart="40dp"-->
+    <!--            >-->
+
+    <!--        </ImageView>-->
+    <!--        <ImageView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:id="@+id/settingicon"-->
+    <!--            android:src="@drawable/setting"-->
+    <!--            android:layout_marginStart="50dp">-->
+
+    <!--        </ImageView>-->
+    <!--    </LinearLayout>-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bài hát mới"
+            android:textSize="30dp">
+
+        </TextView>
+        <!--slider-->
+        <com.denzcoskun.imageslider.ImageSlider
+            android:id="@+id/slider"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            app:iss_auto_cycle="true"
+            app:iss_delay="1000"
+            app:iss_period="1000"
+            app:iss_text_align="center" />
+
+    </LinearLayout>
+    <!--fragment area-->
+    <LinearLayout
+        android:id="@+id/fragement_playicon"
+        android:layout_width="wrap_content"
+        android:layout_height="500dp"
+        android:layout_marginTop="50dp"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+
+
+    <!--    &lt;!&ndash;footer&ndash;&gt;-->
+    <!--    <LinearLayout android:orientation="horizontal"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="50dp"-->
+    <!--        android:id="@+id/footer"-->
+    <!--        android:layout_marginTop="590dp"-->
+    <!--        android:background="@color/sky_blue">-->
+
+    <!--        <ImageView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:id="@+id/homeicon"-->
+    <!--            android:src="@drawable/home">-->
+    <!--        </ImageView>-->
+    <!--        <ImageView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:id="@+id/libraryicon"-->
+    <!--            android:src="@drawable/library"-->
+    <!--            android:layout_marginStart="30dp"-->
+    <!--            >-->
+
+    <!--        </ImageView>-->
+    <!--        <ImageView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:id="@+id/playbuttonicon"-->
+    <!--            android:src="@drawable/play_button"-->
+    <!--            android:layout_marginStart="50dp">-->
+
+    <!--        </ImageView>-->
+    <!--        <ImageView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:id="@+id/ratingicon"-->
+    <!--            android:src="@drawable/review"-->
+    <!--            android:layout_marginStart="40dp"-->
+    <!--            >-->
+
+    <!--        </ImageView>-->
+    <!--        <ImageView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:id="@+id/settingicon"-->
+    <!--            android:src="@drawable/setting"-->
+    <!--            android:layout_marginStart="50dp">-->
+
+    <!--        </ImageView>-->
+    <!--    </LinearLayout>-->
+
+</RelativeLayout>

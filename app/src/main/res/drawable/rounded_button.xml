@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?><!--cấu hình thông số chung để sử dụng cho button-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners android:radius="20dp" /> <!-- Điều chỉnh giá trị để thay đổi bán kính của góc bo tròn -->
+    <solid android:color="@color/sky_blue" /> <!-- Thay đổi màu sắc của button -->
+</shape>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey_light"
+    tools:context=".login_register.DangNhapActivity">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:background="@color/white">
+
+            <!-- Nội dung layout của bạn ở đây -->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView_login_head"
+                android:text="Please enter your credentials to login"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
+
+            <TextView
+                android:id="@+id/textView_login_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:layout_marginTop="50dp"
+                android:layout_below="@id/textView_login_head"
+                android:text="Email*"
+                android:textColor="#555555" />
+
+            <EditText
+                android:id="@+id/editText_login_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:hint="Enter email"
+                android:inputType="textEmailAddress"
+                android:padding="6dp"
+                android:layout_below="@id/textView_login_email"
+                android:textColorHint="@color/grey"
+                android:drawablePadding="@dimen/size10dp"/>
+
+            <TextView
+                android:id="@+id/textView_login_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:layout_below="@id/editText_login_email"
+                android:text="Password*"
+                android:textColor="#555555" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="32dp"
+                android:id="@+id/image_show_hide_pass"
+                android:layout_below="@id/textView_login_password"/>
+
+            <EditText
+                android:id="@+id/editText_login_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:layout_marginStart="30dp"
+                android:hint="Enter password"
+                android:inputType="textPassword"
+                android:padding="6dp"
+                android:layout_below="@id/textView_login_password"
+                android:textColorHint="@color/grey"
+                android:drawablePadding="@dimen/size10dp"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/dangnhap"
+                android:padding="@dimen/size10dp"
+                android:textColorHint="@color/black"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="@dimen/size20dp"
+                android:layout_marginRight="@dimen/size20dp"
+                android:layout_marginBottom="@dimen/size10dp"
+                android:layout_below="@id/editText_login_password"
+                android:background="@color/orange_yello"/>
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/progress"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:elevation="@dimen/size10dp"
+                android:visibility="gone"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/button_login"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView_register"
+                    android:layout_below="@id/button_login"
+                    android:layout_marginTop="30dp"
+                    android:text="Do you have an account?"
+                    android:textAlignment="center" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView_link_register"
+                    android:layout_below="@id/textView_forgot_password"
+                    android:text="Đăng ký"
+                    android:textColor="@color/orange_yello"
+                    android:textAlignment="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/button_login"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                android:layout_alignParentEnd="true">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView_forgot_password"
+                    android:layout_below="@id/button_login"
+                    android:layout_marginTop="30dp"
+                    android:text="Forgot your password ?"
+                    android:textAlignment="center" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView_link_forgot_password"
+                    android:layout_below="@id/textView_forgot_password"
+                    android:text="Quên Mật Khẩu"
+                    android:textColor="@color/orange_yello"
+                    android:textAlignment="center"/>
+            </LinearLayout>
+        </RelativeLayout>
+
+</ScrollView>

@@ -21,6 +21,8 @@ import com.example.appnghenhac.activity.PlayListActivity;
 import com.example.appnghenhac.adapter.PlayListAdapter;
 import com.example.appnghenhac.model.PlayList;
 import com.example.appnghenhac.service.UserService;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,6 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,6 +47,7 @@ public class FragmentThuVien extends Fragment {
 
     private String mParam1;
     private String mParam2;
+
     public FragmentThuVien() {
         // Required empty public constructor
     }
@@ -81,7 +85,8 @@ public class FragmentThuVien extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_thu_vien, container, false);
     }
-    int REQUEST_CODE =123;
+
+    int REQUEST_CODE = 123;
 
     private FirebaseDatabase data;
     private DatabaseReference reference;
@@ -110,9 +115,9 @@ public class FragmentThuVien extends Fragment {
                     PlayList playList = new PlayList(snapshot.getKey(),  snapshot.getValue(String.class));
                     playLists.add(playList);
                 }
-                 playListAdapter = new PlayListAdapter(getActivity(), R.layout.list_item_playlist, playLists);
+                playListAdapter = new PlayListAdapter(getActivity(), R.layout.list_item_playlist, playLists);
                 listView.setAdapter(playListAdapter);
-                listView.setOnItemClickListener((parent, view1, position, id) ->  {
+                listView.setOnItemClickListener((parent, view1, position, id) -> {
                     PlayList p = playLists.get(position);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("playList", p);
@@ -123,6 +128,7 @@ public class FragmentThuVien extends Fragment {
                     startActivityForResult(intent,ADD_PLAYLIST_REQUEST);
                 });
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.e("Firebase", "Error loading data: " + error.getMessage());
@@ -136,7 +142,7 @@ public class FragmentThuVien extends Fragment {
             public void onClick(View v) {
                 // TODO chức năng thêm play list
                 Intent intent = new Intent(getActivity(), AddPlaylistActivity.class);
-                startActivityForResult(intent,ADD_PLAYLIST_REQUEST);
+                startActivityForResult(intent, ADD_PLAYLIST_REQUEST);
             }
         });
     }

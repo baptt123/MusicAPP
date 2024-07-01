@@ -49,7 +49,7 @@ public class PlayerMusicActivity extends AppCompatActivity {
     ImageView love_song;
     FloatingActionButton playPauseBtn;
     SeekBar seekBar;
-
+    ImageView id_love_song;
     int position = 0;
     static ArrayList<MusicFiles> listSongs = new ArrayList<>();
     static MediaPlayer mediaPlayer;
@@ -118,9 +118,42 @@ public class PlayerMusicActivity extends AppCompatActivity {
         love_song.setOnClickListener(v -> {
             addMusicFavorite();
         });
+        checkFavourite();
         loadSongsFromFirebase(music_song_string);
     }
+    private void checkFavourite(){
+        MusicNameApplication musicNameApplication = (MusicNameApplication) getApplicationContext();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        String userID = auth.getCurrentUser().getUid();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference userRef = database.getReference().child("Register User").child(userID);
+        DatabaseReference favouriteRef = userRef.child("favourite");
+        favouriteRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    if (snapshot.getChildren() != null) {
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                            if (dataSnapshot.getKey().equals(musicNameApplication.getSongName())) {
+                                id_love_song=findViewById(R.id.id_love_song);
+                                id_love_song.setImageResource(R.drawable.heart_svgrepo_com);
+                                Toast.makeText(PlayerMusicActivity.this, "Đã tải dữ liệu bài hát thành công!!!", Toast.LENGTH_LONG).show();
+                                return;
+                            }
+                        }
+                    }
 
+                } else {
+                    Toast.makeText(PlayerMusicActivity.this, "Không tìm thấy dữ liệu người dùng", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
     //load nhạc từ Firebase
     private void loadSongsFromFirebase(String song) {
         Log.d("song_name", song);
@@ -137,11 +170,11 @@ public class PlayerMusicActivity extends AppCompatActivity {
                     mediaPlayer.prepare();
                     mediaPlayer.start();
                 } else {
-                    int current_pos = mediaPlayer.getCurrentPosition();
+//                    int current_pos = mediaPlayer.getCurrentPosition();
                     mediaPlayer.reset();
                     mediaPlayer.setDataSource(url);
                     mediaPlayer.prepare();
-                    mediaPlayer.seekTo(current_pos);
+//                    mediaPlayer.seekTo(current_pos);
                     mediaPlayer.start();
                 }
                 mediaPlayer.setLooping(true);
@@ -226,6 +259,8 @@ public class PlayerMusicActivity extends AppCompatActivity {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             if (!dataSnapshot.getKey().equals(musicNameApplication.getSongName())) {
                                 favouriteRef.child(musicNameApplication.getSongName()).setValue(musicNameApplication.getImg());
+                                id_love_song=findViewById(R.id.id_love_song);
+                                id_love_song.setImageResource(R.drawable.heart_svgrepo_com);
                                 Toast.makeText(PlayerMusicActivity.this, "Dữ liệu bài hát đã được thêm vào!!!", Toast.LENGTH_LONG).show();
                                 return;
                             }
@@ -233,7 +268,10 @@ public class PlayerMusicActivity extends AppCompatActivity {
                     }
 
                 } else {
-                    Toast.makeText(PlayerMusicActivity.this, "Không tìm thấy dữ liệu người dùng", Toast.LENGTH_LONG).show();
+                    favouriteRef.child(musicNameApplication.getSongName()).setValue(musicNameApplication.getImg());
+                    id_love_song=findViewById(R.id.id_love_song);
+                    id_love_song.setImageResource(R.drawable.heart_svgrepo_com);
+                    Toast.makeText(PlayerMusicActivity.this, "Đã thêm bài hát thành công", Toast.LENGTH_LONG).show();
                 }
             }
 

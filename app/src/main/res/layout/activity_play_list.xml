@@ -43,14 +43,29 @@
             android:layout_marginVertical="5dp"
             android:layout_margin="@dimen/size20dp"/>
 
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/size20dp"
-            android:text="@string/AddMusic" />
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/size20dp">
+
+            <Button
+                android:id="@+id/buttonDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Xóa playList"
+                android:layout_marginEnd="@dimen/size20dp"/>
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/AddMusic" />
+        </LinearLayout>
+
     </LinearLayout>
 
 

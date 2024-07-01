@@ -26,8 +26,7 @@ public class UserService {
         if(firebaseUser != null){
             res = firebaseUser.getUid();
         }
-//        TODO doi thanh res
-        return "user001";
+        return res;
     }
     public String getUserId(){
         return userId;

@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.appnghenhac.R;
-import com.example.appnghenhac.activity.NavicationActivity;
+import com.example.appnghenhac.activity.HomeActivity;
 import com.example.appnghenhac.fragment.FavouriteFragment;
 import com.example.appnghenhac.model.MusicForFavourite;
 import com.google.firebase.FirebaseApp;
@@ -29,10 +29,10 @@ Date:28/6/2024
 Description:Class này dùng để mô tả asynctask xử lí đa luồng cho chức năng hiển thị danh sách yêu thích của người dùng
  */
 public class AsyncTaskFavourite extends AsyncTask<String, Void, String> {
-    private NavicationActivity navicationActivity;
+    private HomeActivity homeActivity;
 
-    public AsyncTaskFavourite(NavicationActivity navicationActivity) {
-        this.navicationActivity = navicationActivity;
+    public AsyncTaskFavourite(HomeActivity homeActivity) {
+        this.homeActivity = homeActivity;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class AsyncTaskFavourite extends AsyncTask<String, Void, String> {
         CountDownLatch latch = new CountDownLatch(1);
 
         if (uid != null && uid.equals(params)) {
-            FirebaseApp.initializeApp(navicationActivity);
+            FirebaseApp.initializeApp(homeActivity);
             FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
             DatabaseReference dbref = firebaseDatabase.getReference("Register User").child(uid).child("favourite");
 
@@ -92,7 +92,7 @@ public class AsyncTaskFavourite extends AsyncTask<String, Void, String> {
         Bundle bundle = new Bundle();
         bundle.putSerializable("list_result", list_result);
         favouriteFragment.setArguments(bundle);
-        FragmentManager fm = navicationActivity.getSupportFragmentManager();
+        FragmentManager fm = homeActivity.getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.fragment_container, favouriteFragment).commit();
     }
 }

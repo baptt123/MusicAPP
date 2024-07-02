@@ -117,7 +117,7 @@ public class UploadProfilePicActivity extends AppCompatActivity {
                         }
                     });
                     progressBar.setVisibility(View.GONE);
-                    Toast.makeText(UploadProfilePicActivity.this,"Upload Picture Successfully",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UploadProfilePicActivity.this,"Tải ảnh lên thành công",Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(UploadProfilePicActivity.this,ProfileActivity.class);
                     startActivity(intent);
                     finish();
@@ -130,7 +130,7 @@ public class UploadProfilePicActivity extends AppCompatActivity {
             });
         }else {
             progressBar.setVisibility(View.GONE);
-            Toast.makeText(UploadProfilePicActivity.this,"No file Selected!!!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(UploadProfilePicActivity.this,"Không có tập tin được chọn!!!",Toast.LENGTH_SHORT).show();
         }
     }
     //Optain file extension of the image
@@ -174,15 +174,10 @@ public class UploadProfilePicActivity extends AppCompatActivity {
             Intent intent = new Intent(UploadProfilePicActivity.this, UpdateProfileActivity.class);
             startActivity(intent);
             finish();
-       /* }else if(id == R.id.menu_update_email){
-            Intent intent = new Intent(ProfileActivity.this, UpdateEmailActivity.class);
-            startActivity(intent);*/
         }else if(id == R.id.menu_change_password){
             Intent intent = new Intent(UploadProfilePicActivity.this, ChangePasswordActivity.class);
             startActivity(intent);
             finish();
-        }else if(id == R.id.menu_settings){
-           Toast.makeText(UploadProfilePicActivity.this,"menu_setting",Toast.LENGTH_SHORT).show();
         }else if(id == R.id.menu_logout){
             authProfile.signOut();
             Toast.makeText(UploadProfilePicActivity.this,"Logged Out",Toast.LENGTH_SHORT).show();
@@ -192,7 +187,7 @@ public class UploadProfilePicActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }else {
-            Toast.makeText(UploadProfilePicActivity.this,"Something went wrong!!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(UploadProfilePicActivity.this,"Đã xảy ra lỗi!!",Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
 

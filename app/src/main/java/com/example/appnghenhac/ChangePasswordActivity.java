@@ -63,7 +63,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser =auth.getCurrentUser();
         if (firebaseUser.equals("")){
-            Toast.makeText(ChangePasswordActivity.this,"Something went wrong!! User's details not available",
+            Toast.makeText(ChangePasswordActivity.this,"Đã xảy ra lỗi!! Thông tin chi tiết của người dùng không có sẵn",
                     Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(ChangePasswordActivity.this,ProfileActivity.class);
             startActivity(intent);
@@ -87,8 +87,8 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 userPasswordCurrent = editTextPassCurrent.getText().toString();
 
                 if (TextUtils.isEmpty(userPasswordCurrent)){
-                    Toast.makeText(ChangePasswordActivity.this, "Password is needed",Toast.LENGTH_SHORT).show();
-                    editTextPassCurrent.setError("Please enter your current password to authenticate ");
+                    Toast.makeText(ChangePasswordActivity.this, "Cần có mật khẩu",Toast.LENGTH_SHORT).show();
+                    editTextPassCurrent.setError("Vui lòng nhập mật khẩu hiện tại của bạn để xác thực ");
                     editTextPassCurrent.requestFocus();
                 }else{
                     progressBar.setVisibility(View.VISIBLE);
@@ -113,10 +113,10 @@ public class ChangePasswordActivity extends AppCompatActivity {
                                 buttonChangePass.setEnabled(true);
 
                                 //Set textview to show user is authenticated/verified
-                                textViewAuthenticate.setText("You are authenticated/verified." +
-                                        " You can change password now!!");
-                                Toast.makeText(ChangePasswordActivity.this,"Password has been verified. " +
-                                        "Change password now!!",Toast.LENGTH_SHORT).show();
+                                textViewAuthenticate.setText("Bạn đã được xác thực/xác minh." +
+                                        " Bạn có thể thay đổi mật khẩu ngay bây giờ!!");
+                                Toast.makeText(ChangePasswordActivity.this,"Mật khẩu đã được xác minh. " +
+                                        "Đổi mật khẩu ngay!!",Toast.LENGTH_SHORT).show();
 
                                 //Update color of change password button
                                 buttonChangePass.setBackgroundTintList(ContextCompat.getColorStateList(ChangePasswordActivity.this,R.color.misty_rose));
@@ -146,20 +146,20 @@ public class ChangePasswordActivity extends AppCompatActivity {
         String userNewPasswordConfirm = editTextPassNewConfirm.getText().toString();
 
         if (TextUtils.isEmpty(userNewPassword)){
-            Toast.makeText(ChangePasswordActivity.this,"New Password is needed",Toast.LENGTH_SHORT).show();
-            editTextPassNew.setError("Please enter your new password");
+            Toast.makeText(ChangePasswordActivity.this,"Cần có mật khẩu mới",Toast.LENGTH_SHORT).show();
+            editTextPassNew.setError("Vui lòng nhập mật khẩu mới của bạn");
             editTextPassNew.requestFocus();
         }else if(TextUtils.isEmpty(userNewPasswordConfirm)){
-            Toast.makeText(ChangePasswordActivity.this,"Please confirm your new password",Toast.LENGTH_SHORT).show();
-            editTextPassNewConfirm.setError("Please re-enter your new password");
+            Toast.makeText(ChangePasswordActivity.this,"Vui lòng xác nhận mật khẩu mới của bạn",Toast.LENGTH_SHORT).show();
+            editTextPassNewConfirm.setError("Vui lòng nhập lại mật khẩu mới của bạn");
             editTextPassNewConfirm.requestFocus();
         }else if(!userNewPassword.matches(userNewPasswordConfirm)){
-            Toast.makeText(ChangePasswordActivity.this,"Password did not match",Toast.LENGTH_SHORT).show();
-            editTextPassNewConfirm.setError("Please re-enter same password");
+            Toast.makeText(ChangePasswordActivity.this,"Mật khẩu không khớp",Toast.LENGTH_SHORT).show();
+            editTextPassNewConfirm.setError("Vui lòng nhập lại cùng một mật khẩu");
             editTextPassNewConfirm.requestFocus();
         }else if(userPasswordCurrent.matches(userNewPassword)){
-            Toast.makeText(ChangePasswordActivity.this,"New Password cannot be same as old password",Toast.LENGTH_SHORT).show();
-            editTextPassNew.setError("Please enter a new password");
+            Toast.makeText(ChangePasswordActivity.this,"Mật khẩu mới không được giống mật khẩu cũ",Toast.LENGTH_SHORT).show();
+            editTextPassNew.setError("Vui lòng nhập mật khẩu mới");
             editTextPassNew.requestFocus();
         }else{
             progressBar.setVisibility(View.VISIBLE);
@@ -167,7 +167,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()){
-                        Toast.makeText(ChangePasswordActivity.this,"Password has been changed",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ChangePasswordActivity.this,"Mật khẩu đã được thay đổi",Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(ChangePasswordActivity.this,ProfileActivity.class);
                         startActivity(intent);
                         finish();
@@ -199,14 +199,9 @@ public class ChangePasswordActivity extends AppCompatActivity {
         }else if(id == R.id.menu_update_profile ){
             Intent intent = new Intent(ChangePasswordActivity.this, UpdateProfileActivity.class);
             startActivity(intent);
-        /*}else if(id == R.id.menu_update_email){
-            Intent intent = new Intent(ProfileActivity.this, UpdateEmailActivity.class);
-            startActivity(intent);*/
         }else if(id == R.id.menu_change_password){
             Intent intent = new Intent(ChangePasswordActivity.this, ChangePasswordActivity.class);
             startActivity(intent);
-        }else if(id == R.id.menu_settings){
-           Toast.makeText(ChangePasswordActivity.this,"menu_setting",Toast.LENGTH_SHORT).show();
         }else if(id == R.id.menu_logout){
             auth.signOut();
             Toast.makeText(ChangePasswordActivity.this,"Logged Out",Toast.LENGTH_SHORT).show();
@@ -216,9 +211,8 @@ public class ChangePasswordActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }else {
-            Toast.makeText(ChangePasswordActivity.this,"Something went wrong!!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(ChangePasswordActivity.this,"Đã xảy ra lỗi!!",Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
-
     }
 }

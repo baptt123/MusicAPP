@@ -28,18 +28,18 @@ public class MusicAsynctask extends AsyncTask<ArrayList<String>, Void, String> {
     protected String doInBackground(ArrayList<String>... strings) {
         OkHttpClient client = new OkHttpClient();
         ArrayList<String> idSongs = strings[0];
+        Log.d(TAG, "doInBackground: "+idSongs.toString());
         StringBuilder idsBuilder = new StringBuilder();
         for (String id : idSongs) {
+            if (id.equals("ketThuc"))
+                continue;
             if (idsBuilder.length() > 0) {
-                if (id.equals("ketThuc"))
-                    break;
-                else {
-                    idsBuilder.append(",");
-                }
+                idsBuilder.append(",");
             }
             idsBuilder.append(id);
         }
-        String url = "https://v1.nocodeapi.com/tam/spotify/gBsXWERIORAqClxR/tracks?ids=" + idsBuilder;
+        Log.d(TAG, "doInBackground: " +idsBuilder);
+        String url = "https://v1.nocodeapi.com/tam22/spotify/HSqHnfxUdTmcEMbd/tracks?ids=" + idsBuilder;
         Request request = new Request
                 .Builder()
                 .url(url)
@@ -95,8 +95,6 @@ public class MusicAsynctask extends AsyncTask<ArrayList<String>, Void, String> {
                         song.setUrl(url);
                     }
                 }
-
-
                 ac.setSong(song);
             }
         }

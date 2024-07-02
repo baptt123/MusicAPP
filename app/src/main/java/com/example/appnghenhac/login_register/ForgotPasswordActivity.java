@@ -41,12 +41,12 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email = editTextPasswordResetEmail.getText().toString();
                 if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(ForgotPasswordActivity.this, "Please enter your registered email!!!", Toast.LENGTH_SHORT).show();
-                    editTextPasswordResetEmail.setError("Email is required");
+                    Toast.makeText(ForgotPasswordActivity.this, "Vui lòng nhập email đã đăng ký của bạn!!!", Toast.LENGTH_SHORT).show();
+                    editTextPasswordResetEmail.setError("Email là cần thiết");
                     editTextPasswordResetEmail.requestFocus();
                 } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                    Toast.makeText(ForgotPasswordActivity.this, "Please enter valid email!!!", Toast.LENGTH_SHORT).show();
-                    editTextPasswordResetEmail.setError("Valid email is required");
+                    Toast.makeText(ForgotPasswordActivity.this, "Vui lòng nhập email hợp lệ!!!", Toast.LENGTH_SHORT).show();
+                    editTextPasswordResetEmail.setError("Cần có email hợp lệ");
                     editTextPasswordResetEmail.requestFocus();
                 } else {
                     progressBar.setVisibility(View.VISIBLE);
@@ -62,7 +62,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(ForgotPasswordActivity.this, "Please check your inbox for password reset link", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ForgotPasswordActivity.this, "Vui lòng kiểm tra email của bạn để đặt lại mật khẩu", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(ForgotPasswordActivity.this, DangNhapActivity.class);
 
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -72,13 +72,13 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                     try {
                         throw task.getException();
                     } catch (FirebaseAuthInvalidUserException e) {
-                        editTextPasswordResetEmail.setError("User does not exist or is no longer valid.Please register again");
+                        editTextPasswordResetEmail.setError("Người dùng không tồn tại hoặc không hợp lệ. Vui lòng đăng ký lại");
                         editTextPasswordResetEmail.requestFocus();
                     } catch (Exception e) {
                         Log.e(TAG, e.getMessage());
                         Toast.makeText(ForgotPasswordActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                    Toast.makeText(ForgotPasswordActivity.this, "Something went wrong!!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ForgotPasswordActivity.this, "Đã xảy ra lỗi!!!", Toast.LENGTH_SHORT).show();
                 }
                 progressBar.setVisibility(View.GONE);
             }

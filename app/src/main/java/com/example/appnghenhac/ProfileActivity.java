@@ -91,11 +91,11 @@ public class ProfileActivity extends AppCompatActivity {
 
         //Setup the Alert Builder
         AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
-        builder.setTitle("Email Not Verified");
-        builder.setMessage("Please verify your email now. You can not login without email verification next time.");
+        builder.setTitle("Email chưa được xác minh");
+            builder.setMessage("Hãy xác minh email của bạn ngay bây giờ. Bạn không thể đăng nhập nếu không xác minh email vào lần tiếp theo.");
 
         //Open Email Apps if user clicks/taps continue button
-        builder.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Tiếp tục", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(Intent.ACTION_MAIN);
@@ -127,7 +127,7 @@ public class ProfileActivity extends AppCompatActivity {
                     gender = readUserDetails.gender;
                     phone = readUserDetails.phoneNumber;
 
-                    textViewWelcome.setText("WELCOME, "+fullname);
+                    textViewWelcome.setText("Xin chào, "+fullname);
                     textViewFullName.setText(fullname);
                     textViewEmail.setText(email);
                     textViewBirthdate.setText(birthdate);
@@ -140,14 +140,14 @@ public class ProfileActivity extends AppCompatActivity {
                     //ImageView setImageUri() should not be used with regular Uris .So we are using Picasso
                     Picasso.get().load(uri).into(imageView);
                 }else {
-                    Toast.makeText(ProfileActivity.this,"Something went wrong!!!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProfileActivity.this,"Đã xảy ra lỗi!!!",Toast.LENGTH_SHORT).show();
                 }
                 progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(ProfileActivity.this,"Something went wrong!!!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProfileActivity.this,"Đã xảy ra lỗi!!!",Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.GONE);
 
 
@@ -175,8 +175,7 @@ public class ProfileActivity extends AppCompatActivity {
         }else if(id == R.id.menu_change_password){
             Intent intent = new Intent(ProfileActivity.this, ChangePasswordActivity.class);
             startActivity(intent);
-        }else if(id == R.id.menu_settings){
-           Toast.makeText(ProfileActivity.this,"menu_setting",Toast.LENGTH_SHORT).show();
+            finish();
         }else if(id == R.id.menu_logout){
             authProfile.signOut();
             Toast.makeText(ProfileActivity.this,"Logged Out",Toast.LENGTH_SHORT).show();
@@ -186,7 +185,7 @@ public class ProfileActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }else {
-            Toast.makeText(ProfileActivity.this,"Something went wrong!!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(ProfileActivity.this,"Đã xảy ra lỗi!!",Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
 

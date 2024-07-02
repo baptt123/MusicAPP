@@ -10,6 +10,8 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -54,7 +56,7 @@ public class PlayerMusicActivity extends AppCompatActivity {
     static ArrayList<MusicFiles> listSongs = new ArrayList<>();
     static MediaPlayer mediaPlayer;
     private Handler handler = new Handler();
-
+    Animation animation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +64,7 @@ public class PlayerMusicActivity extends AppCompatActivity {
         MusicNameApplication musicNameApplication = (MusicNameApplication) getApplicationContext();
         String song = musicNameApplication.getSongName();
         initView(song);
+        animation = AnimationUtils.loadAnimation(this, R.anim.disc_rotate);
 //        createNotification(song);
         FirebaseApp.initializeApp(this);
         backBtn.setOnClickListener(v -> onBackPressed());
@@ -88,10 +91,12 @@ public class PlayerMusicActivity extends AppCompatActivity {
                 if (mediaPlayer.isPlaying()) {
                     mediaPlayer.pause();
                     playPauseBtn.setImageResource(R.drawable.baseline_play_arrow_24);
+                    cover_art.clearAnimation();
                 } else {
                     mediaPlayer.start();
                     playPauseBtn.setImageResource(R.drawable.baseline_pause);
                     updateSeekBar();
+                    cover_art.startAnimation(animation);
                 }
             }
         });
@@ -169,6 +174,7 @@ public class PlayerMusicActivity extends AppCompatActivity {
                     mediaPlayer.setDataSource(url);
                     mediaPlayer.prepare();
                     mediaPlayer.start();
+                    playPauseBtn.setImageResource(R.drawable.baseline_pause);
                 } else {
 //                    int current_pos = mediaPlayer.getCurrentPosition();
                     mediaPlayer.reset();
@@ -176,10 +182,12 @@ public class PlayerMusicActivity extends AppCompatActivity {
                     mediaPlayer.prepare();
 //                    mediaPlayer.seekTo(current_pos);
                     mediaPlayer.start();
+                    playPauseBtn.setImageResource(R.drawable.baseline_pause);
                 }
                 mediaPlayer.setLooping(true);
                 updateSeekBar();
                 setTimeTotal();
+                cover_art.startAnimation(animation);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

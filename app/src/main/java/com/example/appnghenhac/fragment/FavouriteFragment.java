@@ -1,5 +1,6 @@
 package com.example.appnghenhac.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.appnghenhac.R;
+import com.example.appnghenhac.activity.PlayerMusicActivity;
 import com.example.appnghenhac.adapter.ListFavouriteAdapter;
+import com.example.appnghenhac.application.MusicNameApplication;
 import com.example.appnghenhac.model.MusicForFavourite;
 import com.example.appnghenhac.model.MusicForSearch;
 
@@ -37,6 +40,10 @@ public class FavouriteFragment extends Fragment {
         listView_favourite.setAdapter(adapter);
         listView_favourite.setOnItemClickListener((parent, view1, position, id) -> {
             MusicForFavourite musicForFavourite=(MusicForFavourite) parent.getItemAtPosition(position);
+            MusicNameApplication musicNameApplication=(MusicNameApplication) getActivity().getApplication();
+            musicNameApplication.setSongName(musicForFavourite.getName());
+            Intent intent=new Intent(getActivity(), PlayerMusicActivity.class);
+            startActivity(intent);
         });
     }
 

@@ -109,18 +109,6 @@ public class UpdateProfileActivity extends AppCompatActivity {
             }
         });
 
-        //Update Email
-        Button buttonUpdateEmail = findViewById(R.id.button_upload_profile_email);
-        buttonUpdateEmail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(UpdateProfileActivity.this, UpdateEmailActivity.class);
-                startActivity(intent);
-                finish();
-
-            }
-        });
-
         //Update Profile
         Button buttonUpdateProfile = findViewById(R.id.button_upload_profile);
         buttonUpdateProfile.setOnClickListener(new View.OnClickListener() {
@@ -143,24 +131,24 @@ public class UpdateProfileActivity extends AppCompatActivity {
             editTextUpdateName.setError("Họ và Tên là bắt buộc!!!");
             editTextUpdateName.requestFocus();
         }else if(TextUtils.isEmpty(textBirthDate)){
-            Toast.makeText(UpdateProfileActivity.this,"Please your date of birth",Toast.LENGTH_SHORT).show();
-            editTextUpdateBirthDate.setError("Date of Birth is required");
+            Toast.makeText(UpdateProfileActivity.this,"Vui lòng chọn ngày sinh của bạn",Toast.LENGTH_SHORT).show();
+            editTextUpdateBirthDate.setError("Ngày sinh là bắt buộc");
             editTextUpdateBirthDate.requestFocus();
         }else if(TextUtils.isEmpty(radioButtonUpdateGenderSelected.getText())){
-            Toast.makeText(UpdateProfileActivity.this,"Please select your gender",Toast.LENGTH_SHORT).show();
-            radioButtonUpdateGenderSelected.setError("Gender is required");
+            Toast.makeText(UpdateProfileActivity.this,"Vui lòng chọn giới tính của bạn",Toast.LENGTH_SHORT).show();
+            radioButtonUpdateGenderSelected.setError("Giới tính là bắt buộc");
             radioButtonUpdateGenderSelected.requestFocus();
         }else if(TextUtils.isEmpty(textPhone)){
-            Toast.makeText(UpdateProfileActivity.this,"Please enter your phone number",Toast.LENGTH_SHORT).show();
-            editTextUpdatePhone.setError("Phone Number is required");
+            Toast.makeText(UpdateProfileActivity.this,"Vui lòng điền số điện thoại của bạn",Toast.LENGTH_SHORT).show();
+            editTextUpdatePhone.setError("Số điện thoại là bắt buộc");
             editTextUpdatePhone.requestFocus();
         }else if(textPhone.length()!= 10) {
-            Toast.makeText(UpdateProfileActivity.this, "Please re-enter your phone number", Toast.LENGTH_SHORT).show();
-            editTextUpdatePhone.setError("Number phone should be 10 digits");
+            Toast.makeText(UpdateProfileActivity.this, "Vui lòng nhập lại số điện thoại của bạn", Toast.LENGTH_SHORT).show();
+            editTextUpdatePhone.setError("Số điện thoại phải có 10 chữ số");
             editTextUpdatePhone.requestFocus();
         }else if(!phoneMatcher.find()) {
-            Toast.makeText(UpdateProfileActivity.this, "Please re-enter your phone number", Toast.LENGTH_SHORT).show();
-            editTextUpdatePhone.setError("Number phone no. is not valid");
+            Toast.makeText(UpdateProfileActivity.this, "Vui lòng nhập lại số điện thoại của bạn", Toast.LENGTH_SHORT).show();
+            editTextUpdatePhone.setError("Số điện thoại không hợp lệ");
             editTextUpdatePhone.requestFocus();
         }else  {
             textGender = radioButtonUpdateGenderSelected.getText().toString();
@@ -184,7 +172,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
                         //Settings new display name
                         UserProfileChangeRequest profileUpdate = new UserProfileChangeRequest.Builder().setDisplayName(textFullName).build();
                         firebaseUser.updateProfile(profileUpdate);
-                        Toast.makeText(UpdateProfileActivity.this,"Update Successfully!!",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UpdateProfileActivity.this,"Cập nhật thành công!!",Toast.LENGTH_SHORT).show();
 
 
                         //Stop user from returning to UpdateProfileActivity on pressing back button and close activity
@@ -242,7 +230,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(UpdateProfileActivity.this,"Something went wrong!!!!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpdateProfileActivity.this,"Đã xảy ra lỗi!!!!",Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.GONE);
             }
         });
@@ -269,8 +257,6 @@ public class UpdateProfileActivity extends AppCompatActivity {
             Intent intent = new Intent(UpdateProfileActivity.this, ChangePasswordActivity.class);
             startActivity(intent);
             finish();
-        }else if(id == R.id.menu_settings){
-           Toast.makeText(UpdateProfileActivity.this,"menu_setting",Toast.LENGTH_SHORT).show();
         }else if(id == R.id.menu_logout){
             auth.signOut();
             Toast.makeText(UpdateProfileActivity.this,"Logged Out",Toast.LENGTH_SHORT).show();
@@ -279,7 +265,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }else {
-            Toast.makeText(UpdateProfileActivity.this,"Something went wrong!!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(UpdateProfileActivity.this,"Đã xảy ra lỗi!!",Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
 

@@ -21,6 +21,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.appnghenhac.activity.HomeActivity;
 import com.example.appnghenhac.login_register.DangNhapActivity;
 import com.example.appnghenhac.login_register.ReadWriteUserDetails;
 import com.google.firebase.auth.FirebaseAuth;
@@ -164,7 +165,11 @@ public class ProfileActivity extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(@NonNull MenuItem item){
         int id = item.getItemId();
-        if(id == R.id.memu_refresh){
+        if(item.getItemId() == android.R.id.home) {
+            Intent intent = new Intent(ProfileActivity.this, HomeActivity.class);
+            startActivity(intent);
+            finish();
+        }else if(id == R.id.memu_refresh){
             startActivity(getIntent());
             finish();
             overridePendingTransition(0,0);

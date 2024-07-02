@@ -67,13 +67,15 @@ public class AddPlaylistActivity extends AppCompatActivity {
         reference.child("ListSong").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Song s = null;
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                     s = snapshot.getValue(Song.class);
+                    Song s = null;
+                    s = snapshot.getValue(Song.class);
                      if(s!=null)
                         s.setId(snapshot.getKey());
                     if(s!= null){
-                        songs.add(s);}
+                        songs.add(s);
+                    }
+                    Log.d(TAG, "onDataChange: " + s.toString());
                 }
 
                 SongInAddPlaylistRecyclerView songAdapter = new SongInAddPlaylistRecyclerView(AddPlaylistActivity.this, songs);

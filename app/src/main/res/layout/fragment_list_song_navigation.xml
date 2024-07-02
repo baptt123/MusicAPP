@@ -6,7 +6,7 @@
     <ListView
         android:id="@+id/list_song_navigation"
         android:layout_width="match_parent"
-        android:layout_height="600px">
+        android:layout_height="wrap_content">
 
     </ListView>
 </RelativeLayout>

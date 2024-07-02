@@ -110,7 +110,10 @@
             android:exported="true">
 
         </activity>
-
+        <activity android:name=".ChangePasswordActivity"
+            android:exported="false">
+            
+        </activity>
         <!--    receiver-->
         <receiver
             android:name=".receiver.MusicReceiver"

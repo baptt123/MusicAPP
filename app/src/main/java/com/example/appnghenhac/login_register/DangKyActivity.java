@@ -200,7 +200,7 @@ public class DangKyActivity extends AppCompatActivity {
                     //Enter USer data into the Firebase Realtime Database
                     ReadWriteUserDetails writeUserDetails = new ReadWriteUserDetails(textGender, textBirthDate, textPhoneNum);
 
-                    DatabaseReference referenceProfile = FirebaseDatabase.getInstance().getReference("Đăng ký người dùng");
+                    DatabaseReference referenceProfile = FirebaseDatabase.getInstance().getReference("Register User");
 
                     referenceProfile.child(firebaseUser.getUid()).setValue(writeUserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
 

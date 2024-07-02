@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.appnghenhac.R;
 import com.example.appnghenhac.adapter.SongInPlaylistAdapter;
 import com.example.appnghenhac.adapter.SongPlayListRecyclerView;
+import com.example.appnghenhac.application.MusicNameApplication;
 import com.example.appnghenhac.asynctask.MusicAsynctask;
 import com.example.appnghenhac.model.PlayList;
 import com.example.appnghenhac.model.Song;
@@ -63,6 +64,17 @@ public class PlayListActivity extends AppCompatActivity {
         GridLayoutManager gridLayout = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(gridLayout);
 
+        Button buttonPlayMusic = findViewById(R.id.buton_play_music);
+//        phat nhac
+        buttonPlayMusic.setOnClickListener(v ->{
+            MusicNameApplication musicNameApplication = (MusicNameApplication) this.getApplicationContext();
+//
+            musicNameApplication.setSongName(listSong.get(0).getName().substring(1,listSong.get(0).getName().length()-1));
+            musicNameApplication.setImg(listSong.get(0).getUrl());
+
+            Intent intent2 = new Intent(this, PlayerMusicActivity.class);
+            this.startActivity(intent2);
+        });
 
         Button buttonDone = findViewById(R.id.button);
         buttonDone.setOnClickListener(new View.OnClickListener() {
@@ -94,6 +106,6 @@ public class PlayListActivity extends AppCompatActivity {
     }
 
     public void loadAgaint(ArrayList<String> listSong) {
-
+        getSong(listSong);
     }
 }

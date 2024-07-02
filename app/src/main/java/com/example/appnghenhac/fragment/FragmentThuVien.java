@@ -140,7 +140,6 @@ public class FragmentThuVien extends Fragment {
         buttonAddPlayList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO chức năng thêm play list
                 Intent intent = new Intent(getActivity(), AddPlaylistActivity.class);
                 startActivityForResult(intent, ADD_PLAYLIST_REQUEST);
             }

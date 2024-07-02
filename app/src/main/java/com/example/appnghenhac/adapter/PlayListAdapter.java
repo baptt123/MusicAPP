@@ -1,6 +1,7 @@
 package com.example.appnghenhac.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.appnghenhac.R;
+import com.example.appnghenhac.activity.PlayerMusicActivity;
+import com.example.appnghenhac.application.MusicNameApplication;
 import com.example.appnghenhac.model.PlayList;
 
 import java.util.ArrayList;
@@ -42,10 +45,17 @@ public class PlayListAdapter extends ArrayAdapter<PlayList> {
         textViewPlayListNum.setText(playList.getListSong().size() + "");
 
         android.widget.ImageView imageButton = convertView.findViewById(R.id.playMusic);
-        imageButton.setOnClickListener(v->{
-//            TODO chức năng phát nhạc
-            Toast.makeText(context, "phat nhac", Toast.LENGTH_SHORT).show();
-        });
+//        imageButton.setOnClickListener(v->{
+////            TODO chức năng phát nhạc
+//            MusicNameApplication musicNameApplication = (MusicNameApplication) context.getApplicationContext();
+//
+//            musicNameApplication.setSongName(playList.getListSong().get(0));
+//            musicNameApplication.setImg("");
+//
+//            Intent intent = new Intent(context, PlayerMusicActivity.class);
+//            context.startActivity(intent);
+//
+//        });
 
         return convertView;
     }

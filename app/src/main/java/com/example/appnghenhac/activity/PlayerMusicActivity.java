@@ -108,7 +108,7 @@ public class PlayerMusicActivity extends AppCompatActivity {
 //        String music_song = bundle.getString("name_song");
         song_name.setText(song);
         String music_song_string = song_name.getText().toString();
-        artist_name = findViewById(R.id.song_arist);
+//        artist_name = findViewById(R.id.song_arist);
         duration_played = findViewById(R.id.durationPlayed);
         duaration_total = findViewById(R.id.durationTotal);
         cover_art = findViewById(R.id.cover_art);

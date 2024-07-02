@@ -76,7 +76,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
         public MyViewHolder(@NonNull @NotNull View itemView, OnItemClickListener listener) {
             super(itemView);
             songName = itemView.findViewById(R.id.song_name);
-            artistName = itemView.findViewById(R.id.song_arist);
+//            artistName = itemView.findViewById(R.id.song_arist);
             coverArt = itemView.findViewById(R.id.cover_art);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

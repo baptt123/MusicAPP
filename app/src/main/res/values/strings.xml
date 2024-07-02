@@ -44,6 +44,7 @@
     <string name="addSong">Thêm nhạc vào playList</string>
     <string name="playListName">Tên PlayList :</string>
     <string name="CacbaiNhacCoThe">Các bài nhạc có thể thêm vào PlayList</string>
+    <string name="deleteSong">Xóa bài hát</string>
 
 
 </resources>

@@ -1,7 +1,6 @@
 package com.example.appnghenhac.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,14 +19,14 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SongInAddPlaylistAdapter extends RecyclerView.Adapter<SongInAddPlaylistAdapter.SongViewHolder> {
+public class SongInAddPlaylistRecyclerView extends RecyclerView.Adapter<SongInAddPlaylistRecyclerView.SongViewHolder> {
     private static final String TAG = "SongInAddPlaylistAdapter";
     private List<Song> Songs;
     private Context mContext;
     private ArrayList<String> elementClicked;
     private LayoutInflater mLayoutInflater;
 
-    public SongInAddPlaylistAdapter(Context mContext,List<Song> songs ) {
+    public SongInAddPlaylistRecyclerView(Context mContext, List<Song> songs) {
         this.Songs = songs;
         this.mContext = mContext;
         elementClicked = new ArrayList<>();
@@ -41,13 +40,7 @@ public class SongInAddPlaylistAdapter extends RecyclerView.Adapter<SongInAddPlay
         return new SongViewHolder(itemView);
     }
 
-    public ArrayList<String> getElementClicked() {
-        return elementClicked;
-    }
 
-    public void setElementClicked(ArrayList<String> elementClicked) {
-        this.elementClicked = elementClicked;
-    }
 
     @Override
     public void onBindViewHolder(@NonNull SongViewHolder holder, int position) {
@@ -85,7 +78,13 @@ public class SongInAddPlaylistAdapter extends RecyclerView.Adapter<SongInAddPlay
     public int getItemCount() {
         return Songs.size();
     }
+    public ArrayList<String> getElementClicked() {
+        return elementClicked;
+    }
 
+    public void setElementClicked(ArrayList<String> elementClicked) {
+        this.elementClicked = elementClicked;
+    }
 
 
     class SongViewHolder extends RecyclerView.ViewHolder {

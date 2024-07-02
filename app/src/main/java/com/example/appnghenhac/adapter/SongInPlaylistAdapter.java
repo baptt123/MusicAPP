@@ -35,15 +35,7 @@ public class SongInPlaylistAdapter extends ArrayAdapter<Song> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         convertView = layoutInflater.inflate(resource, null);
-        Song song = objects.get(position);
 
-        TextView tv = convertView.findViewById(R.id.tv);
-        tv.setText(song.getName());
-
-        ImageView imageView = convertView.findViewById(R.id.imageView);
-        Picasso.get()
-                .load(song.getUrl().substring(1,song.getUrl().length()-1))
-                .into(imageView);
 
         return convertView;
     }

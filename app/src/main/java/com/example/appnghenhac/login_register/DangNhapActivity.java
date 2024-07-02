@@ -24,9 +24,6 @@ import com.example.appnghenhac.ProfileActivity;
 import com.example.appnghenhac.R;
 
 import com.example.appnghenhac.activity.HomeActivity;
-import com.example.appnghenhac.activity.MainActivity;
-import com.example.appnghenhac.activity.NavicationActivity;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -141,7 +138,7 @@ public class DangNhapActivity extends AppCompatActivity {
 
                         //Open user profile
 
-                        startActivity(new Intent(DangNhapActivity.this, ProfileActivity.class));
+                        startActivity(new Intent(DangNhapActivity.this, HomeActivity.class));
 
                         finish();
                     }else{
@@ -204,7 +201,7 @@ public class DangNhapActivity extends AppCompatActivity {
         if(fAuth.getCurrentUser() != null){
             Toast.makeText(DangNhapActivity.this,"Đã đăng nhập!!",Toast.LENGTH_SHORT).show();
 
-            startActivity(new Intent(DangNhapActivity.this, ProfileActivity.class));
+            startActivity(new Intent(DangNhapActivity.this, HomeActivity.class));
 
 
             finish();

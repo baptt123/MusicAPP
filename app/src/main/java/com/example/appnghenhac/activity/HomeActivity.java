@@ -1,120 +1,114 @@
 package com.example.appnghenhac.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.webkit.WebView;
-import android.widget.Button;
+import android.view.MenuItem;
+import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-/*
-Author:Thanh Tân
-Note for:Lê Tâm
-Date:15/6/2024
-Content:class home activity trước mắt tui giữ lại nha có chỉnh gì thì ông cứ chỉnh
- */
+import com.example.appnghenhac.ProfileActivity;
+import com.example.appnghenhac.R;
+
+import com.example.appnghenhac.asynctask.AsyncTaskFavourite;
+import com.example.appnghenhac.fragment.FragmentThuVien;
+import com.example.appnghenhac.fragment.FragmentTrangChu;
+import com.example.appnghenhac.fragment.ListSongNavFragment;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.auth.FirebaseAuth;
+
 public class HomeActivity extends AppCompatActivity {
-    private WebView webView;
-    private Button btn_dowload;
+    private ImageView search_icon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.home);
-//        addFragment();
-//        addSpotify();
-//        changeIntent();
+        setContentView(R.layout.activity_navication);
+//        toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+//        fragment
+        Fragment fragment = new FragmentTrangChu();
+        loadFragment(fragment);
+//        navigation
+        BottomNavigationView bottom_navigation = findViewById(R.id.bottom_navigation);
+        bottom_navigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                // TODO yeu cay chuyen doi  sang dung frament chưa hoàn thành
+                Fragment selectedFragment = null;
+                if (item.getItemId() == R.id.home) {
+                    toolbar.setTitle("Trang Chủ");
+                    selectedFragment = new FragmentTrangChu();
+                    loadFragment(selectedFragment);
+                    return true;
+                } else if (item.getItemId() == R.id.thuVien) {
+                    toolbar.setTitle("Thư viện");
+                    selectedFragment = new FragmentThuVien();
+                    loadFragment(selectedFragment);
+                    return true;
+                    //dùng asynctask xử lí việc nhúng fragment danh sách yêu thích
+                } else if (item.getItemId() == R.id.Favourite) {
+                    toolbar.setTitle("Danh sách yêu thích");
+                    loadFragmentFavourite();
+                    return true;
+                } else if (item.getItemId() == R.id.AddMusic) {
+                    changeIntoProfile();
+                    return true;
+                }else if(item.getItemId()==R.id.PlayMusic){
+                    toolbar.setTitle("Danh sách bài hát ");
+                    loadFragmentMusic();
+                    return true;
+                }
+
+                return false;
+            }
+        });
+        search_icon=findViewById(R.id.search_icon);
+        search_icon.setOnClickListener( v -> {
+            Intent intent=new Intent(this, SearchActivity.class);
+            startActivity(intent);
+        });
     }
 
-    //    public void addFragment(){
-//        SearchFragment searchFragment=new SearchFragment();
-//        FragmentManager fragmentManager=getSupportFragmentManager();
-//        fragmentManager.beginTransaction().add(R.id.fragment_playmusic,searchFragment).commit();
-//
-//    }
-    //nhung spotify html vao android
-//    @SuppressLint("SetJavaScriptEnabled")
-//    public void addSpotify() {
-//        webView = findViewById(R.id.webviewspotify);
-//        if (webView != null) {
-//            WebSettings webSettings = webView.getSettings();
-//            webSettings.setJavaScriptEnabled(true);
-//            webSettings.setDomStorageEnabled(true);
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//                webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-//            }
-//            webView.setWebViewClient(new WebViewClient() {
-//                @RequiresApi(api = Build.VERSION_CODES.M)
-//                @Override
-//                public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-//                    super.onReceivedError(view, request, error);
-//                    Log.e("HomeActivity", "Error loading page: " + error.getDescription());
-//                }
-//
-//                @Override
-//                public void onPageFinished(WebView view, String url) {
-//                    super.onPageFinished(view, url);
-//                    Log.i("HomeActivity", "Page loaded: " + url);
-//                }
-//
-//                @Override
-//                public boolean shouldOverrideUrlLoading(WebView view, String url) {
-//                    if (url == null || url.startsWith("http://") || url.startsWith("https://")) return false;
-//                    try {
-//                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-//                        view.getContext().startActivity(intent);
-//                        return true;
-//                    } catch (Exception e) {
-//                        return true;
-//                    }
-//                }
-//            });
-//
-//            webView.setWebChromeClient(new WebChromeClient() {
-//                @Override
-//                public void onPermissionRequest(final PermissionRequest request) {
-//                    runOnUiThread(new Runnable() {
-//                        @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-//                        @Override
-//                        public void run() {
-//                            request.grant(request.getResources());
-//                        }
-//                    });
-//                }
-//            });
-//
-//            String html = "<html>\n" +
-//                    "<body>\n" +
-//                    "<h2>Hello World!</h2>\n" +
-//                    "<iframe style=\"border-radius:12px\" src=\"https://open.spotify.com/embed/track/4inMQ83GNpQ2OHDredH5hW?utm_source=generator&theme=0\" width=\"100%\" height=\"352\" frameBorder=\"0\" allowfullscreen=\"\" allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\" loading=\"lazy\"></iframe>\n" +
-//                    "</body>\n" +
-//                    "</html>";
-//            webView.loadDataWithBaseURL("http://localhost:8080/TestSpotify_war/index.jsp", html, "text/html", "UTF-8", null);
-//        } else {
-//            Log.e("HomeActivity", "WebView is null");
-//        }
-//    }
-//
-//    public void changeIntent() {
-//        btn_dowload = findViewById(R.id.chuyenhuongdowload);
-//        btn_dowload.setOnClickListener(v -> {
-//            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://spotifydown.com/vi"));
-//            startActivity(intent);
-//        });
-//    }
-//
-//    public void getMusicNameFromAsyncTask(ArrayList<Music> musicArrayList) {
-//    }
+    private void loadFragmentMusic() {
+        ListSongNavFragment listSongNavFragment=new ListSongNavFragment();
+        FragmentManager fm=getSupportFragmentManager();
+        FragmentTransaction ft=fm.beginTransaction();
+        ft.replace(R.id.fragment_container,listSongNavFragment);
+        ft.commit();
+    }
+
+    private void loadFragment(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    public void loadFragmentFavourite() {
+        AsyncTaskFavourite asyncTaskFavourite = new AsyncTaskFavourite(this);
+        asyncTaskFavourite.execute(FirebaseAuth.getInstance().getCurrentUser().getUid());
+    }
+
+    public void changeIntoAddMusic() {
+        Intent intent = new Intent(this, UploadFileActivity.class);
+        startActivity(intent);
+    }
+
+    public void changeIntoSearch() {
+        Intent intent = new Intent(this, SearchActivity.class);
+        startActivity(intent);
+    }
+    public void changeIntoProfile() {
+        Intent intent = new Intent(this, ProfileActivity.class);
+        startActivity(intent);
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

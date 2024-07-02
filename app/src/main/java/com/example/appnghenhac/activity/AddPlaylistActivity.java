@@ -10,30 +10,26 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appnghenhac.R;
-import com.example.appnghenhac.adapter.SongInAddPlaylistAdapter;
-import com.example.appnghenhac.fragment.FragmentThuVien;
-import com.example.appnghenhac.model.PlayList;
+import com.example.appnghenhac.adapter.SongInAddPlaylistRecyclerView;
 import com.example.appnghenhac.model.Song;
-import com.example.appnghenhac.model.user;
+import com.example.appnghenhac.service.UserService;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class AddPlaylistActivity extends AppCompatActivity {
 
     private String TAG = "AddPlaylistActivity";
+    private String root = "Register User";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +56,7 @@ public class AddPlaylistActivity extends AppCompatActivity {
         songs.add(new Song("211PBKJlAG1CxXUEjN5nqq","chung ta cua hien tai 2", "https://i.scdn.co/image/ab67616d00001e02bc146f67374ea7e19c5d0c80"));
         songs.add(new Song("513yY4zlOPYCAnqH614sl1","chung ta cua hien tai 3", "https://i.scdn.co/image/ab67616d00001e02bc146f67374ea7e19c5d0c80"));
 
-        SongInAddPlaylistAdapter songAdapter = new SongInAddPlaylistAdapter(this, songs);
+        SongInAddPlaylistRecyclerView songAdapter = new SongInAddPlaylistRecyclerView(this, songs);
         recyclerView.setAdapter(songAdapter);
 
 //        RecyclerView scroll vertical
@@ -71,49 +67,40 @@ public class AddPlaylistActivity extends AppCompatActivity {
         Button button = findViewById(R.id.buttonDone);
         button.setOnClickListener(v->{
                 if (editText.getText().toString().isEmpty() || editText.getText() == null) {
-                    Log.d(TAG, "onCreate: "+editText.getText() +","+songAdapter.getElementClicked().toString());
                     Toast.makeText(this, "chua nhap ten play list ko the tao", Toast.LENGTH_SHORT).show();
                 }else{
-                    String s = "";
                     if(songAdapter.getElementClicked().size()<=0){
                         Toast.makeText(this, "chua chon bai hat ch play list ko the tao", Toast.LENGTH_SHORT).show();
                         return;
-                    }
-                    for(String song: songAdapter.getElementClicked()){
-                        s += song+",";
-                    }
-                    listSong.put(editText.getText().toString(), s);
-//                ghi du lieu
-                    FirebaseDatabase data = FirebaseDatabase.getInstance();
-                    DatabaseReference reference = data.getReference();
-//                  TODO tai khoan user o dau
-                    String userID = getUserId();
-                    reference.child("user").child(userID).child("playList").updateChildren(listSong);
+                    }else {
+                        String s = "";
+                        for (String song : songAdapter.getElementClicked()) {
+                            s += song + ",";
+                        }
+                        listSong.put(editText.getText().toString(), s);
+//                      ghi du lieu
+                        FirebaseDatabase data = FirebaseDatabase.getInstance();
+                        DatabaseReference reference = data.getReference();
+//                      TODO tai khoan user o dau
+                        String userID = UserService.getInstance().getUserId();
+                        reference.child(root).child(userID).child("playList").updateChildren(listSong);
 
-                    Intent returnItent = new Intent();
-                    Bundle bundle = new Bundle();
-                    ArrayList<String> lists = new ArrayList<>();
-                    for (Map.Entry<String,Object> en : listSong.entrySet()) {
-                        lists.add(en.getValue().toString());
+                        Intent returnItent = new Intent();
+                        Bundle bundle = new Bundle();
+                        ArrayList<String> lists = new ArrayList<>();
+                        for (Map.Entry<String, Object> en : listSong.entrySet()) {
+                            lists.add(en.getValue().toString());
+                        }
+                        bundle.putString("playlistName", editText.getText().toString());
+                        bundle.putStringArrayList("lists", lists);
+                        returnItent.putExtras(bundle);
+                        setResult(Activity.RESULT_OK, returnItent);
+                        finish();
                     }
-                    bundle.putString("playlistName",editText.getText().toString());
-                    bundle.putStringArrayList("lists",lists);
-                    returnItent.putExtras(bundle);
-                    setResult(Activity.RESULT_OK, returnItent);
-                    finish();
                 }
         });
     }
 
-    private String getUserId() {
-        String res = "";
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        if(firebaseUser != null){
-            res = firebaseUser.getUid();
-        }
-//        TODO doi thanh res
-        return "user001";
-    }
 
 
 }

@@ -44,7 +44,13 @@
             android:exported="true" />
         <activity
             android:name=".login_register.DangNhapActivity"
-            android:exported="true"/>
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".activity.MainActivity"
@@ -53,20 +59,18 @@
             android:name=".fragment.RatingFragment"
             android:exported="true"/>
 
-        <activity
-            android:name=".activity.HomeActivity"
-            android:exported="true">
-            <intent-filter tools:ignore="AppLinkUrlError">
-                <action android:name="android.intent.action.VIEW" />
+<!--        <activity-->
+<!--            android:name=".activity.HomeActivity"-->
+<!--            android:exported="true">-->
+<!--            <intent-filter tools:ignore="AppLinkUrlError">-->
+<!--                <action android:name="android.intent.action.VIEW" />-->
 
-                <category android:name="android.intent.category.DEFAULT" />
+<!--                <category android:name="android.intent.category.DEFAULT" />-->
 
-                <data android:scheme="https" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".activity.HistoryActivity"
-            android:exported="true" />
+<!--                <data android:scheme="https" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
+
         <activity
             android:name=".activity.SearchActivity"
             android:exported="true" />
@@ -87,13 +91,9 @@
             android:name=".activity.TestPlayMusicActivity"
             android:exported="true"/> <!-- tam -->
         <activity
-            android:name=".activity.NavicationActivity"
+            android:name=".activity.HomeActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".activity.PlayListActivity"

@@ -31,7 +31,11 @@ public class MusicAsynctask extends AsyncTask<ArrayList<String>, Void, String> {
         StringBuilder idsBuilder = new StringBuilder();
         for (String id : idSongs) {
             if (idsBuilder.length() > 0) {
-                idsBuilder.append(",");
+                if (id.equals("ketThuc"))
+                    break;
+                else {
+                    idsBuilder.append(",");
+                }
             }
             idsBuilder.append(id);
         }
@@ -49,6 +53,10 @@ public class MusicAsynctask extends AsyncTask<ArrayList<String>, Void, String> {
                 return json;
             } else {
                 Log.e("HTTP", "Request was not successful: " + response.code());
+                if(!idSongs.contains("ketThuc")){
+                    idSongs.add("ketThuc");
+                    ac.loadAgaint(idSongs);
+                }
                 return null;
             }
         } catch (IOException e) {

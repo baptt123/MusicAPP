@@ -1,4 +1,4 @@
-package com.example.appnghenhac.login_register;
+package com.example.appnghenhac.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,10 +20,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.appnghenhac.ProfileActivity;
 import com.example.appnghenhac.R;
 
-import com.example.appnghenhac.activity.HomeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -87,7 +85,7 @@ public class DangNhapActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(DangNhapActivity.this,"Bạn có thể đặt lại mật khẩu ngay bây giờ!!",Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(DangNhapActivity.this,ForgotPasswordActivity.class));
+                startActivity(new Intent(DangNhapActivity.this, ForgotPasswordActivity.class));
             }
         });
 

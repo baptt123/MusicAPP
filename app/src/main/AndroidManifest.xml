@@ -37,13 +37,13 @@
             android:name=".UploadProfilePicActivity"
             android:exported="false" />
         <activity
-            android:name=".login_register.ForgotPasswordActivity"
+            android:name=".activity.ForgotPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".login_register.DangKyActivity"
+            android:name=".activity.DangKyActivity"
             android:exported="true" />
         <activity
-            android:name=".login_register.DangNhapActivity"
+            android:name=".activity.DangNhapActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

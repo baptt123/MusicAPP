@@ -1,9 +1,5 @@
 package com.example.appnghenhac.activity;
 
-import android.annotation.SuppressLint;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -19,14 +15,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
 
 import com.example.appnghenhac.R;
 import com.example.appnghenhac.application.MusicNameApplication;
-import com.example.appnghenhac.login_register.DangNhapActivity;
 import com.example.appnghenhac.model.MusicFiles;
-import com.example.appnghenhac.notification.MusicNotification;
-import com.example.appnghenhac.receiver.MusicReceiver;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;

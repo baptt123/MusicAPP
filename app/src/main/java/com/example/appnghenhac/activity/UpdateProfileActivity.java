@@ -20,8 +20,6 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.appnghenhac.R;
-import com.example.appnghenhac.login_register.DangNhapActivity;
-import com.example.appnghenhac.login_register.ReadWriteUserDetails;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;

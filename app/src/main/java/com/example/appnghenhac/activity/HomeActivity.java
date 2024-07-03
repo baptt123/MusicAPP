@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.appnghenhac.ProfileActivity;
 import com.example.appnghenhac.R;
 
 import com.example.appnghenhac.asynctask.AsyncTaskFavourite;

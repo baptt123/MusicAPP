@@ -1,4 +1,4 @@
-package com.example.appnghenhac.login_register;
+package com.example.appnghenhac.activity;
 
 import android.content.Intent;
 import android.os.Bundle;

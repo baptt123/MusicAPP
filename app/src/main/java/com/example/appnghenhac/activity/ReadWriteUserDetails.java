@@ -1,4 +1,4 @@
-package com.example.appnghenhac.login_register;
+package com.example.appnghenhac.activity;
 
 public class ReadWriteUserDetails {
     public String birthDate, gender, phoneNumber;

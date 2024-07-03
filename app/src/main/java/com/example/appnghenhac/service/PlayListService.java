@@ -37,10 +37,11 @@ public class PlayListService {
             if (so.endsWith("\"")) {
                 so = so.substring(0, so.length() - 1);
             }
+            songids+=so+",";
             Log.d(TAG, "updatePlayList: "+so);
         }
         Log.d(TAG, "updatePlayList: "+songids);
-        reference.child("user").child(UserService.getInstance().getUserId())
+        reference.child("Register User").child(UserService.getInstance().getUserId())
                 .child("playList")
                 .child(playListName)
                 .setValue(songids);

@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.appnghenhac.R;
 import com.example.appnghenhac.application.MusicNameApplication;
 import com.example.appnghenhac.model.MusicFiles;
+import com.example.appnghenhac.service.MusicService;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -49,6 +50,7 @@ public class PlayerMusicActivity extends AppCompatActivity {
     static MediaPlayer mediaPlayer;
     private Handler handler = new Handler();
     Animation animation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,8 +119,14 @@ public class PlayerMusicActivity extends AppCompatActivity {
         });
         checkFavourite();
         loadSongsFromFirebase(music_song_string);
+        playPauseBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(this, MusicService.class);
+            intent.setAction("ACTION_TOGGLE_PLAYBACK");
+            startService(intent);
+        });
     }
-    private void checkFavourite(){
+
+    private void checkFavourite() {
         MusicNameApplication musicNameApplication = (MusicNameApplication) getApplicationContext();
         FirebaseAuth auth = FirebaseAuth.getInstance();
         String userID = auth.getCurrentUser().getUid();
@@ -132,7 +140,7 @@ public class PlayerMusicActivity extends AppCompatActivity {
                     if (snapshot.getChildren() != null) {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             if (dataSnapshot.getKey().equals(musicNameApplication.getSongName())) {
-                                id_love_song=findViewById(R.id.id_love_song);
+                                id_love_song = findViewById(R.id.id_love_song);
                                 id_love_song.setImageResource(R.drawable.heart_svgrepo_com);
                                 Toast.makeText(PlayerMusicActivity.this, "Đã tải dữ liệu bài hát thành công!!!", Toast.LENGTH_LONG).show();
                                 return;
@@ -151,6 +159,7 @@ public class PlayerMusicActivity extends AppCompatActivity {
             }
         });
     }
+
     //load nhạc từ Firebase
     private void loadSongsFromFirebase(String song) {
         Log.d("song_name", song);
@@ -259,7 +268,7 @@ public class PlayerMusicActivity extends AppCompatActivity {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             if (!dataSnapshot.getKey().equals(musicNameApplication.getSongName())) {
                                 favouriteRef.child(musicNameApplication.getSongName()).setValue(musicNameApplication.getImg());
-                                id_love_song=findViewById(R.id.id_love_song);
+                                id_love_song = findViewById(R.id.id_love_song);
                                 id_love_song.setImageResource(R.drawable.heart_svgrepo_com);
                                 Toast.makeText(PlayerMusicActivity.this, "Dữ liệu bài hát đã được thêm vào!!!", Toast.LENGTH_LONG).show();
                                 return;
@@ -269,7 +278,7 @@ public class PlayerMusicActivity extends AppCompatActivity {
 
                 } else {
                     favouriteRef.child(musicNameApplication.getSongName()).setValue(musicNameApplication.getImg());
-                    id_love_song=findViewById(R.id.id_love_song);
+                    id_love_song = findViewById(R.id.id_love_song);
                     id_love_song.setImageResource(R.drawable.heart_svgrepo_com);
                     Toast.makeText(PlayerMusicActivity.this, "Đã thêm bài hát thành công", Toast.LENGTH_LONG).show();
                 }

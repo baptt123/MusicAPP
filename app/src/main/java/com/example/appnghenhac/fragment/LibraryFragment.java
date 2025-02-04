@@ -34,10 +34,10 @@ import java.util.StringTokenizer;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link FragmentThuVien#newInstance} factory method to
+ * Use the {@link LibraryFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentThuVien extends Fragment {
+public class LibraryFragment extends Fragment {
 
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -48,7 +48,7 @@ public class FragmentThuVien extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public FragmentThuVien() {
+    public LibraryFragment() {
         // Required empty public constructor
     }
 
@@ -58,10 +58,10 @@ public class FragmentThuVien extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment fragmentThuVien.
+     * @return A new instance of fragment LibraryFragment.
      */
-    public static FragmentThuVien newInstance(String param1, String param2) {
-        FragmentThuVien fragment = new FragmentThuVien();
+    public static LibraryFragment newInstance(String param1, String param2) {
+        LibraryFragment fragment = new LibraryFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -94,7 +94,7 @@ public class FragmentThuVien extends Fragment {
     private String myUser = "";
     ArrayList<PlayList> playLists;
     PlayListAdapter playListAdapter;
-    String TAG = "fragmentThuvien";
+    String TAG = "LibraryFragment";
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -165,7 +165,7 @@ public class FragmentThuVien extends Fragment {
 //                playListAdapter.notifyDataSetChanged();
 //            }
             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.fragment_container, new FragmentThuVien());
+            transaction.replace(R.id.fragment_container, new LibraryFragment());
             transaction.addToBackStack(null);
             transaction.commit();
         }

@@ -14,10 +14,10 @@ import com.google.firebase.FirebaseApp;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link FragmentTrangChu#newInstance} factory method to
+ * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentTrangChu extends Fragment {
+public class HomeFragment extends Fragment {
 
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,7 +27,7 @@ public class FragmentTrangChu extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public FragmentTrangChu() {
+    public HomeFragment() {
         // Required empty public constructor
     }
 
@@ -39,8 +39,8 @@ public class FragmentTrangChu extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment fragment_trangChu.
      */
-    public static FragmentTrangChu newInstance(String param1, String param2) {
-        FragmentTrangChu fragment = new FragmentTrangChu();
+    public static HomeFragment newInstance(String param1, String param2) {
+        HomeFragment fragment = new HomeFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

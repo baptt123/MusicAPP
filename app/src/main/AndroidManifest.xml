@@ -25,25 +25,25 @@
             android:name=".activity.AddPlaylistActivity"
             android:exported="false"/>
         <activity
-            android:name=".ProfileActivity"
+            android:name=".activity.ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".UpdateEmailActivity"
+            android:name=".activity.UpdateEmailActivity"
             android:exported="false" />
         <activity
-            android:name=".UpdateProfileActivity"
+            android:name=".activity.UpdateProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".UploadProfilePicActivity"
+            android:name=".activity.UploadProfilePicActivity"
             android:exported="false" />
         <activity
             android:name=".activity.ForgotPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.DangKyActivity"
+            android:name=".activity.RegisterActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.DangNhapActivity"
+            android:name=".activity.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -56,8 +56,13 @@
             android:name=".activity.MainActivity"
             android:exported="true"/>
         <activity
-            android:name=".fragment.RatingFragment"
+            android:name=".activity.DownloadedMusicActivity"
             android:exported="true"/>
+
+        <activity
+            android:name=".fragment.RatingFragment"
+            android:exported="true"
+            tools:ignore="Instantiatable" />
 
 <!--        <activity-->
 <!--            android:name=".activity.HomeActivity"-->
@@ -110,7 +115,7 @@
             android:exported="true">
 
         </activity>
-        <activity android:name=".ChangePasswordActivity"
+        <activity android:name=".activity.ChangePasswordActivity"
             android:exported="false">
             
         </activity>

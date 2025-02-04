@@ -37,14 +37,14 @@ import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class DangKyActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
     private EditText editTextFullName, editTextEmail, editTextPassword, editTextConfirmPassword, editTextPhoneNum, editTextDate;
     private ProgressBar progressBar;
     private RadioGroup radioGroupGender;
     private RadioButton radioButtonSelectGender;
     private DatePickerDialog picker;
 
-    private static final String TAG = "DangKyActivity";
+    private static final String TAG = "RegisterActivity";
 
 
     @Override
@@ -52,7 +52,7 @@ public class DangKyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_register);
 //        getSupportActionBar().setTitle("ĐĂNG KÝ");
-        Toast.makeText(DangKyActivity.this, "Bạn có thể đăng ký ngay bây giờ!!!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(RegisterActivity.this, "Bạn có thể đăng ký ngay bây giờ!!!", Toast.LENGTH_SHORT).show();
 
         progressBar = findViewById(R.id.idprogressbar);
         editTextFullName = findViewById(R.id.idFullName);
@@ -69,7 +69,7 @@ public class DangKyActivity extends AppCompatActivity {
                 int year = calendar.get(Calendar.YEAR);
 
                 //Date Picker Dialog
-                picker = new DatePickerDialog(DangKyActivity.this, new DatePickerDialog.OnDateSetListener() {
+                picker = new DatePickerDialog(RegisterActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         editTextDate.setText(dayOfMonth + "/" + (month +1) + "/"+year);
@@ -116,52 +116,52 @@ public class DangKyActivity extends AppCompatActivity {
 
 
                 if (TextUtils.isEmpty(textFullName)) {
-                    Toast.makeText(DangKyActivity.this, "Vui lòng nhập đầy đủ Họ và tên", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Vui lòng nhập đầy đủ Họ và tên", Toast.LENGTH_SHORT).show();
                     editTextFullName.setError("Họ và Tên là bắt buộc!!!");
                     editTextFullName.requestFocus();
                 } else if (TextUtils.isEmpty(textEmail)) {
-                    Toast.makeText(DangKyActivity.this, "Vui lòng nhập Email", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Vui lòng nhập Email", Toast.LENGTH_SHORT).show();
                     editTextEmail.setError("Email là bắt buộc!!!");
                     editTextEmail.requestFocus();
                 } else if (!Patterns.EMAIL_ADDRESS.matcher(textEmail).matches()) {
-                    Toast.makeText(DangKyActivity.this, "Vui lòng nhập lại Email", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Vui lòng nhập lại Email", Toast.LENGTH_SHORT).show();
                     editTextEmail.setError("Cần có email hợp lệ!!!");
                     editTextEmail.requestFocus();
                 } else if (TextUtils.isEmpty(textBirthDate)) {
-                    Toast.makeText(DangKyActivity.this, "Xin vui lòng ngày sinh của bạn", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Xin vui lòng ngày sinh của bạn", Toast.LENGTH_SHORT).show();
                     editTextDate.setError("Ngày sinh là bắt buộc");
                     editTextDate.requestFocus();
                 } else if (radioGroupGender.getCheckedRadioButtonId() == -1) {
-                    Toast.makeText(DangKyActivity.this, "Vui lòng chọn giới tính của bạn", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Vui lòng chọn giới tính của bạn", Toast.LENGTH_SHORT).show();
                     radioButtonSelectGender.setError("Giới tính là bắt buộc");
                     radioButtonSelectGender.requestFocus();
                 } else if (TextUtils.isEmpty(textPhoneNum)) {
-                    Toast.makeText(DangKyActivity.this, "Xin vui lòng điền số điện thoại của bạn", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Xin vui lòng điền số điện thoại của bạn", Toast.LENGTH_SHORT).show();
                     editTextPhoneNum.setError("Số điện thoại là bắt buộc");
                     editTextPhoneNum.requestFocus();
                 } else if (textPhoneNum.length() != 10) {
-                    Toast.makeText(DangKyActivity.this, "Vui lòng nhập lại số điện thoại của bạn", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Vui lòng nhập lại số điện thoại của bạn", Toast.LENGTH_SHORT).show();
                     editTextPhoneNum.setError("Số điện thoại phải có 10 chữ số");
                     editTextPhoneNum.requestFocus();
                 } else if (!phoneMatcher.find()) {
-                    Toast.makeText(DangKyActivity.this, "Vui lòng nhập lại số điện thoại của bạn", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Vui lòng nhập lại số điện thoại của bạn", Toast.LENGTH_SHORT).show();
                     editTextPhoneNum.setError("Số điện thoại không hợp lệ");
                     editTextPhoneNum.requestFocus();
 
                 } else if (TextUtils.isEmpty(textPass)) {
-                    Toast.makeText(DangKyActivity.this, "Vui lòng nhập mật khẩu của bạn", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Vui lòng nhập mật khẩu của bạn", Toast.LENGTH_SHORT).show();
                     editTextPassword.setError("Cần có mật khẩu");
                     editTextPassword.requestFocus();
                 } else if (textPass.length() < 6) {
-                    Toast.makeText(DangKyActivity.this, "Mật khẩu phải có ít nhất 6 chữ số", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Mật khẩu phải có ít nhất 6 chữ số", Toast.LENGTH_SHORT).show();
                     editTextPassword.setError("Mật khẩu quá yếu");
                     editTextPassword.requestFocus();
                 } else if (TextUtils.isEmpty(textConfirmPass)) {
-                    Toast.makeText(DangKyActivity.this, "Vui lòng xác nhận mật khẩu của bạn", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Vui lòng xác nhận mật khẩu của bạn", Toast.LENGTH_SHORT).show();
                     editTextConfirmPassword.setError("Xác nhận mật khẩu là bắt buộc");
                     editTextConfirmPassword.requestFocus();
                 } else if (!textPass.equals(textConfirmPass)) {
-                    Toast.makeText(DangKyActivity.this, "Vui lòng nhập cùng một mật khẩu", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Vui lòng nhập cùng một mật khẩu", Toast.LENGTH_SHORT).show();
                     editTextConfirmPassword.setError("Cần phải xác nhận mật khẩu");
                     editTextConfirmPassword.requestFocus();
 
@@ -183,12 +183,12 @@ public class DangKyActivity extends AppCompatActivity {
         FirebaseAuth auth = FirebaseAuth.getInstance();
 
         //Create user profile
-        auth.createUserWithEmailAndPassword(textEmail, textPass).addOnCompleteListener(DangKyActivity.this, new OnCompleteListener<AuthResult>() {
+        auth.createUserWithEmailAndPassword(textEmail, textPass).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
             @OptIn(markerClass = UnstableApi.class)
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(DangKyActivity.this, "Đăng ký người dùng thành công", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Đăng ký người dùng thành công", Toast.LENGTH_SHORT).show();
                     FirebaseUser firebaseUser = auth.getCurrentUser();
                     UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder().setDisplayName(textFullName).build();
                     firebaseUser.updateProfile(profileChangeRequest);
@@ -204,16 +204,16 @@ public class DangKyActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
                                 firebaseUser.sendEmailVerification();
-                                Toast.makeText(DangKyActivity.this, "Người dùng đã đăng ký thành công. Vui lòng xác minh email của bạn", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterActivity.this, "Người dùng đã đăng ký thành công. Vui lòng xác minh email của bạn", Toast.LENGTH_SHORT).show();
 
-                                Intent intent = new Intent(DangKyActivity.this, ProfileActivity.class);
+                                Intent intent = new Intent(RegisterActivity.this, ProfileActivity.class);
                                 //To prevent user from returning back to Register Activity on pressing back button after registation
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
-                                finish(); //close DangKyACtivity
+                                finish(); //close RegisterActivity
 
                             } else {
-                                Toast.makeText(DangKyActivity.this, "Người dùng đã đăng ký thành công. Vui lòng xác minh email của bạn", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterActivity.this, "Người dùng đã đăng ký thành công. Vui lòng xác minh email của bạn", Toast.LENGTH_SHORT).show();
 
                             }
                             //Hide ProgressBar whether User creation is successful or failed
@@ -237,7 +237,7 @@ public class DangKyActivity extends AppCompatActivity {
 
                     } catch (Exception e) {
                         Log.e(TAG, e.getMessage());
-                        Toast.makeText(DangKyActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                     //Hide ProgressBar whether User creation is successful or failed
                     progressBar.setVisibility(View.GONE);

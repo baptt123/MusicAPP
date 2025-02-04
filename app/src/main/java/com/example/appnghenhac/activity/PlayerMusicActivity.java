@@ -1,9 +1,12 @@
 package com.example.appnghenhac.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 import android.view.animation.Animation;
@@ -15,7 +18,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import com.example.appnghenhac.Manifest;
 import com.example.appnghenhac.R;
 import com.example.appnghenhac.application.MusicNameApplication;
 import com.example.appnghenhac.model.MusicFiles;
@@ -31,7 +37,12 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -50,6 +61,7 @@ public class PlayerMusicActivity extends AppCompatActivity {
     static MediaPlayer mediaPlayer;
     private Handler handler = new Handler();
     Animation animation;
+    ImageView  downloadBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +71,6 @@ public class PlayerMusicActivity extends AppCompatActivity {
         String song = musicNameApplication.getSongName();
         initView(song);
         animation = AnimationUtils.loadAnimation(this, R.anim.disc_rotate);
-//        createNotification(song);
         FirebaseApp.initializeApp(this);
         backBtn.setOnClickListener(v -> onBackPressed());
 
@@ -97,12 +108,10 @@ public class PlayerMusicActivity extends AppCompatActivity {
     }
 
     private void initView(String song) {
+//        downloadBtn=findViewById(R.id.)
         song_name = findViewById(R.id.song_name);
-//        Bundle bundle = getIntent().getExtras();
-//        String music_song = bundle.getString("name_song");
         song_name.setText(song);
         String music_song_string = song_name.getText().toString();
-//        artist_name = findViewById(R.id.song_arist);
         duration_played = findViewById(R.id.durationPlayed);
         duaration_total = findViewById(R.id.durationTotal);
         cover_art = findViewById(R.id.cover_art);
@@ -123,6 +132,9 @@ public class PlayerMusicActivity extends AppCompatActivity {
             Intent intent = new Intent(this, MusicService.class);
             intent.setAction("ACTION_TOGGLE_PLAYBACK");
             startService(intent);
+        });
+        downloadBtn.setOnClickListener(v -> {
+            downloadSongFromFirebase(song);
         });
     }
 
@@ -218,26 +230,7 @@ public class PlayerMusicActivity extends AppCompatActivity {
         }
     }
 
-    //tạo notification
-//    @SuppressLint("NotificationTrampoline")
-//    public void createNotification(String name) {
-//        Intent changeActivity = new Intent(this, MusicReceiver.class);
-//        changeActivity.setAction("Change");
-//        PendingIntent changeActivityPendingIntent = PendingIntent.getBroadcast(this, 0, changeActivity, PendingIntent.FLAG_UPDATE_CURRENT);
-//        Notification notification = new NotificationCompat.Builder(this, MusicNotification.CHANNEL_ID_MUSIC)
-//                .setContentTitle("Playing music")
-//                .setContentText("Chúc bạn nghe nhạc vui vẻ")
-//                .setSmallIcon(R.drawable.music_cd_svgrepo_com)
-//                .addAction(R.drawable.baseline_play_circle, "Change", changeActivityPendingIntent)
-//                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-//                .setOnlyAlertOnce(true)
-//                .setAutoCancel(true)
-//                .build();
-//        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-//        if (notificationManager != null) {
-//            notificationManager.notify(1, notification);
-//        }
-//    }
+
 
     //hàm thêm bài hát yêu thích
     public void addMusicFavorite() {
@@ -251,7 +244,7 @@ public class PlayerMusicActivity extends AppCompatActivity {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() == null) {
             Toast.makeText(this, "Bạn chưa đăng nhập! Sẽ quay về trang đăng nhập", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this, DangNhapActivity.class));
+            startActivity(new Intent(this, LoginActivity.class));
             return;
         }
 
@@ -290,55 +283,81 @@ public class PlayerMusicActivity extends AppCompatActivity {
             }
         });
     }
+    // Kiểm tra quyền lưu trữ
+    private void checkStoragePermission() {
+//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//                != PackageManager.PERMISSION_GRANTED) {
+//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+//        }
+    }
+
+    // Phương thức tải bài hát từ Firebase
+    private void downloadSongFromFirebase(String song) {
+        FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+        StorageReference storageReference = firebaseStorage.getReference();
+        StorageReference songRef = storageReference.child("/upload/file/" + song + ".mp3");
+
+        songRef.getDownloadUrl().addOnSuccessListener(uri -> {
+            String url = uri.toString();
+            File file = new File(Environment.getExternalStorageDirectory(), song + ".mp3");
+
+            // Kiểm tra nếu bài hát đã được tải về chưa
+            if (file.exists()) {
+                Toast.makeText(this, "Bài hát đã được tải về", Toast.LENGTH_SHORT).show();
+            } else {
+                // Tiến hành tải bài hát
+                new Thread(() -> {
+                    try {
+                        URL downloadUrl = new URL(url);
+                        URLConnection connection = downloadUrl.openConnection();
+                        connection.connect();
+                        InputStream inputStream = connection.getInputStream();
+                        OutputStream outputStream = openFileOutput(file.getName(), Context.MODE_PRIVATE);
+
+                        byte[] buffer = new byte[1024];
+                        int length;
+                        while ((length = inputStream.read(buffer)) > 0) {
+                            outputStream.write(buffer, 0, length);
+                        }
+
+                        outputStream.flush();
+                        outputStream.close();
+                        inputStream.close();
+
+                        runOnUiThread(() -> {
+                            Toast.makeText(PlayerMusicActivity.this, "Tải bài hát thành công!", Toast.LENGTH_SHORT).show();
+                        });
+                    } catch (IOException e) {
+                        Log.e("Download Error", e.getMessage());
+                        runOnUiThread(() -> {
+                            Toast.makeText(PlayerMusicActivity.this, "Lỗi tải bài hát", Toast.LENGTH_SHORT).show();
+                        });
+                    }
+                }).start();
+            }
+        }).addOnFailureListener(e -> {
+            Log.e("Download Error", "Không thể lấy URL bài hát: " + e.getMessage());
+        });
+    }
+
+    // Kiểm tra xem bài hát đã được tải xuống chưa
+    private boolean isSongDownloaded(String song) {
+        File file = new File(Environment.getExternalStorageDirectory(), song + ".mp3");
+        return file.exists();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Quyền lưu trữ được cấp", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Cần quyền lưu trữ để tải bài hát", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 }
-//        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//
-//                if (snapshot.exists()) {
-//                    String currentFavorites = snapshot.child("favourite").getValue(String.class);
-//                    if (currentFavorites != null) {
-//                        if (!currentFavorites.contains(song)) {
-//                            String updatedFavorites = currentFavorites + "," + song;
-//                            userRef.child("favourite_name").setValue(updatedFavorites);
-//                            Toast.makeText(PlayerMusicActivity.this, "Thêm vào danh sách yêu thích thành công", Toast.LENGTH_SHORT).show();
-//                        } else {
-//                            Toast.makeText(PlayerMusicActivity.this, "Bài hát đã có trong danh sách yêu thích", Toast.LENGTH_SHORT).show();
-//                        }
-//                    } else {
-//                        userRef.child("favourite").setValue(song);
-//                        Toast.makeText(PlayerMusicActivity.this, "Tạo mới và thêm dữ liệu thành công", Toast.LENGTH_SHORT).show();
-//                    }
-//                } else {
-//                    Toast.makeText(PlayerMusicActivity.this, "Không tìm thấy dữ liệu người dùng", Toast.LENGTH_SHORT).show();
-//                    userRef.child("favourite").setValue(song);
-//                    Toast.makeText(PlayerMusicActivity.this, "Tạo mới và thêm dữ liệu thành công", Toast.LENGTH_SHORT).show();
-//                }
-
-//phần này dùng để lưu trữ dữ liệu bài hát
-
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                Toast.makeText(PlayerMusicActivity.this, "Lỗi khi truy cập dữ liệu", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//        favouriteRef.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for (DataSnapshot childSnapshot : snapshot.getChildren()) {
-//                    if (childSnapshot.getKey().equals(musicNameApplication.getSongName())) {
-//                        favouriteRef.child(musicNameApplication.getSongName()).setValue(musicNameApplication.getImg());
-//                        Toast.makeText(PlayerMusicActivity.this, "Dữ liệu bài hát đã được thêm vào!!!", Toast.LENGTH_SHORT).show();
-//                        return;
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                Toast.makeText(PlayerMusicActivity.this, "Thêm dữ liêu thất bại!!!", Toast.LENGTH_SHORT).show();
-//            }
-//        });
 
 
 

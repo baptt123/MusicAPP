@@ -30,7 +30,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
 
-public class DangNhapActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
   private   Button btnDongYDN;
   private   EditText edEmail,edMatkhau;
   private   FirebaseAuth fAuth;
@@ -84,15 +84,15 @@ public class DangNhapActivity extends AppCompatActivity {
         textViewForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(DangNhapActivity.this,"Bạn có thể đặt lại mật khẩu ngay bây giờ!!",Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(DangNhapActivity.this, ForgotPasswordActivity.class));
+                Toast.makeText(LoginActivity.this,"Bạn có thể đặt lại mật khẩu ngay bây giờ!!",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
             }
         });
 
     }
 
     private void register() {
-        Intent intent = new Intent(DangNhapActivity.this, DangKyActivity.class);
+        Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
         startActivity(intent);
     }
 
@@ -109,7 +109,7 @@ public class DangNhapActivity extends AppCompatActivity {
             edEmail.setError("Cần có email hợp lệ");
             edEmail.requestFocus();
         }else if(TextUtils.isEmpty(pass)){
-            Toast.makeText(DangNhapActivity.this,"Vui lòng nhập mật khẩu",Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this,"Vui lòng nhập mật khẩu",Toast.LENGTH_SHORT).show();
             edMatkhau.setError("Cần có mật khẩu");
             edMatkhau.requestFocus();
         }else{
@@ -121,7 +121,7 @@ public class DangNhapActivity extends AppCompatActivity {
     }
 
     private void loginUser(String email, String pass) {
-        fAuth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(DangNhapActivity.this,new OnCompleteListener<AuthResult>() {
+        fAuth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(LoginActivity.this,new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
@@ -132,11 +132,11 @@ public class DangNhapActivity extends AppCompatActivity {
 
                     //Check if email is verified before user can access their profile
                     if (firebaseUser.isEmailVerified()){
-                        Toast.makeText(DangNhapActivity.this,"Bạn đã đăng nhập thành công",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this,"Bạn đã đăng nhập thành công",Toast.LENGTH_SHORT).show();
 
                         //Open user profile
 
-                        startActivity(new Intent(DangNhapActivity.this, HomeActivity.class));
+                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
 
                         finish();
                     }else{
@@ -158,9 +158,9 @@ public class DangNhapActivity extends AppCompatActivity {
                         edEmail.requestFocus();
                     }catch (Exception e){
                         Log.e(TAG,e.getMessage());
-                        Toast.makeText(DangNhapActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
                     }
-                    Toast.makeText(DangNhapActivity.this,"Đã xảy ra lỗi!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this,"Đã xảy ra lỗi!",Toast.LENGTH_SHORT).show();
 
                 }
                 progressBar.setVisibility(View.GONE);
@@ -170,7 +170,7 @@ public class DangNhapActivity extends AppCompatActivity {
     private void showArletDialog() {
 
         //Setup the Alert Builder
-        AlertDialog.Builder builder = new AlertDialog.Builder(DangNhapActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
         builder.setTitle("Email chưa được xác minh");
         builder.setMessage("Hãy xác minh email của bạn ngay bây giờ. Bạn không thể đăng nhập nếu không xác minh email.");
 
@@ -197,14 +197,14 @@ public class DangNhapActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if(fAuth.getCurrentUser() != null){
-            Toast.makeText(DangNhapActivity.this,"Đã đăng nhập!!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this,"Đã đăng nhập!!",Toast.LENGTH_SHORT).show();
 
-            startActivity(new Intent(DangNhapActivity.this, HomeActivity.class));
+            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
 
 
             finish();
         }else {
-            Toast.makeText(DangNhapActivity.this,"Bạn có thể đăng nhập ngay bây giờ!!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this,"Bạn có thể đăng nhập ngay bây giờ!!",Toast.LENGTH_SHORT).show();
         }
     }
 }

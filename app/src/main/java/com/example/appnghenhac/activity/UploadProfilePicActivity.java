@@ -180,7 +180,7 @@ public class UploadProfilePicActivity extends AppCompatActivity {
         }else if(id == R.id.menu_logout){
             authProfile.signOut();
             Toast.makeText(UploadProfilePicActivity.this,"Logged Out",Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(UploadProfilePicActivity.this, DangNhapActivity.class);
+            Intent intent = new Intent(UploadProfilePicActivity.this, LoginActivity.class);
 
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);

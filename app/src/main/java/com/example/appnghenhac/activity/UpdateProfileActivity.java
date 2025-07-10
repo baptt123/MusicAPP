@@ -20,6 +20,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.appnghenhac.R;
+import com.example.appnghenhac.model.ReadWriteUserDetails;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -256,7 +257,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         }else if(id == R.id.menu_logout){
             auth.signOut();
             Toast.makeText(UpdateProfileActivity.this,"Logged Out",Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(UpdateProfileActivity.this, DangNhapActivity.class);
+            Intent intent = new Intent(UpdateProfileActivity.this, LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();

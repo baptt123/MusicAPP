@@ -1,4 +1,4 @@
-package com.example.appnghenhac.activity;
+package com.example.appnghenhac.model;
 
 public class ReadWriteUserDetails {
     public String birthDate, gender, phoneNumber;

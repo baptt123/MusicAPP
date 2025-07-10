@@ -8,7 +8,7 @@
     android:paddingTop="@dimen/size16dp"
     android:paddingRight="@dimen/size16dp"
     android:paddingBottom="@dimen/size16dp"
-    tools:context=".activity.DangKyActivity">
+    tools:context=".activity.RegisterActivity">
 
     <TextView
         android:layout_width="wrap_content"

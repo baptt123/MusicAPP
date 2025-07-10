@@ -5,18 +5,18 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class user implements Serializable {
+public class User implements Serializable {
     private String fullName;
     private Date birthDate;
     private String gender;
     private String phoneNumber;
     private Map<String, String> playList = new HashMap<>();
 
-    public user() {
+    public User() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public user(String fullName, Date birthDate, String gender, String phoneNumber, Map<String, String> playList) {
+    public User(String fullName, Date birthDate, String gender, String phoneNumber, Map<String, String> playList) {
         this.birthDate = birthDate;
         this.fullName = fullName;
         this.gender = gender;

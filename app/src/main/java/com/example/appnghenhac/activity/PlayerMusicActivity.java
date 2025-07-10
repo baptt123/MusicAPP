@@ -242,7 +242,7 @@ public class PlayerMusicActivity extends AppCompatActivity {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() == null) {
             Toast.makeText(this, "Bạn chưa đăng nhập! Sẽ quay về trang đăng nhập", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this, DangNhapActivity.class));
+            startActivity(new Intent(this, LoginActivity.class));
             return;
         }
 

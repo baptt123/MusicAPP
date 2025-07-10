@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.appnghenhac.R;
+import com.example.appnghenhac.model.ReadWriteUserDetails;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -179,7 +180,7 @@ public class ProfileActivity extends AppCompatActivity {
         }else if(id == R.id.menu_logout){
             authProfile.signOut();
             Toast.makeText(ProfileActivity.this,"Logged Out",Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(ProfileActivity.this, DangNhapActivity.class);
+            Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
 
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
